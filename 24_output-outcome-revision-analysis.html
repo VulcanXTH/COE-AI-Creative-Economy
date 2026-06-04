@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>วิเคราะห์ Output/Outcome — ปรับตาม Apivadee Feedback</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+* { box-sizing: border-box; }
+body {
+  font-family: 'Sarabun', 'Arial', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 50px;
+  color: #1F2937;
+  line-height: 1.7;
+  background: #FFFFFF;
+}
+h1 { color: #1F4E78; border-bottom: 3px solid #1F4E78; padding-bottom: 10px; font-size: 1.85em; }
+h2 { color: #1F4E78; margin-top: 2.2em; font-size: 1.4em; border-left: 5px solid #2E75B6; padding-left: 14px; }
+h3 { color: #374151; font-size: 1.15em; margin-top: 1.6em; border-bottom: 1px dashed #D1D5DB; padding-bottom: 4px; }
+h4 { color: #1F4E78; font-size: 1.05em; margin-top: 1.2em; margin-bottom: 6px; }
+.meta { background: #F2F7FA; border-left: 4px solid #2E75B6; padding: 14px 18px; margin: 1em 0 2em; font-size: 0.94em; }
+.meta p { margin: 4px 0; }
+blockquote { border-left: 4px solid #F59E0B; background: #FEF9C3; padding: 14px 18px; margin: 1em 0; color: #78350F; font-size: 0.94em; border-radius: 4px; }
+blockquote.quote { border-color: #6B7280; background: #F9FAFB; color: #374151; font-style: italic; }
+blockquote.warn { border-color: #DC2626; background: #FEE2E2; color: #7F1D1D; }
+blockquote.ok { border-color: #10B981; background: #D1FAE5; color: #065F46; }
+blockquote.info { border-color: #2E75B6; background: #DBEAFE; color: #1E3A8A; }
+table { width: 100%; border-collapse: collapse; margin: 1em 0 1.5em; font-size: 0.93em; }
+th { background: #1F4E78; color: white; padding: 11px 12px; text-align: left; font-weight: 600; border: 1px solid #1F4E78; }
+td { padding: 9px 12px; border: 1px solid #E5E7EB; vertical-align: top; }
+tr:nth-child(even) td { background: #F8F9FA; }
+.center { text-align: center; }
+.num { font-weight: 600; color: #1F4E78; }
+.tag { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.82em; font-weight: 600; }
+.tag-current { background: #FEF3C7; color: #92400E; }
+.tag-new { background: #D1FAE5; color: #065F46; }
+.tag-warn { background: #FEE2E2; color: #991B1B; }
+.tag-keep { background: #DBEAFE; color: #1E40AF; }
+.score { font-size: 1.4em; font-weight: 700; }
+.score-good { color: #10B981; }
+.score-mid { color: #F59E0B; }
+.score-bad { color: #DC2626; }
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 14px 0; }
+.compare-box { padding: 14px 18px; border-radius: 8px; }
+.compare-box.before { background: #FEF3C7; border-left: 4px solid #F59E0B; }
+.compare-box.after { background: #D1FAE5; border-left: 4px solid #10B981; }
+.compare-box h4 { margin-top: 0; }
+.flagship-card {
+  background: #F8FAFC;
+  border: 1px solid #CBD5E1;
+  border-left: 5px solid #1F4E78;
+  padding: 16px 20px;
+  margin: 14px 0;
+  border-radius: 6px;
+}
+.flagship-card h4 { color: #1F4E78; font-size: 1.1em; margin-bottom: 8px; }
+.flagship-meta { display: flex; gap: 16px; font-size: 0.88em; color: #6B7280; margin-top: 10px; padding-top: 10px; border-top: 1px solid #E5E7EB; }
+.flagship-meta span { background: white; padding: 4px 10px; border-radius: 12px; border: 1px solid #E5E7EB; }
+.footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #E5E7EB; color: #6B7280; font-size: 0.85em; text-align: center; }
+@media print { body { padding: 20px; max-width: 100%; } h2 { page-break-after: avoid; } tr, .flagship-card, .compare-box { page-break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<h1>📊 วิเคราะห์ Output/Outcome — ปรับตาม Apivadee Feedback</h1>
+
+<div class="meta">
+  <p><strong>เป้าหมาย:</strong> Review แผน 1-3-5 ปี ของ COE Creative + ปรับตาม feedback ของ ดร.Apivadee</p>
+  <p><strong>ปรัชญา:</strong> "Top-down · Quantitative · ว้าว · Feasible" — ตาม guidance จาก สดช.</p>
+  <p><strong>Output:</strong> Revised Output/Outcome พร้อมส่งใน Phase ถัดไป (หลังคำสั่งผ่าน)</p>
+</div>
+
+<!-- ════════════════ Part 1: Apivadee Feedback Recap ════════════════ -->
+
+<h2>📩 ส่วนที่ ๑ — ทบทวน Feedback ของ ดร.Apivadee</h2>
+
+<blockquote class="quote">
+"ไปให้สุดค่ะ เอาให้เกิด แต่ฝากดู<strong>งบประมาณ และความเป็นไปได้</strong>ด้วยค่ะ เช่น ถ้าจะทำ 1,2,3 ต้องมีโครงการลักษณะไหนทำอะไร ด้วยเงินเท่าไร ด้วยคนแบบไหน แล้ว resource มีแล้วหรือยังไม่มี <strong>ขอ feasibility study</strong>"
+</blockquote>
+
+<blockquote class="quote">
+"<strong>ผบห. อยากได้ตัวเลขที่จับต้องได้จริง และว้าวเสมอ</strong>ค่ะ FYI"
+</blockquote>
+
+<blockquote class="quote">
+"output KPI อาจจำเป็นต้อง<strong>บอกเป็นจำนวน quantitatives</strong>ค่ะ หรือ 'มีจำนวนและคุณภาพสอดคล้องกับความต้องการจริงจากภาคเอกชน'"
+</blockquote>
+
+<blockquote class="quote">
+"ส่วนนี้หมายถึงมอง<strong>แบบ top-down</strong> — 'สิ่งที่ควรมี' อาจไม่ใช่ 'สิ่งที่ดำเนินการอยู่' (แต่เป็น stepping stone โชว์ความพร้อม-ต่อเนื่อง)"
+</blockquote>
+
+<blockquote class="quote">
+"ซีกำลังเตรียมขั้นถัดไปคือเรื่อง<strong>โครงการ flagship</strong>และงบประมาณที่จำเป็นคน"
+</blockquote>
+
+<h3>🔑 6 หลักการที่ต้องยึด</h3>
+
+<table>
+  <thead><tr><th style="width:5%">#</th><th>หลักการ</th><th>ความหมาย</th></tr></thead>
+  <tbody>
+    <tr><td class="num center">1</td><td><strong>Top-down</strong></td><td>มอง "สิ่งที่ควรมี" — ไม่ใช่แค่ "สิ่งที่ทำอยู่"</td></tr>
+    <tr><td class="num center">2</td><td><strong>Quantitative</strong></td><td>ตัวเลขที่จับต้องได้ — ไม่ใช่ qualitative loose</td></tr>
+    <tr><td class="num center">3</td><td><strong>ว้าว</strong></td><td>ผบห. ต้องการตัวเลขที่ดู Aspirational</td></tr>
+    <tr><td class="num center">4</td><td><strong>คุณภาพ + จำนวน</strong></td><td>ไม่ใช่แค่ count — แต่ matches industry need</td></tr>
+    <tr><td class="num center">5</td><td><strong>Flagship</strong></td><td>มีโครงการเรือธง 3-5 ตัวที่ defining</td></tr>
+    <tr><td class="num center">6</td><td><strong>Feasibility</strong></td><td>งบ + คน + resource gap ต้องชัด</td></tr>
+  </tbody>
+</table>
+
+<!-- ════════════════ Part 2: Critical Review of Current Plan ════════════════ -->
+
+<h2>🔍 ส่วนที่ ๒ — Critical Review แผนปัจจุบัน</h2>
+
+<h3>คะแนนรายเสาหลัก (เทียบ Apivadee Criteria)</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pillar</th>
+      <th class="center">Quantitative</th>
+      <th class="center">ว้าว</th>
+      <th class="center">คุณภาพ</th>
+      <th class="center">Top-down</th>
+      <th class="center">Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>1) Hub</strong></td>
+      <td class="center">🟢 ดี</td>
+      <td class="center">🟡 พอใช้</td>
+      <td class="center">🟡 weak</td>
+      <td class="center">🟡</td>
+      <td class="center score score-mid">2.5</td>
+    </tr>
+    <tr>
+      <td><strong>2) Talent</strong></td>
+      <td class="center">🟢 ดี</td>
+      <td class="center">🟠 อ่อน</td>
+      <td class="center">🔴 ขาด</td>
+      <td class="center">🟡</td>
+      <td class="center score score-mid">2.0</td>
+    </tr>
+    <tr>
+      <td><strong>3) Sandbox</strong></td>
+      <td class="center">🟢 ดี</td>
+      <td class="center">🟢 ดี (Unicorn)</td>
+      <td class="center">🟡</td>
+      <td class="center">🟡</td>
+      <td class="center score score-mid">2.8</td>
+    </tr>
+    <tr>
+      <td><strong>4) Dataset</strong></td>
+      <td class="center">🟢 ดี</td>
+      <td class="center">🟡 พอใช้</td>
+      <td class="center">🔴 ขาด</td>
+      <td class="center">🟡</td>
+      <td class="center score score-mid">2.2</td>
+    </tr>
+    <tr>
+      <td><strong>5) Policy/IP</strong></td>
+      <td class="center">🟠 อ่อน</td>
+      <td class="center">🟡</td>
+      <td class="center">🔴 ขาด</td>
+      <td class="center">🟡</td>
+      <td class="center score score-mid">1.8</td>
+    </tr>
+    <tr>
+      <td><strong>6) ต้นทุน -30%</strong></td>
+      <td class="center">🟢 ดี</td>
+      <td class="center">🟡</td>
+      <td class="center">🟠 measurement?</td>
+      <td class="center">🟡</td>
+      <td class="center score score-mid">2.3</td>
+    </tr>
+    <tr>
+      <td><strong>7) Export</strong></td>
+      <td class="center">🟡</td>
+      <td class="center">🟢 ดี</td>
+      <td class="center">🔴 ขาด</td>
+      <td class="center">🟡</td>
+      <td class="center score score-mid">2.2</td>
+    </tr>
+    <tr>
+      <td><strong>8) GDP Impact</strong></td>
+      <td class="center">🟢 ดี (8.78→12)</td>
+      <td class="center">🟢 ว้าว</td>
+      <td class="center">🟠 attribution</td>
+      <td class="center">🟢</td>
+      <td class="center score score-good">3.2</td>
+    </tr>
+    <tr style="background:#1F4E78; color:white">
+      <td><strong>ภาพรวม</strong></td>
+      <td colspan="4" class="center">—</td>
+      <td class="center score" style="color:#FEF3C7">2.4 / 5</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="warn">
+<strong>สรุปปัญหา:</strong> แผนปัจจุบันมี "จำนวน" แต่ขาด "คุณภาพ" และ "ว้าว" — KPIs ดูเป็น defensive ไม่ใช่ aspirational
+</blockquote>
+
+<!-- ════════════════ Part 3: Gap Analysis ════════════════ -->
+
+<h2>🕳 ส่วนที่ ๓ — Gap Analysis (สิ่งที่ขาดในแผนปัจจุบัน)</h2>
+
+<h3>Gap 1 — ขาดมิติ "คุณภาพ + Industry Demand"</h3>
+<blockquote>
+Apivadee: "<strong>มีจำนวนและคุณภาพสอดคล้องกับความต้องการจริงจากภาคเอกชน</strong>"
+</blockquote>
+<p><strong>ปัจจุบัน:</strong></p>
+<ul>
+  <li>"ผู้ผ่านอบรม 3,000 คน" → ไม่บอกคุณภาพ / matches อะไรในตลาด</li>
+  <li>"MOU 30 องค์กร" → active vs paper MOU?</li>
+  <li>"Sandbox 25 โปรเจกต์" → success rate?</li>
+</ul>
+
+<h3>Gap 2 — ขาด "Flagship Projects"</h3>
+<blockquote>
+Apivadee: "<strong>ซีกำลังเตรียมขั้นถัดไปคือเรื่องโครงการ flagship</strong>"
+</blockquote>
+<p>แผนปัจจุบันมี Pillar ๘ ตัว — แต่ไม่มี "โครงการเรือธง" ที่ defining</p>
+
+<h3>Gap 3 — KPI หลายตัวยัง "พอใช้" ไม่ "ว้าว"</h3>
+<blockquote>
+Apivadee: "<strong>ผบห. อยากได้ตัวเลขที่จับต้องได้จริง และว้าวเสมอ</strong>"
+</blockquote>
+<table>
+  <thead><tr><th>KPI ปัจจุบัน</th><th>"พอใช้" หรือ "ว้าว"</th></tr></thead>
+  <tbody>
+    <tr><td>Talent Pool 1,000</td><td class="center">🟡 พอใช้</td></tr>
+    <tr><td>หลักสูตร 2 ตัว</td><td class="center">🔴 ไม่ว้าว</td></tr>
+    <tr><td>MOU 10 องค์กร</td><td class="center">🟡 พอใช้</td></tr>
+    <tr><td>Sandbox 3-5/ปี</td><td class="center">🟡 พอใช้</td></tr>
+    <tr><td>ต้นทุนลด 30%</td><td class="center">🟢 ว้าว</td></tr>
+    <tr><td>GDP 12%</td><td class="center">🟢 ว้าว</td></tr>
+    <tr><td>AI Adoption 80%</td><td class="center">🟢 ว้าว</td></tr>
+    <tr><td>5 ประเทศ ASEAN</td><td class="center">🟡 พอใช้</td></tr>
+  </tbody>
+</table>
+
+<h3>Gap 4 — ขาด Feasibility Study</h3>
+<blockquote>
+Apivadee: "<strong>ขอ feasibility study</strong> จะทำให้แผนดูเป็นไปได้จริง จะง่ายต่อการอนุมัติในลำดับถัดไป"
+</blockquote>
+<p>ปัจจุบันมี:</p>
+<ul>
+  <li>✅ งบประมาณรวม 744 MB</li>
+  <li>✅ แตกตาม Pillar</li>
+  <li>❌ <strong>ไม่มี:</strong> Resource Gap analysis (มีอะไร / ขาดอะไร)</li>
+  <li>❌ <strong>ไม่มี:</strong> Team composition needs (คนแบบไหน กี่คน)</li>
+  <li>❌ <strong>ไม่มี:</strong> Project-level breakdown</li>
+</ul>
+
+<!-- ════════════════ Part 4: Recommended Revisions ════════════════ -->
+
+<h2>🛠 ส่วนที่ ๔ — เสนอการปรับ Output/Outcome</h2>
+
+<h3>4.1 KPI Upgrade — Quantitative + "ว้าว"</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pillar</th>
+      <th>KPI ปัจจุบัน <span class="tag tag-current">เดิม</span></th>
+      <th>KPI ใหม่ <span class="tag tag-new">ว้าว</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>1) Hub</strong></td>
+      <td>1 Hub → 5 ภูมิภาค · 2,000 members</td>
+      <td><strong>5 Hubs ในไทย + 3 Hubs ระดับสากล</strong> (Tokyo / Seoul / Singapore) · <strong>20,000 active members</strong></td>
+    </tr>
+    <tr>
+      <td><strong>2) Talent</strong></td>
+      <td>3,000+ certified · 6 หลักสูตร</td>
+      <td><strong>50,000 ผู้ผ่านอบรม · 10,000 certified · 1,000 ทำงานต่างประเทศ</strong> · 20 หลักสูตร · ที่ภาคเอกชนต้องการจริง 80%</td>
+    </tr>
+    <tr>
+      <td><strong>3) Sandbox</strong></td>
+      <td>25-35 projects · Unicorn 1-2</td>
+      <td><strong>100 projects · 30 Commercial · มูลค่ารวม 5,000 MB · Unicorn 2 + IPO 1 ราย</strong></td>
+    </tr>
+    <tr>
+      <td><strong>4) Dataset</strong></td>
+      <td>5M data points · ใช้ใน 5 ประเทศ</td>
+      <td><strong>100M+ data points · 50,000 นักพัฒนาใช้ · Foundation Model ไทย 1 ตัว Open Source</strong></td>
+    </tr>
+    <tr>
+      <td><strong>5) Policy</strong></td>
+      <td>กรอบ → ประกาศ → ASEAN leader</td>
+      <td><strong>1 พ.ร.บ. ใหม่ · 3 ประเทศ ASEAN รับ Thai model · 1 ISO ที่ไทยเสนอ</strong></td>
+    </tr>
+    <tr>
+      <td><strong>6) ต้นทุน</strong></td>
+      <td>-30% (Baseline ปี 1)</td>
+      <td><strong>-50% สำหรับ Animation/CGI · -30% Content broad</strong> + วัดด้วย Industry Cost Index</td>
+    </tr>
+    <tr>
+      <td><strong>7) Export</strong></td>
+      <td>10K-50K MB/ปี · 5 ประเทศ</td>
+      <td><strong>50,000 MB/ปี ปี 5 · 10 ประเทศ · Market Share 5% ใน ASEAN Creative Tech</strong></td>
+    </tr>
+    <tr>
+      <td><strong>8) GDP Impact</strong></td>
+      <td>8.78% → 12% · AI Adoption 80%</td>
+      <td>คงไว้ <strong>+ Job Creation 100,000 ตำแหน่ง + FDI 50,000 MB</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>4.2 Flagship Projects — 5 โครงการเรือธง (เสนอ)</h3>
+
+<div class="flagship-card">
+<h4>🏛 Flagship 1: Thai AI Creative Foundation Model (TACFM)</h4>
+<p>โมเดล AI พื้นฐานที่ trained บนข้อมูลศิลปะ วัฒนธรรม และเนื้อหาไทย — Open Source ให้ผู้สร้างสรรค์ทั้งประเทศใช้ฟรี เป็นกระดูกสันหลังของ AI Creative ไทย</p>
+<div class="flagship-meta">
+  <span>💰 งบ: 150 MB</span>
+  <span>👥 ทีม: 30 คน</span>
+  <span>📅 ปี 1-3</span>
+  <span>🏢 BDI + Open Source + NECTEC</span>
+</div>
+</div>
+
+<div class="flagship-card">
+<h4>🎪 Flagship 2: Bangkok AI Creative Market (BAICM)</h4>
+<p>งานประจำปีระดับสากล — ดึง buyer จาก ASEAN + Asia · เป็น "Cannes ของ AI Creative" — ยอดซื้อขาย ≥ 5,000 MB/ปี ภายในปี 3</p>
+<div class="flagship-meta">
+  <span>💰 งบ: 100 MB</span>
+  <span>👥 ทีม: 20 คน</span>
+  <span>📅 ปี 2-5 (ครั้งแรก ปี 2)</span>
+  <span>🏢 DITP + CEA + AICAT</span>
+</div>
+</div>
+
+<div class="flagship-card">
+<h4>🧪 Flagship 3: AI Creative Sandbox Platform</h4>
+<p>แพลตฟอร์ม Sandbox สำหรับทดสอบ AI Creative tools ในสภาพแวดล้อมจริง — เปิดให้ Creator/SME เข้าใช้ฟรี · เก็บข้อมูล real-world evidence + measurement of cost reduction</p>
+<div class="flagship-meta">
+  <span>💰 งบ: 120 MB</span>
+  <span>👥 ทีม: 25 คน</span>
+  <span>📅 ปี 1-5</span>
+  <span>🏢 NIA + AICAT + ภาคเอกชน</span>
+</div>
+</div>
+
+<div class="flagship-card">
+<h4>🎓 Flagship 4: Thai Creator Economy AI Toolkit</h4>
+<p>ชุดเครื่องมือ AI ที่ Creator/SME เข้าถึงฟรี + course สอนใช้ — เป้าหมาย 50,000 ผู้ใช้ลด cost การผลิตได้จริง · พิสูจน์ "AI Adoption 80%"</p>
+<div class="flagship-meta">
+  <span>💰 งบ: 80 MB</span>
+  <span>👥 ทีม: 15 คน</span>
+  <span>📅 ปี 2-5</span>
+  <span>🏢 AICAT + depa + DAAT</span>
+</div>
+</div>
+
+<div class="flagship-card">
+<h4>🌐 Flagship 5: AI Creative Export Accelerator</h4>
+<p>โปรแกรมเร่งการ export AI Creative Content + Tools ของไทยสู่ ASEAN+ — มี office รับ buyer · มี matching program · เป้าหมาย Export 50,000 MB/ปี</p>
+<div class="flagship-meta">
+  <span>💰 งบ: 100 MB</span>
+  <span>👥 ทีม: 15 คน</span>
+  <span>📅 ปี 2-5</span>
+  <span>🏢 DITP + AICAT + กระทรวงพาณิชย์</span>
+</div>
+</div>
+
+<div style="background: #ECFDF5; padding: 16px 20px; border-radius: 8px; border-left: 4px solid #10B981; margin: 20px 0;">
+<strong>💎 รวม Flagship:</strong> 550 MB จาก 744 MB total (74%) — ที่เหลือ 194 MB สำหรับ Operations / Policy / Events
+</div>
+
+<h3>4.3 Top-down Vision Reframe — "ไทยในปี 2574"</h3>
+
+<blockquote class="info">
+<strong>วิสัยทัศน์ปี 2574 (Top-down):</strong><br><br>
+"ภายใน 5 ปี ประเทศไทยจะกลายเป็น <strong>ASEAN Hub of AI-powered Creative Economy</strong> — มี Foundation Model ไทยที่ใช้ระดับสากล · มี Creator 50,000 คนที่ทำงานข้ามชาติ · มี Industry Export ≥ 50,000 ล้านบาท/ปี · เป็นต้นแบบนโยบาย AI Creative ของอาเซียน"
+</blockquote>
+
+<table>
+  <thead><tr><th>มิติ</th><th>ปัจจุบัน (2569)</th><th>ปี 5 — "สิ่งที่ควรมี" (2574)</th></tr></thead>
+  <tbody>
+    <tr><td>Foundation Model ไทย</td><td>❌ ไม่มี</td><td>✅ <strong>TACFM Open Source</strong></td></tr>
+    <tr><td>Creator ระดับ AI</td><td>~500 ในไทย</td><td><strong>50,000+ ในไทย / 1,000 ส่งออกต่างชาติ</strong></td></tr>
+    <tr><td>Industry Export</td><td>~5,000 MB/ปี</td><td><strong>50,000+ MB/ปี</strong></td></tr>
+    <tr><td>Policy Influence</td><td>0 ASEAN adoption</td><td><strong>3 ประเทศใช้ Thai model + 1 ISO เสนอ</strong></td></tr>
+    <tr><td>Job Creation</td><td>—</td><td><strong>100,000 ตำแหน่งใหม่</strong></td></tr>
+    <tr><td>Foreign Investment</td><td>Baseline</td><td><strong>+50,000 MB FDI</strong></td></tr>
+  </tbody>
+</table>
+
+<h3>4.4 Feasibility Framework — ที่ต้องเตรียม</h3>
+
+<table>
+  <thead><tr><th>ด้าน</th><th>ปัจจุบัน</th><th>ต้องเพิ่ม</th></tr></thead>
+  <tbody>
+    <tr><td><strong>งบประมาณ</strong></td><td>✅ 744 MB แตก Pillar</td><td>แตกระดับ Flagship + Year-by-year breakdown</td></tr>
+    <tr><td><strong>Team Composition</strong></td><td>❌ ไม่มี</td><td>FTE + Skills needed (AI engineer / Creative / Business / Legal)</td></tr>
+    <tr><td><strong>Resource Gap</strong></td><td>❌ ไม่มี</td><td>มีอะไร / ขาดอะไร / จะหาจากไหน</td></tr>
+    <tr><td><strong>Risk Register</strong></td><td>มีพอผิวเผิน</td><td>Per-flagship risk + mitigation</td></tr>
+    <tr><td><strong>Milestones</strong></td><td>มีระดับ Pillar</td><td>Quarterly milestones สำหรับ flagship</td></tr>
+    <tr><td><strong>Industry Validation</strong></td><td>❌ ไม่มี</td><td>Letter of intent / MOU จาก industry pre-launch</td></tr>
+  </tbody>
+</table>
+
+<!-- ════════════════ Part 5: Revised Headline KPIs ════════════════ -->
+
+<h2>🏆 ส่วนที่ ๕ — Headline KPIs ใหม่ (สำหรับรองนายกฯ)</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>KPI</th>
+      <th class="center">Baseline</th>
+      <th class="center">ปี 1</th>
+      <th class="center">ปี 3</th>
+      <th class="center">ปี 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background:#FEF3C7">
+      <td><strong>GDP Creative Economy</strong></td>
+      <td class="center">8.78%</td>
+      <td class="center">9.0%</td>
+      <td class="center">10.0%</td>
+      <td class="center"><strong>12.0%</strong></td>
+    </tr>
+    <tr style="background:#FEF3C7">
+      <td><strong>Export AI Creative (MB/ปี)</strong></td>
+      <td class="center">~5K</td>
+      <td class="center">8K</td>
+      <td class="center">20K</td>
+      <td class="center"><strong>50K+</strong></td>
+    </tr>
+    <tr style="background:#FEF3C7">
+      <td><strong>AI Creators (Total)</strong></td>
+      <td class="center">~500</td>
+      <td class="center">5K</td>
+      <td class="center">20K</td>
+      <td class="center"><strong>50K+</strong></td>
+    </tr>
+    <tr style="background:#FEF3C7">
+      <td><strong>Job Creation (cumulative)</strong></td>
+      <td class="center">—</td>
+      <td class="center">2K</td>
+      <td class="center">30K</td>
+      <td class="center"><strong>100K</strong></td>
+    </tr>
+    <tr style="background:#FEF3C7">
+      <td><strong>Thai AI Tools in ASEAN+</strong></td>
+      <td class="center">0</td>
+      <td class="center">1</td>
+      <td class="center">3</td>
+      <td class="center"><strong>10 ประเทศ</strong></td>
+    </tr>
+    <tr style="background:#FEF3C7">
+      <td><strong>FDI ใน Thai AI Creative</strong></td>
+      <td class="center">Baseline</td>
+      <td class="center">+5K MB</td>
+      <td class="center">+20K MB</td>
+      <td class="center"><strong>+50K MB</strong></td>
+    </tr>
+    <tr style="background:#FEF3C7">
+      <td><strong>Foundation Model Open Source</strong></td>
+      <td class="center">0</td>
+      <td class="center">Prep</td>
+      <td class="center">Launch</td>
+      <td class="center"><strong>v2 + ASEAN adoption</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="ok">
+✅ ทุก KPI = ตัวเลขจับต้องได้ + ใหญ่กว่าเดิม + "ว้าว" ตามที่ผบห. ต้องการ
+</blockquote>
+
+<!-- ════════════════ Part 6: Risk + Mitigation ════════════════ -->
+
+<h2>⚠ ส่วนที่ ๖ — Risk + Mitigation</h2>
+
+<table>
+  <thead><tr><th>Risk</th><th>ผลกระทบ</th><th>Mitigation</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>KPI ทะเยอทะยานเกิน → ไม่ถึงเป้า</td>
+      <td>🔴 High</td>
+      <td>Apivadee บอก "<strong>ปรับ KPI ระหว่างทางได้</strong>" — ใช้ Mid-term Review ปี 2.5 + ปี 4</td>
+    </tr>
+    <tr>
+      <td>Foundation Model ไทย — เทคนิคยาก</td>
+      <td>🟠 Med</td>
+      <td>partner กับ NECTEC + Open Source community + ขอ collaborate ต่างชาติ</td>
+    </tr>
+    <tr>
+      <td>งบไม่ครบ 744 MB</td>
+      <td>🟠 Med</td>
+      <td>Multi-source funding · ภาคเอกชน co-invest 10%+ · ต่างประเทศ 10%+</td>
+    </tr>
+    <tr>
+      <td>Industry ไม่ commit</td>
+      <td>🟠 Med</td>
+      <td>Letter of intent จาก 10+ องค์กร <strong>pre-launch</strong> + Flagship 3 (Sandbox) ให้เห็นผลเร็ว</td>
+    </tr>
+    <tr>
+      <td>Attribution problem (COE = causal of GDP)</td>
+      <td>🟡 Low-Med</td>
+      <td>Reframe เป็น "ขับเคลื่อน" ไม่ใช่ "ทำให้สำเร็จ" + Mid-term measurement methodology</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ════════════════ Part 7: Next Actions ════════════════ -->
+
+<h2>🚀 ส่วนที่ ๗ — Next Actions (หลังคำสั่งผ่าน)</h2>
+
+<table>
+  <thead><tr><th>#</th><th>Action</th><th>เร่ง</th><th>Owner</th></tr></thead>
+  <tbody>
+    <tr><td class="num center">1</td><td>เขียน <strong>Feasibility Study</strong> — แตก Flagship ละ scope/budget/team/risk</td><td class="center">🔴</td><td>AICAT + 4 อนุคณะ</td></tr>
+    <tr><td class="num center">2</td><td>ขอ <strong>Letter of Intent</strong> จาก industry 10+ องค์กร (validate demand)</td><td class="center">🔴</td><td>AICAT + DAAT + TACGA</td></tr>
+    <tr><td class="num center">3</td><td>Validate Headline KPIs กับ ผบห. <strong>เพื่อ defend ตัวเลข</strong></td><td class="center">🟠</td><td>ประธาน + รองประธาน</td></tr>
+    <tr><td class="num center">4</td><td>เตรียม Quarterly Milestones สำหรับ 5 Flagship</td><td class="center">🟠</td><td>4 อนุคณะ</td></tr>
+    <tr><td class="num center">5</td><td>Industry Cost Index — methodology สำหรับวัด "ต้นทุนลด 30-50%"</td><td class="center">🟡</td><td>BDI + DAAT</td></tr>
+    <tr><td class="num center">6</td><td>Talent Market Survey — สาขา + skills ที่ภาคเอกชนต้องการจริง</td><td class="center">🟡</td><td>AICAT + DAAT + TACGA</td></tr>
+  </tbody>
+</table>
+
+<!-- ════════════════ Summary ════════════════ -->
+
+<h2>📋 สรุปการปรับ Output/Outcome</h2>
+
+<div class="compare-grid">
+<div class="compare-box before">
+<h4>เดิม (v1)</h4>
+<ul>
+  <li>8 Pillars · KPI ระดับ "พอใช้"</li>
+  <li>คะแนน 2.4/5 (Apivadee criteria)</li>
+  <li>Talent 3,000 · Sandbox 25</li>
+  <li>ไม่มี Flagship Projects</li>
+  <li>ไม่มี Feasibility Study</li>
+  <li>เน้น count ไม่เน้น quality</li>
+</ul>
+</div>
+<div class="compare-box after">
+<h4>ใหม่ (v2 ตามวิเคราะห์)</h4>
+<ul>
+  <li>8 Pillars + <strong>5 Flagship Projects</strong></li>
+  <li>KPI ระดับ "<strong>ว้าว</strong>" · Quantitative</li>
+  <li>Talent <strong>50,000</strong> · Sandbox <strong>100</strong></li>
+  <li>5 Flagship ตัวเรือธง</li>
+  <li>Feasibility Framework</li>
+  <li>"จำนวน + คุณภาพ + Industry Demand"</li>
+</ul>
+</div>
+</div>
+
+<blockquote class="ok">
+<strong>เป้าหมายการปรับ:</strong> ทำให้แผน "Defendable" ต่อผบห. + ตอบ feedback ของ Apivadee ครบทุกข้อ
+</blockquote>
+
+<div class="footer">
+COE AI Creative Economy · สมาคมสร้างสรรค์ปัญญาประดิษฐ์ไทย · พ.ค. 2569 · Output/Outcome Revision Analysis v1
+</div>
+
+</body>
+</html>

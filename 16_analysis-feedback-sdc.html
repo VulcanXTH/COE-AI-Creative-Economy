@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>วิเคราะห์ Feedback จาก สดช. — ปรับยุทธศาสตร์</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+* { box-sizing: border-box; }
+body {
+  font-family: 'Sarabun', 'Arial', sans-serif;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 50px;
+  color: #1F2937;
+  line-height: 1.7;
+  background: #FFFFFF;
+}
+h1 { color: #1F4E78; border-bottom: 3px solid #1F4E78; padding-bottom: 10px; font-size: 1.85em; }
+h2 { color: #1F4E78; margin-top: 2.2em; font-size: 1.35em; border-left: 5px solid #2E75B6; padding-left: 14px; }
+h3 { color: #374151; font-size: 1.1em; margin-top: 1.8em; border-bottom: 1px dashed #D1D5DB; padding-bottom: 4px; }
+.meta { background: #F2F7FA; border-left: 4px solid #2E75B6; padding: 12px 18px; margin: 1em 0 2em; font-size: 0.92em; }
+.meta p { margin: 4px 0; }
+blockquote { border-left: 4px solid #F59E0B; background: #FEF9C3; padding: 12px 16px; margin: 1em 0; color: #78350F; font-size: 0.95em; }
+blockquote.warn { border-color: #DC2626; background: #FEE2E2; color: #7F1D1D; }
+blockquote.info { border-color: #2E75B6; background: #DBEAFE; color: #1E3A8A; }
+blockquote.ok { border-color: #10B981; background: #D1FAE5; color: #065F46; }
+blockquote.quote { border-color: #6B7280; background: #F9FAFB; color: #374151; font-style: italic; }
+table { width: 100%; border-collapse: collapse; margin: 1em 0 1.5em; font-size: 0.93em; }
+th { background: #1F4E78; color: white; padding: 11px 12px; text-align: left; font-weight: 600; border: 1px solid #1F4E78; }
+td { padding: 9px 12px; border: 1px solid #E5E7EB; vertical-align: top; }
+tr:nth-child(even) td { background: #F8F9FA; }
+tr:hover td { background: #EFF6FF; }
+.center { text-align: center; }
+.num { font-weight: 600; color: #1F4E78; }
+ul, ol { padding-left: 24px; }
+li { margin: 0.3em 0; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.85em; font-weight: 600; }
+.tag-ok { background: #D1FAE5; color: #065F46; }
+.tag-warn { background: #FEF3C7; color: #92400E; }
+.tag-bad { background: #FEE2E2; color: #991B1B; }
+.tag-new { background: #DBEAFE; color: #1E40AF; }
+.icon-resolved { color: #10B981; font-weight: 700; }
+.icon-new { color: #2E75B6; font-weight: 700; }
+.footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #E5E7EB; color: #6B7280; font-size: 0.85em; text-align: center; }
+@media print { body { padding: 20px; max-width: 100%; } h2 { page-break-after: avoid; } tr { page-break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<h1>วิเคราะห์ Feedback จาก สดช. — ปรับยุทธศาสตร์ COE Creative</h1>
+
+<div class="meta">
+  <p><strong>ที่มา:</strong> ตอบกลับจาก สดช. (Apivadee + ทีมประสาน) ต่อ draft ที่ส่งไป</p>
+  <p><strong>สรุปสั้น:</strong> 5 ข้อกังวลเดิม → คลายไป 4 ข้อ / มี 3 ข้อต้องเพิ่มงานใหม่</p>
+  <p><strong>Deadline:</strong> 29 พ.ค. 2569 (เหลือไม่กี่วัน)</p>
+</div>
+
+<!-- ════════════════ ส่วน 1: สรุป Feedback ════════════════ -->
+
+<h2>📩 ส่วนที่ ๑ — สรุป Feedback ที่ได้รับ</h2>
+
+<table>
+  <thead><tr><th style="width:5%">#</th><th>ประเด็น</th><th>คำตอบจาก สดช.</th><th>ผลกระทบ</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="num center">1</td>
+      <td>หน่วยงานรัฐที่ยังไม่ Pre-sync — ใส่เข้าคณะได้เลยมั้ย?</td>
+      <td>"ถ้าเป็น <strong>strategic partner</strong> ที่อย่างไรก็ต้องมี ใส่เป็น <strong>'ผู้แทน[ชื่อหน่วยงาน]'</strong> ไปก่อนได้เลย"</td>
+      <td><span class="tag tag-ok">คลาย</span></td>
+    </tr>
+    <tr>
+      <td class="num center">2</td>
+      <td>ประธานต้องเป็นภาครัฐมั้ย? บางคนติง</td>
+      <td>"<strong>ไม่ติงเลย</strong> ขอประธานที่มุ่งมั่นใส่ใจ รู้เรื่อง ฟันธงได้"</td>
+      <td><span class="tag tag-ok">คลาย</span></td>
+    </tr>
+    <tr>
+      <td class="num center">3</td>
+      <td>ผู้ทรงคุณวุฒิ 5 คน — ต้องส่งชื่อใน formal คำสั่งมั้ย?</td>
+      <td>"<strong>ไม่อยู่ในหนังสือแต่งตั้งหลัก</strong> ประธานมีอำนาจแต่งตั้ง/ปรับเปลี่ยนได้เอง / แนบท้ายได้ ถ้ามี"</td>
+      <td><span class="tag tag-ok">คลาย</span></td>
+    </tr>
+    <tr>
+      <td class="num center">4</td>
+      <td>ผู้ช่วยเลขานุการร่วม (๙.๑๗) จาก สดช. หรือ BDI</td>
+      <td>"จะเป็นคนจากทีมซี + ท่านเวทางค์ — <strong>สดช. จัดให้เอง</strong>"</td>
+      <td><span class="tag tag-ok">คลาย</span></td>
+    </tr>
+    <tr>
+      <td class="num center">5</td>
+      <td>ส่งแผน 1-3-5 + งบประมาณ</td>
+      <td>"<strong>ไปให้สุด เอาให้เกิด</strong> แต่ฝากดู feasibility — flagship + เงิน + คน + resource"</td>
+      <td><span class="tag tag-new">งานเพิ่ม</span></td>
+    </tr>
+    <tr>
+      <td class="num center">6</td>
+      <td>มุมมองในแผน</td>
+      <td>"มอง <strong>top-down</strong> — 'สิ่งที่ควรมี' ไม่ใช่ 'สิ่งที่ทำอยู่' — เป็น stepping stone โชว์ความพร้อม"</td>
+      <td><span class="tag tag-new">งานเพิ่ม</span></td>
+    </tr>
+    <tr>
+      <td class="num center">7</td>
+      <td>KPI ในแผน Output/Outcome</td>
+      <td>"<strong>Quantitative</strong> — ตัวเลขจับต้องได้ + 'ว้าว' / ปรับ KPI ระหว่างทางได้"</td>
+      <td><span class="tag tag-new">งานเพิ่ม</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ════════════════ ส่วน 2: ความกังวลเดิมที่หายไป ════════════════ -->
+
+<h2>✅ ส่วนที่ ๒ — ความกังวลเดิมที่ "หายไปแล้ว"</h2>
+
+<blockquote class="ok">
+4 ใน 5 ข้อ political risk ที่กังวลก่อนหน้านี้ → <strong>คลายหมด</strong> หลังจาก feedback นี้
+</blockquote>
+
+<table>
+  <thead><tr><th>เดิมกังวล</th><th>ตอนนี้</th><th>เหตุผล</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>🔴 AICAT เป็นประธาน → คกก.แม่ติง</td>
+      <td><span class="icon-resolved">✅ หายแล้ว</span></td>
+      <td>สดช. ยืนยัน "ไม่ติงเลย" — ขอแค่ "มุ่งมั่น รู้เรื่อง ฟันธงได้"</td>
+    </tr>
+    <tr>
+      <td>🔴 ดร.ชาคริต ลงเป็นกรรมการ = ลดสถานะ</td>
+      <td><span class="icon-resolved">✅ ไม่ใช่ปัญหา</span></td>
+      <td>ภาครัฐยอมรับ AICAT นำ → ดร.ชาคริต จะมีบทบาทตามที่กำหนด</td>
+    </tr>
+    <tr>
+      <td>🟠 ต้อง pre-sync ทุกหน่วยรัฐก่อน</td>
+      <td><span class="icon-resolved">✅ ไม่ต้อง</span></td>
+      <td>ใส่ "ผู้แทน[หน่วยงาน]" ไปก่อนได้ — สดช. จะประสานต่อ</td>
+    </tr>
+    <tr>
+      <td>🟠 ต้องระบุชื่อผู้ทรงคุณวุฒิ 5 ราย</td>
+      <td><span class="icon-resolved">✅ ไม่ต้อง</span></td>
+      <td>ไม่อยู่ใน formal คำสั่ง — แนบท้ายเป็น "กำลังคนของ COE" ได้</td>
+    </tr>
+    <tr>
+      <td>🟠 ต้องหาคนเป็น ๙.๑๗ (เลขาร่วม)</td>
+      <td><span class="icon-resolved">✅ สดช. จัดให้</span></td>
+      <td>เป็น "น้องในทีมซี+ท่านเวทางค์" — เราไม่ต้องเลือก</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ════════════════ ส่วน 3: งานใหม่ที่ต้องทำ ════════════════ -->
+
+<h2>🆕 ส่วนที่ ๓ — งานใหม่ที่ต้องทำเพิ่ม</h2>
+
+<h3>3.1 Feasibility Study</h3>
+<blockquote class="quote">
+"ถ้าจะทำ 1, 2, 3 ต้องมี<strong>โครงการลักษณะไหน</strong> ทำอะไร ด้วย<strong>เงินเท่าไร</strong> ด้วย<strong>คนแบบไหน</strong> แล้ว <strong>resource มีแล้ว/ไม่มี</strong> — feasibility study"
+</blockquote>
+
+<p><strong>ต้องเตรียม:</strong></p>
+<ul>
+  <li>🎯 <strong>Flagship Projects</strong> — โครงการเรือธง 3-5 โครงการ พร้อมรายละเอียด</li>
+  <li>💰 <strong>งบประมาณ</strong> — แตกถึงระดับโครงการ (ตอนนี้มีแค่ระดับ Pillar)</li>
+  <li>👥 <strong>คน</strong> — Team composition / Skills needed</li>
+  <li>📊 <strong>Resource Gap</strong> — มีอะไร / ขาดอะไร</li>
+</ul>
+
+<h3>3.2 Top-Down Vision Mode</h3>
+<blockquote class="quote">
+"มอง<strong>แบบ top-down</strong> — 'สิ่งที่ควรมี' อาจไม่ใช่ 'สิ่งที่ดำเนินการอยู่' — เป็น stepping stone โชว์ความพร้อม-ต่อเนื่อง"
+</blockquote>
+
+<p><strong>หมายความว่า:</strong></p>
+<ul>
+  <li>เขียนแผนแบบ <strong>aspirational</strong> — สิ่งที่ "ควรเกิดขึ้นใน Thailand"</li>
+  <li>ไม่ใช่แค่ map กิจกรรมที่หน่วยงานทำอยู่</li>
+  <li>มี "ช่องว่าง" ให้ขอ resource เพิ่ม</li>
+</ul>
+
+<h3>3.3 KPI ต้อง Quantitative + ว้าว</h3>
+<blockquote class="quote">
+"output KPI อาจจำเป็นต้อง<strong>บอกเป็นจำนวน quantitatives</strong> หรือ '<strong>มีจำนวนและคุณภาพสอดคล้องกับความต้องการจริงจากภาคเอกชน ในสาขาการผลิตเป้าหมาย</strong>'<br><br>
+แล้วในการทำงานเราไปศึกษาความเหมาะสมหน้างาน <strong>เพื่อมาตั้งเป็น KPI จริงระหว่างทาง</strong>ได้<br><br>
+ผบห. อยาก<strong>ได้ตัวเลขที่จับต้องได้จริง และว้าวเสมอ</strong>"
+</blockquote>
+
+<p><strong>ตัวอย่าง KPI ปัจจุบัน vs ต้องปรับ:</strong></p>
+
+<table>
+  <thead><tr><th>KPI เดิม</th><th>ปัญหา</th><th>เสนอใหม่</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>"Talent Pool ≥ 1,000 คน"</td>
+      <td>ตัวเลขใช่ — แต่ไม่ "ว้าว"</td>
+      <td>"<strong>10,000 ผู้สร้างสรรค์</strong> ที่ใช้ AI จริง — ส่งออกได้ ๑,๐๐๐ คน"</td>
+    </tr>
+    <tr>
+      <td>"AI Adoption ≥ 80%"</td>
+      <td>"%" ไม่ชัด — % ของอะไร</td>
+      <td>"<strong>80% ของ SME สร้างสรรค์</strong> ใช้ AI ลดต้นทุน ≥ 30%"</td>
+    </tr>
+    <tr>
+      <td>"Sandbox 3-5 โปรเจกต์"</td>
+      <td>เล็กไป ไม่ "ว้าว"</td>
+      <td>"<strong>20 Sandbox</strong> — 5 เข้า Commercial — สร้างมูลค่า ≥ 500 MB"</td>
+    </tr>
+    <tr>
+      <td>"Export AI Creative สู่ ASEAN"</td>
+      <td>ไม่มีตัวเลข</td>
+      <td>"<strong>Export มูลค่า 10,000 MB/ปี</strong> ภายในปี 5 (เริ่ม 1,000 MB ปี 3)"</td>
+    </tr>
+    <tr>
+      <td>"Thai AI Creative Tools ใน ≥ 5 ประเทศ"</td>
+      <td>"Tool" คืออะไร นับยังไง</td>
+      <td>"<strong>3 Thai AI Tools + 5 Datasets</strong> ที่ใช้ใน 5 ประเทศ ASEAN — ผู้ใช้รวม ≥ 100,000 ราย"</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ════════════════ ส่วน 4: สิ่งที่ปรับเรา ════════════════ -->
+
+<h2>🎯 ส่วนที่ ๔ — แผนปรับยุทธศาสตร์เรา</h2>
+
+<h3>4.1 คณะทำงาน — Lock ได้แล้ว (ง่ายขึ้นมาก)</h3>
+
+<blockquote class="ok">
+✅ ไม่ต้อง pre-sync ดร.ชาคริต ก่อนส่ง (แต่ควรแจ้งให้ทราบ)<br>
+✅ ไม่ต้อง lock ชื่อผู้ทรงคุณวุฒิ 5 ราย (แนบท้ายภายหลังได้)<br>
+✅ ไม่ต้องหาเลขาร่วม (สดช. จัดให้)<br>
+✅ AICAT เป็นประธานได้ — confirmed
+</blockquote>
+
+<p><strong>สิ่งที่เหลือต้องทำ:</strong></p>
+<ol>
+  <li>Lock 17 ที่นั่ง (ใช้ format "ผู้แทน[หน่วยงาน]" ทั้งหมดได้)</li>
+  <li>(Optional) แนบท้ายชื่อผู้ทรงคุณวุฒิ 5 + ที่ปรึกษา = โชว์กำลังคน</li>
+  <li>ลง .docx</li>
+</ol>
+
+<h3>4.2 แผน Output/Outcome — ต้อง revise</h3>
+
+<table>
+  <thead><tr><th>ต้องทำ</th><th>วิธี</th><th>เร่ง</th></tr></thead>
+  <tbody>
+    <tr><td>เพิ่ม Flagship Projects 3-5 โครงการ</td><td>เลือก 3-5 โปรเจกต์ + Project Brief (scope, budget, team, timeline)</td><td>🔴</td></tr>
+    <tr><td>Revise KPI ให้ quantitative + "ว้าว"</td><td>ตัวเลขใหญ่ขึ้น + ระบุ unit ชัด</td><td>🔴</td></tr>
+    <tr><td>เพิ่ม Resource Gap analysis</td><td>มีอะไร / ขาดอะไร — โดยเฉพาะ Talent + Data + Compute</td><td>🟡</td></tr>
+    <tr><td>Reframe เป็น Top-down vision</td><td>"Thailand ในปี 2574 ที่ AI Creative ขับเคลื่อน" — แล้วถอยกลับมาเป็น flagship</td><td>🟡</td></tr>
+  </tbody>
+</table>
+
+<h3>4.3 ประเด็นที่ก่อนหน้าวิเคราะห์ว่าเป็นจุดเสี่ยง → ตอนนี้ลดความสำคัญ</h3>
+
+<blockquote class="info">
+จากรายงานวิเคราะห์ก่อน — KPI ทะเยอทะยานเกินจริง (Unicorn, 80% Adoption) เคยถูกเสนอให้ "ลด"<br>
+<strong>แต่ feedback ใหม่บอก: "อยากได้ตัวเลขที่ว้าว"</strong> → เราควร <strong>คงไว้หรือเพิ่ม</strong> ไม่ใช่ลด<br>
+<br>
+<strong>Attribution Problem</strong> ที่กังวลมาก → ตอนนี้บอกว่า "KPI ปรับระหว่างทางได้" = ไม่ต้องสะสมโทษถ้าไม่ถึง<br>
+→ ลด anxiety ได้
+</blockquote>
+
+<!-- ════════════════ ส่วน 5: Top 3 Actions ════════════════ -->
+
+<h2>🚀 Top 3 Actions ก่อน 29 พ.ค. 2569</h2>
+
+<table>
+  <thead><tr><th>ลำดับ</th><th>ภารกิจ</th><th>Output</th><th>เร่ง</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="num center">1</td>
+      <td><strong>Lock คณะทำงาน 17 + ลง .docx</strong></td>
+      <td>ส่วนที่ ๙ ใน template ของ สดช. — พร้อมส่ง</td>
+      <td>🔴 ภายในวันที่ 28</td>
+    </tr>
+    <tr>
+      <td class="num center">2</td>
+      <td><strong>Revise KPI ให้ quantitative + ว้าว</strong></td>
+      <td>Update แผน Output/Outcome — ตัวเลขที่ใหญ่ขึ้น</td>
+      <td>🔴 ภายในวันที่ 28</td>
+    </tr>
+    <tr>
+      <td class="num center">3</td>
+      <td><strong>Flagship Projects 3-5 + งบ + คน</strong></td>
+      <td>Project Brief ละ 1 หน้า → เป็น feasibility annex</td>
+      <td>🟡 ระยะ 1-2 สัปดาห์ (หลังส่งคณะ)</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ════════════════ ส่วน 6: คำถามตัดสินใจ ════════════════ -->
+
+<h2>❓ คำถามที่ต้องตัดสินใจ</h2>
+
+<table>
+  <thead><tr><th>#</th><th>คำถาม</th><th>ตัวเลือก</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="num center">1</td>
+      <td>ผู้ทรงคุณวุฒิ 5 ราย — แนบท้ายเลย หรือเว้นไว้ก่อน?</td>
+      <td>A: แนบท้าย (โชว์ความพร้อม)<br>B: เว้นไว้ก่อน (คล่องตัวสุด)</td>
+    </tr>
+    <tr>
+      <td class="num center">2</td>
+      <td>ที่ปรึกษา 4 ราย (WorkPoint, Film Tech, Academic, Bitkub) — แนบท้ายมั้ย?</td>
+      <td>A: แนบท้าย<br>B: เก็บไว้ตั้งภายหลัง</td>
+    </tr>
+    <tr>
+      <td class="num center">3</td>
+      <td>Flagship Projects — กี่โครงการ?</td>
+      <td>A: 3 (focused)<br>B: 5 (broader)<br>C: 8 (one per pillar)</td>
+    </tr>
+    <tr>
+      <td class="num center">4</td>
+      <td>KPI Revision — agressive แค่ไหน?</td>
+      <td>A: ✕2 จากปัจจุบัน<br>B: ✕3 (very aspirational)<br>C: คงเดิม + reword</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="footer">
+COE AI Creative Economy · สมาคมสร้างสรรค์ปัญญาประดิษฐ์ไทย · พ.ค. 2569 · Analysis of สดช. Feedback
+</div>
+
+</body>
+</html>

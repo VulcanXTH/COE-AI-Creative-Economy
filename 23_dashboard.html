@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>COE AI Creative Economy — Dashboard</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap');
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Sarabun', 'Arial', sans-serif;
+  color: #1F2937;
+  line-height: 1.6;
+  background: #F1F5F9;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 30px 40px; }
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #1F4E78 0%, #2E75B6 100%);
+  color: white;
+  padding: 35px 40px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 20px rgba(31, 78, 120, 0.2);
+}
+.header h1 { font-size: 2.2em; margin-bottom: 8px; font-weight: 700; }
+.header p { font-size: 1.05em; opacity: 0.92; }
+.header-meta { display: flex; gap: 30px; margin-top: 18px; font-size: 0.95em; }
+.header-meta-item { background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 8px; }
+
+/* Section */
+.section { background: white; padding: 28px 32px; border-radius: 12px; margin-bottom: 26px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
+.section h2 {
+  color: #1F4E78;
+  font-size: 1.5em;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #2E75B6;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section h2 .icon { font-size: 1.3em; }
+.section h3 { color: #374151; font-size: 1.15em; margin: 20px 0 12px; padding-left: 12px; border-left: 4px solid #2E75B6; }
+
+/* Quick stats */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 26px; }
+.stat-card {
+  background: white;
+  padding: 20px 24px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-left: 5px solid #2E75B6;
+}
+.stat-card.green { border-left-color: #10B981; }
+.stat-card.orange { border-left-color: #F59E0B; }
+.stat-card.purple { border-left-color: #8B5CF6; }
+.stat-card.red { border-left-color: #DC2626; }
+.stat-value { font-size: 2.1em; font-weight: 700; color: #1F4E78; line-height: 1; }
+.stat-label { color: #6B7280; font-size: 0.95em; margin-top: 4px; }
+.stat-sub { color: #9CA3AF; font-size: 0.82em; margin-top: 2px; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 0.93em; }
+th { background: #1F4E78; color: white; padding: 10px 12px; text-align: left; font-weight: 600; }
+td { padding: 9px 12px; border-bottom: 1px solid #E5E7EB; vertical-align: top; }
+tr:nth-child(even) td { background: #F8F9FA; }
+.center { text-align: center; }
+.num { font-weight: 600; color: #1F4E78; }
+
+/* 2-col grid */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+/* Cards */
+.card {
+  background: #F8FAFC;
+  padding: 18px 20px;
+  border-radius: 8px;
+  border-left: 4px solid #2E75B6;
+}
+.card.green { background: #ECFDF5; border-left-color: #10B981; }
+.card.yellow { background: #FEF9C3; border-left-color: #F59E0B; }
+.card.orange { background: #FED7AA; border-left-color: #EA580C; }
+.card.purple { background: #EDE9FE; border-left-color: #8B5CF6; }
+.card h4 { color: #1F4E78; margin-bottom: 8px; font-size: 1em; }
+.card p { font-size: 0.9em; color: #4B5563; }
+
+/* Tags */
+.tag { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.82em; font-weight: 600; margin-right: 4px; }
+.tag-green { background: #D1FAE5; color: #065F46; }
+.tag-blue { background: #DBEAFE; color: #1E40AF; }
+.tag-yellow { background: #FEF3C7; color: #92400E; }
+.tag-red { background: #FEE2E2; color: #991B1B; }
+.tag-purple { background: #EDE9FE; color: #5B21B6; }
+
+/* Power Math visualization */
+.power-bar { display: flex; height: 40px; border-radius: 8px; overflow: hidden; margin: 16px 0 8px; }
+.power-segment { display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.85em; }
+.power-aicat { background: #10B981; }
+.power-ally { background: #F59E0B; }
+.power-neutral { background: #9CA3AF; }
+
+/* Timeline */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 3px; background: #2E75B6;
+}
+.timeline-item { position: relative; padding-bottom: 24px; }
+.timeline-item::before {
+  content: ''; position: absolute; left: -28px; top: 6px; width: 14px; height: 14px;
+  background: #1F4E78; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 2px #2E75B6;
+}
+.timeline-item h4 { color: #1F4E78; font-size: 1.05em; margin-bottom: 4px; }
+.timeline-item .year { color: #6B7280; font-size: 0.85em; margin-bottom: 6px; }
+
+/* Pillar grid */
+.pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.pillar {
+  padding: 14px 16px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #E5E7EB;
+  border-left: 4px solid #2E75B6;
+}
+.pillar-num { font-weight: 700; color: #1F4E78; font-size: 0.9em; }
+.pillar-title { font-weight: 600; margin: 4px 0; }
+.pillar-budget { color: #059669; font-size: 0.88em; font-weight: 600; }
+
+/* Status indicator */
+.status-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #F3F4F6; }
+.status-row:last-child { border-bottom: none; }
+
+/* Footer */
+.footer { text-align: center; color: #6B7280; padding: 20px; font-size: 0.85em; }
+
+@media print {
+  body { background: white; }
+  .section { box-shadow: none; border: 1px solid #E5E7EB; page-break-inside: avoid; }
+  .header { background: #1F4E78 !important; -webkit-print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- ════════════════ Header ════════════════ -->
+<div class="header">
+  <h1>📊 COE AI Creative Economy — Executive Dashboard</h1>
+  <p>คณะทำงานขับเคลื่อนศูนย์ความเป็นเลิศปัญญาประดิษฐ์ด้านอุตสาหกรรมสร้างสรรค์</p>
+  <div class="header-meta">
+    <div class="header-meta-item">📅 จัดทำ พ.ค. 2569</div>
+    <div class="header-meta-item">🏛 เจ้าภาพ: AICAT</div>
+    <div class="header-meta-item">📤 ส่ง สดช. 29 พ.ค. 2569</div>
+    <div class="header-meta-item">⏱ ระยะดำเนินงาน: 5 ปี</div>
+  </div>
+</div>
+
+<!-- ════════════════ Quick Stats ════════════════ -->
+<div class="stats">
+  <div class="stat-card">
+    <div class="stat-value">17</div>
+    <div class="stat-label">ที่นั่งใน คณะทำงาน</div>
+    <div class="stat-sub">+ ที่ปรึกษา (ตั้งภายหลัง)</div>
+  </div>
+  <div class="stat-card green">
+    <div class="stat-value">13</div>
+    <div class="stat-label">หน้าที่และอำนาจ</div>
+    <div class="stat-sub">ครอบ 9 Pillars</div>
+  </div>
+  <div class="stat-card orange">
+    <div class="stat-value">744</div>
+    <div class="stat-label">งบประมาณ (ล้านบาท)</div>
+    <div class="stat-sub">Mid Scenario · 5 ปี</div>
+  </div>
+  <div class="stat-card purple">
+    <div class="stat-value">8.78% → 12%</div>
+    <div class="stat-label">GDP Creative Economy</div>
+    <div class="stat-sub">เป้าหมายปี 5</div>
+  </div>
+  <div class="stat-card red">
+    <div class="stat-value">10/17</div>
+    <div class="stat-label">Vote Majority</div>
+    <div class="stat-sub">AICAT + NIA Ally</div>
+  </div>
+</div>
+
+<!-- ════════════════ คณะทำงาน ════════════════ -->
+<div class="section">
+<h2><span class="icon">👥</span> คณะทำงาน 17 ที่นั่ง</h2>
+
+<div class="grid-2">
+<div>
+  <h3>องค์ประกอบ</h3>
+  <table>
+    <thead><tr><th style="width:8%">ข้อ</th><th>ตำแหน่ง</th><th>บทบาท</th></tr></thead>
+    <tbody>
+      <tr><td class="num center">๙.๑</td><td>ผู้แทน AICAT</td><td><span class="tag tag-green">ประธาน</span></td></tr>
+      <tr><td class="num center">๙.๒–๙.๖</td><td>ผู้ทรงคุณวุฒิ ๕ (ผู้กำกับ · TACGA · DAAT · Content Creator · IP/AI Law)</td><td>คณะทำงาน</td></tr>
+      <tr><td class="num center">๙.๗</td><td>depa</td><td>คณะทำงาน</td></tr>
+      <tr><td class="num center">๙.๘</td><td>กรมส่งเสริมวัฒนธรรม</td><td>คณะทำงาน</td></tr>
+      <tr><td class="num center">๙.๙</td><td>CEA</td><td>คณะทำงาน</td></tr>
+      <tr><td class="num center">๙.๑๐</td><td>กรมทรัพย์สินทางปัญญา</td><td>คณะทำงาน</td></tr>
+      <tr><td class="num center">๙.๑๑</td><td>NIA</td><td>คณะทำงาน</td></tr>
+      <tr><td class="num center">๙.๑๒</td><td>BDI</td><td>คณะทำงาน</td></tr>
+      <tr><td class="num center">๙.๑๓</td><td>DITP</td><td>คณะทำงาน</td></tr>
+      <tr><td class="num center">๙.๑๔</td><td>สมาคมโอเพนซอร์ส</td><td>คณะทำงาน</td></tr>
+      <tr><td class="num center">๙.๑๕</td><td>AICAT</td><td><span class="tag tag-yellow">เลขา</span></td></tr>
+      <tr><td class="num center">๙.๑๖</td><td>NIA</td><td><span class="tag tag-yellow">ผู้ช่วยเลขา</span></td></tr>
+      <tr><td class="num center">๙.๑๗</td><td>สดช.</td><td><span class="tag tag-yellow">เลขาร่วม</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <h3>🧮 Power Math (Vote)</h3>
+  <div class="power-bar">
+    <div class="power-segment power-aicat" style="width: 47%">8 (47%)</div>
+    <div class="power-segment power-ally" style="width: 12%">2</div>
+    <div class="power-segment power-neutral" style="width: 41%">7 (41%)</div>
+  </div>
+  <div style="display: flex; gap: 20px; font-size: 0.9em; margin-bottom: 16px;">
+    <span><span style="display:inline-block; width:14px; height:14px; background:#10B981; border-radius:3px; vertical-align: middle;"></span> AICAT camp</span>
+    <span><span style="display:inline-block; width:14px; height:14px; background:#F59E0B; border-radius:3px; vertical-align: middle;"></span> NIA Ally</span>
+    <span><span style="display:inline-block; width:14px; height:14px; background:#9CA3AF; border-radius:3px; vertical-align: middle;"></span> Neutral</span>
+  </div>
+
+  <table>
+    <thead><tr><th>Threshold</th><th class="center">ต้องการ</th><th class="center">มี</th><th class="center">สถานะ</th></tr></thead>
+    <tbody>
+      <tr><td>Quorum</td><td class="center">9/17</td><td class="center">10</td><td class="center">✅</td></tr>
+      <tr><td>Simple Majority</td><td class="center">9/17</td><td class="center">10</td><td class="center">✅</td></tr>
+      <tr><td>Super-majority ⅔</td><td class="center">12/17</td><td class="center">10</td><td class="center">⚠ ดึง 2</td></tr>
+    </tbody>
+  </table>
+
+  <h3>🎯 Strategic Position</h3>
+  <ul style="margin-left: 20px; font-size: 0.92em;">
+    <li>AICAT alone = 47% (ไม่ถึงครึ่ง)</li>
+    <li>+ NIA = 59% Majority ✅</li>
+    <li>เป้าหมายดึง CEA / depa / สดช. เพิ่ม → Super-majority</li>
+  </ul>
+</div>
+</div>
+</div>
+
+<!-- ════════════════ อำนาจหน้าที่ ════════════════ -->
+<div class="section">
+<h2><span class="icon">⚖</span> หน้าที่และอำนาจ 13 ข้อ</h2>
+
+<div class="grid-3">
+  <div class="card"><h4>๑. นโยบาย AI แห่งชาติ</h4><p>Standard — สอดคล้องแผนแห่งชาติ</p></div>
+  <div class="card"><h4>๒. ทิศทาง/ยุทธศาสตร์</h4><p>นโยบาย AI สำหรับ Creative Economy</p></div>
+  <div class="card green"><h4>๓. ⭐ Hub + สำนักงาน</h4><p>จัดตั้งศูนย์ฯ ในสถานที่ตั้ง + ดิจิทัล · ผลักดันสู่สำนักงาน</p></div>
+  <div class="card"><h4>๔. ระบบนิเวศ</h4><p>เชื่อม Research-Industry-Creator-รัฐ-สากล</p></div>
+  <div class="card"><h4>๕. โครงสร้างพื้นฐาน + ชุดข้อมูล</h4><p>Thai Creative AI Dataset</p></div>
+  <div class="card"><h4>๖. โครงการต้นแบบ</h4><p>Sandbox + Use Cases ขยายผลพาณิชย์</p></div>
+  <div class="card"><h4>๗. มาตรฐาน + IP + จริยธรรม</h4><p>AI Copyright · ภายใต้หลักธรรมาภิบาล</p></div>
+  <div class="card"><h4>๘. กำลังคน</h4><p>Upskill/Reskill ผู้ประกอบการ + ผู้สร้างสรรค์</p></div>
+  <div class="card"><h4>๙. ตลาด + ส่งออก</h4><p>ASEAN + เวทีระดับสากล</p></div>
+  <div class="card green"><h4>๑๐. ⭐ ทรัพยากร + งบ</h4><p>บูรณาการ infrastructure · data · บุคลากร · งบ</p></div>
+  <div class="card"><h4>๑๑. ⭐ แต่งตั้งย่อย/ที่ปรึกษา</h4><p>คณะทำงานย่อย · ที่ปรึกษา · ผู้เชี่ยวชาญ</p></div>
+  <div class="card"><h4>๑๒. รายงานผล</h4><p>Standard — รายงาน คกก.แม่ ทุก 6 เดือน</p></div>
+</div>
+<div style="margin-top: 12px;">
+  <div class="card"><h4>๑๓. ปฏิบัติหน้าที่อื่นใดตามที่ได้รับมอบหมาย</h4></div>
+</div>
+</div>
+
+<!-- ════════════════ แผน 1-3-5 ════════════════ -->
+<div class="section">
+<h2><span class="icon">📅</span> แผน Output / Outcome — 1-3-5 ปี</h2>
+
+<div class="timeline">
+  <div class="timeline-item">
+    <h4>🟢 ปี 1 — Foundation (2569–70)</h4>
+    <div class="year">วางรากฐาน</div>
+    <ul style="margin-left: 20px;">
+      <li>ตั้ง Hub ร่วมกับ CEA/TCDC + ลง MOU ≥ 10 องค์กร</li>
+      <li>เปิดหลักสูตร AI Creative Production ≥ 2 หลักสูตร · ผู้ผ่านอบรม ≥ 500 คน</li>
+      <li>Sandbox 3-5 โปรเจกต์นำร่อง (Animation/Music/Content/Ads)</li>
+      <li>Thai Creative AI Dataset Phase 1 (ภาษา + วัฒนธรรม + ทรัพยากรไทย)</li>
+      <li>กรอบนโยบาย AI Copyright & IP (เบื้องต้น)</li>
+    </ul>
+  </div>
+  <div class="timeline-item">
+    <h4>🟡 ปี 3 — Scale (2571–72)</h4>
+    <div class="year">ขยายผลเชิงพาณิชย์</div>
+    <ul style="margin-left: 20px;">
+      <li>Talent Pool ≥ 1,000 คน (ผ่านรับรองมาตรฐาน)</li>
+      <li>Scale → Commercial ≥ 10 โปรเจกต์ · AI Creative Startup ≥ 20 ราย</li>
+      <li>ต้นทุนผลิตคอนเทนต์ลดลง ≥ 30% (Baseline ปี 1)</li>
+      <li>Dataset Phase 2-3 · ประกาศใช้มาตรฐานวิชาชีพระดับชาติ</li>
+      <li>เริ่ม Export AI Creative ASEAN</li>
+    </ul>
+  </div>
+  <div class="timeline-item">
+    <h4>🟠 ปี 5 — Leadership (2573–74)</h4>
+    <div class="year">ผู้นำระดับภูมิภาค</div>
+    <ul style="margin-left: 20px;">
+      <li>ไทยเป็น <strong>ASEAN Hub of AI Creative Economy</strong></li>
+      <li><strong>GDP Creative 8.78% → 12%</strong> (KPI หลัก)</li>
+      <li><strong>AI Adoption ≥ 80%</strong> ของผู้ประกอบการ Creative</li>
+      <li>Thai AI Tools/IP ใช้ใน ≥ 5 ประเทศ ASEAN</li>
+      <li>Thai AI Creative Content ใน World Stage</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ งบประมาณ ════════════════ -->
+<div class="section">
+<h2><span class="icon">💰</span> งบประมาณ 5 ปี — 744 ล้านบาท</h2>
+
+<div class="grid-2">
+<div>
+  <h3>แตกตาม Pillar</h3>
+  <div class="pillar-grid">
+    <div class="pillar"><div class="pillar-num">1) Hub & Operations</div><div class="pillar-budget">72 MB (10%)</div></div>
+    <div class="pillar"><div class="pillar-num">2) Training</div><div class="pillar-budget">80 MB (11%)</div></div>
+    <div class="pillar"><div class="pillar-num">3) Sandbox Projects</div><div class="pillar-budget">120 MB (16%)</div></div>
+    <div class="pillar"><div class="pillar-num">4) Thai Creative AI Dataset</div><div class="pillar-budget">110 MB (15%)</div></div>
+    <div class="pillar"><div class="pillar-num">5) Policy / Standards</div><div class="pillar-budget">36 MB (5%)</div></div>
+    <div class="pillar"><div class="pillar-num">6) Startup Grants</div><div class="pillar-budget">110 MB (15%)</div></div>
+    <div class="pillar"><div class="pillar-num">7) Export + ASEAN</div><div class="pillar-budget">71 MB (10%)</div></div>
+    <div class="pillar"><div class="pillar-num">8) Events / Showcase</div><div class="pillar-budget">68 MB (9%)</div></div>
+    <div class="pillar"><div class="pillar-num">9) ASEAN/Global</div><div class="pillar-budget">52 MB (7%)</div></div>
+    <div class="pillar"><div class="pillar-num">10) Admin</div><div class="pillar-budget">25 MB (3%)</div></div>
+  </div>
+</div>
+
+<div>
+  <h3>แหล่งทุน</h3>
+  <table>
+    <thead><tr><th>แหล่ง</th><th class="center">%</th><th class="center">MB</th></tr></thead>
+    <tbody>
+      <tr><td>งบแผ่นดิน (CEA, สดช., วธ.)</td><td class="center">40%</td><td class="center">298</td></tr>
+      <tr><td>depa Digital Economy Fund</td><td class="center">20%</td><td class="center">149</td></tr>
+      <tr><td>NIA Innovation Fund</td><td class="center">15%</td><td class="center">112</td></tr>
+      <tr><td>ภาคเอกชน / Co-invest</td><td class="center">10%</td><td class="center">74</td></tr>
+      <tr><td>ทุนต่างประเทศ / MOU</td><td class="center">10%</td><td class="center">74</td></tr>
+      <tr><td>DITP / BOI</td><td class="center">5%</td><td class="center">37</td></tr>
+    </tbody>
+  </table>
+  <div style="background: #ECFDF5; padding: 14px; border-radius: 8px; border-left: 4px solid #10B981; margin-top: 14px;">
+    <strong>💎 ROI:</strong> ทุก 1 บาทลงทุน → GDP เพิ่ม ~820 บาท
+    <br><small style="color: #6B7280;">GDP +610,000 MB + ต้นทุนลด +500,000 MB</small>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ════════════════ Operations ════════════════ -->
+<div class="section">
+<h2><span class="icon">⚙</span> กลไกการทำงาน (3 ชั้น)</h2>
+
+<div class="grid-3">
+  <div class="card purple">
+    <h4>ชั้น 1 — คณะทำงานหลัก</h4>
+    <p><strong>17 คน · ประชุมทุก 2 เดือน</strong></p>
+    <ul style="margin-left: 18px; margin-top: 8px; font-size: 0.88em;">
+      <li>กำหนดทิศทาง / อนุมัติ</li>
+      <li>Vote เมื่อจำเป็น</li>
+      <li>รายงาน คกก.แม่</li>
+    </ul>
+  </div>
+  <div class="card green">
+    <h4>ชั้น 2 — คณะอนุทำงาน 4 ชุด</h4>
+    <p><strong>ประชุมรายเดือน</strong></p>
+    <ul style="margin-left: 18px; margin-top: 8px; font-size: 0.88em;">
+      <li>🟦 Hub + Training</li>
+      <li>🟩 Sandbox + Dataset</li>
+      <li>🟨 Policy + IP</li>
+      <li>🟧 Industry + Export</li>
+    </ul>
+  </div>
+  <div class="card yellow">
+    <h4>ชั้น 3 — เลขานุการ</h4>
+    <p><strong>สดช. + AICAT · ทำงาน Daily</strong></p>
+    <ul style="margin-left: 18px; margin-top: 8px; font-size: 0.88em;">
+      <li>วาระประชุม</li>
+      <li>เอกสาร / รายงาน</li>
+      <li>ติดตาม Action items</li>
+    </ul>
+  </div>
+</div>
+
+<h3 style="margin-top: 28px;">📋 รูปแบบประชุม</h3>
+<table>
+  <thead><tr><th>ระดับ</th><th>ความถี่</th><th class="center">/ ปี</th><th>รูปแบบ</th></tr></thead>
+  <tbody>
+    <tr><td>คณะทำงานหลัก</td><td>ทุก 2 เดือน</td><td class="center">6</td><td>Hybrid (Hub + Online)</td></tr>
+    <tr><td>คณะอนุทำงาน 4 ชุด</td><td>ทุกเดือน</td><td class="center">12 ต่อชุด</td><td>Online</td></tr>
+    <tr><td>ที่ปรึกษา</td><td>เชิญตามวาระ</td><td class="center">~4</td><td>ตามความจำเป็น</td></tr>
+    <tr><td>Strategic Retreat</td><td>รายปี</td><td class="center">1</td><td>2 วัน 1 คืน</td></tr>
+    <tr><td>รายงาน คกก.แม่</td><td>ทุก 6 เดือน</td><td class="center">2</td><td>Formal</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ════════════════ Roadmap First 100 Days ════════════════ -->
+<div class="section">
+<h2><span class="icon">🚀</span> Roadmap — First 100 Days</h2>
+
+<div class="grid-4">
+  <div class="card">
+    <h4>Day 1-15</h4>
+    <p><strong>Kick-off</strong> · Charter + Ground rules + Mission alignment</p>
+  </div>
+  <div class="card">
+    <h4>Day 15-30</h4>
+    <p><strong>Sub-committees</strong> · ตั้ง 4 อนุคณะ + แต่งตั้งเจ้าภาพ</p>
+  </div>
+  <div class="card">
+    <h4>Day 30-60</h4>
+    <p><strong>Proposal Call</strong> · Sandbox + Dataset scope + Curriculum draft</p>
+  </div>
+  <div class="card">
+    <h4>Day 60-90</h4>
+    <p><strong>MOU Wave</strong> · ลง MOU ≥ 5-10 องค์กร + Sandbox kick-off</p>
+  </div>
+</div>
+<div style="margin-top: 14px;">
+  <div class="card green">
+    <h4>Day 90-100 · First Deliverable</h4>
+    <p>First showcase + รายงาน คกก.แม่ ครั้งแรก</p>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ KPI Headlines ════════════════ -->
+<div class="section">
+<h2><span class="icon">🏆</span> Headline KPIs — รายงานรองนายกฯ</h2>
+
+<table>
+  <thead><tr><th>KPI</th><th class="center">Baseline</th><th class="center">ปี 1</th><th class="center">ปี 3</th><th class="center">ปี 5</th></tr></thead>
+  <tbody>
+    <tr style="background:#FEF9C3"><td><strong>GDP สัดส่วน Creative Economy</strong></td><td class="center">8.78%</td><td class="center">9.0%</td><td class="center">10.0%</td><td class="center"><strong>12.0%</strong></td></tr>
+    <tr><td>AI Adoption (Creative SME)</td><td class="center">&lt;10%</td><td class="center">20%</td><td class="center">50%</td><td class="center"><strong>80%</strong></td></tr>
+    <tr><td>ต้นทุนการผลิตคอนเทนต์</td><td class="center">Baseline</td><td class="center">-10%</td><td class="center"><strong>-30%</strong></td><td class="center">-40%</td></tr>
+    <tr><td>Export AI Creative (MB/ปี)</td><td class="center">—</td><td class="center">—</td><td class="center">1,000</td><td class="center"><strong>10K-50K</strong></td></tr>
+    <tr><td>Thai AI Tools ใน ASEAN</td><td class="center">0</td><td class="center">1</td><td class="center">2</td><td class="center"><strong>5+ ประเทศ</strong></td></tr>
+    <tr><td>Talent ที่ผ่านการรับรอง</td><td class="center">0</td><td class="center">100</td><td class="center"><strong>1,000+</strong></td><td class="center">3,000+</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ════════════════ Submission Status ════════════════ -->
+<div class="section">
+<h2><span class="icon">📤</span> Submission Status</h2>
+
+<div class="status-row">
+  <div><strong>1.</strong> ฉบับเต็มของ สดช. <small style="color: #6B7280;">— Section ๙ ลงในเอกสาร 13 COE</small></div>
+  <div><span class="tag tag-green">✅ Lock</span> <code style="background:#F3F4F6; padding:2px 8px; border-radius:4px; font-size:0.85em;">21_คำสั่งแต่งตั้ง_Final.docx</code></div>
+</div>
+<div class="status-row">
+  <div><strong>2.</strong> Standalone Word <small style="color: #6B7280;">— เฉพาะ Section ๙</small></div>
+  <div><span class="tag tag-green">✅ Lock</span> <code style="background:#F3F4F6; padding:2px 8px; border-radius:4px; font-size:0.85em;">22_Section9_Standalone.docx</code></div>
+</div>
+<div class="status-row">
+  <div><strong>3.</strong> Standalone PDF <small style="color: #6B7280;">— Print-ready</small></div>
+  <div><span class="tag tag-green">✅ Lock</span> <code style="background:#F3F4F6; padding:2px 8px; border-radius:4px; font-size:0.85em;">22_Section9_Standalone.pdf</code></div>
+</div>
+<div class="status-row">
+  <div><strong>4.</strong> Pre-sync ดร.ชาคริต (CEA) <small style="color: #6B7280;">— ก่อนส่ง</small></div>
+  <div><span class="tag tag-yellow">⏳ Pending</span></div>
+</div>
+<div class="status-row">
+  <div><strong>5.</strong> ส่ง สดช.</div>
+  <div><span class="tag tag-blue">📅 29 พ.ค. 2569</span></div>
+</div>
+</div>
+
+<!-- ════════════════ Next Steps ════════════════ -->
+<div class="section">
+<h2><span class="icon">🎯</span> ขั้นต่อไป (หลังคำสั่งผ่าน)</h2>
+
+<div class="grid-3">
+  <div class="card purple">
+    <h4>📅 ครั้งที่ 1: Kick-off Meeting</h4>
+    <p>Charter · Ground rules · เลือก เจ้าภาพอนุคณะ</p>
+  </div>
+  <div class="card purple">
+    <h4>💼 Feasibility Study</h4>
+    <p>Flagship Projects 3-5 · งบ · คน · resource gap (ตาม สดช. ฝาก)</p>
+  </div>
+  <div class="card purple">
+    <h4>📋 KPI Revision</h4>
+    <p>Quantitative + "ว้าว" · ผบห. อยากเห็นตัวเลข</p>
+  </div>
+  <div class="card purple">
+    <h4>🤝 MOU Wave</h4>
+    <p>ลง MOU ≥ 10 องค์กร ภายในปี 1</p>
+  </div>
+  <div class="card purple">
+    <h4>🎓 หลักสูตร</h4>
+    <p>เปิด AI Creative Production 2 หลักสูตร · ผู้อบรม 500+</p>
+  </div>
+  <div class="card purple">
+    <h4>🧪 Sandbox</h4>
+    <p>3-5 โปรเจกต์นำร่อง · Animation / Music / Content / Ads</p>
+  </div>
+</div>
+</div>
+
+<div class="footer">
+COE AI Creative Economy · สมาคมสร้างสรรค์ปัญญาประดิษฐ์ไทย (AICAT) · พ.ค. 2569<br>
+Dashboard v1 · 🖨 Cmd+P → Print PDF
+</div>
+
+</div>
+
+</body>
+</html>

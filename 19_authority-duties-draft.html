@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>ร่างอำนาจหน้าที่ v2 — กว้างขึ้น + Hub</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+* { box-sizing: border-box; }
+body {
+  font-family: 'Sarabun', 'Arial', sans-serif;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 50px;
+  color: #1F2937;
+  line-height: 1.7;
+  background: #FFFFFF;
+}
+h1 { color: #1F4E78; border-bottom: 3px solid #1F4E78; padding-bottom: 10px; font-size: 1.85em; }
+h2 { color: #1F4E78; margin-top: 2.2em; font-size: 1.35em; border-left: 5px solid #2E75B6; padding-left: 14px; }
+h3 { color: #374151; font-size: 1.1em; margin-top: 1.8em; border-bottom: 1px dashed #D1D5DB; padding-bottom: 4px; }
+.meta { background: #F2F7FA; border-left: 4px solid #2E75B6; padding: 12px 18px; margin: 1em 0 2em; font-size: 0.92em; }
+.meta p { margin: 4px 0; }
+table { width: 100%; border-collapse: collapse; margin: 1em 0 1.5em; font-size: 0.93em; }
+th { background: #1F4E78; color: white; padding: 11px 12px; text-align: left; font-weight: 600; border: 1px solid #1F4E78; }
+td { padding: 9px 12px; border: 1px solid #E5E7EB; vertical-align: top; }
+tr:nth-child(even) td { background: #F8F9FA; }
+.center { text-align: center; }
+.num { font-weight: 600; color: #1F4E78; }
+.subhead { font-weight: 700; color: #1F4E78; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.82em; font-weight: 600; margin-right: 4px; }
+.tag-std { background: #DBEAFE; color: #1E40AF; }
+.tag-adapt { background: #FEF3C7; color: #92400E; }
+.tag-new { background: #D1FAE5; color: #065F46; }
+.tag-rev { background: #FEE2E2; color: #991B1B; }
+.duty-box {
+  background: #F8FAFC; border: 1px solid #CBD5E1; border-left: 4px solid #1F4E78;
+  padding: 14px 18px; margin: 12px 0; border-radius: 4px;
+}
+.duty-box.std { border-left-color: #2E75B6; background: #EFF6FF; }
+.duty-box.adapt { border-left-color: #F59E0B; background: #FFFBEB; }
+.duty-box.new { border-left-color: #10B981; background: #ECFDF5; }
+.duty-box.rev { border-left-color: #DC2626; background: #FEF2F2; }
+.duty-num { font-weight: 700; color: #1F4E78; font-size: 1.05em; }
+.source { color: #6B7280; font-size: 0.88em; font-style: italic; }
+blockquote { border-left: 4px solid #F59E0B; background: #FEF9C3; padding: 12px 16px; margin: 1em 0; color: #78350F; font-size: 0.95em; }
+blockquote.ok { border-color: #10B981; background: #D1FAE5; color: #065F46; }
+blockquote.info { border-color: #2E75B6; background: #DBEAFE; color: #1E3A8A; }
+.footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #E5E7EB; color: #6B7280; font-size: 0.85em; text-align: center; }
+@media print { body { padding: 20px; max-width: 100%; } h2 { page-break-after: avoid; } .duty-box { page-break-inside: avoid; } tr { page-break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<h1>ร่างอำนาจหน้าที่ v2 — กว้างขึ้น + เพิ่ม Hub</h1>
+
+<div class="meta">
+  <p><strong>สถานะ:</strong> Draft v2 — ปรับ wording กว้างขึ้น + เพิ่ม Hub + ตัดชื่อ event เฉพาะ</p>
+  <p><strong>จำนวน:</strong> 12 ข้อ (เพิ่ม 1 = Hub)</p>
+  <p><strong>การปรับ:</strong> ใกล้ Education style (กว้าง) มากกว่า Health (เฉพาะ)</p>
+</div>
+
+<!-- ════════════════ Legend ════════════════ -->
+
+<h2>📚 หมวดหมู่</h2>
+
+<table>
+  <thead><tr><th>หมวด</th><th>ความหมาย</th><th>จำนวน</th></tr></thead>
+  <tbody>
+    <tr><td><span class="tag tag-std">Standard</span></td><td>ใช้ verbatim จากทุกคณะ</td><td class="center">4 ข้อ</td></tr>
+    <tr><td><span class="tag tag-adapt">Adapt</span></td><td>ดูดจาก Section อื่น แล้วปรับ Creative + กว้างขึ้น</td><td class="center">5 ข้อ</td></tr>
+    <tr><td><span class="tag tag-new">New</span></td><td>ใหม่เฉพาะ Creative (Hub + Export)</td><td class="center">2 ข้อ</td></tr>
+    <tr><td><span class="tag tag-rev">Revised</span></td><td>ปรับจาก v1 ให้กว้างขึ้น/ตัดชื่อเฉพาะ</td><td class="center">1 ข้อ</td></tr>
+  </tbody>
+</table>
+
+<!-- ════════════════ ข้อทั้งหมด ════════════════ -->
+
+<h2>📋 ร่าง 12 ข้อ — Wording จริงที่จะใส่ใน .docx</h2>
+
+<div class="duty-box std">
+<span class="duty-num">๑.</span> <span class="tag tag-std">Standard</span>
+<p>ศึกษา วิเคราะห์ และจัดทำข้อเสนอเชิงนโยบาย แผนปฏิบัติการ แนวทางการดำเนินงาน และแผนงาน/โครงการด้านปัญญาประดิษฐ์ ที่สอดคล้องกับแผนปฏิบัติการด้านปัญญาประดิษฐ์แห่งชาติ เพื่อเสนอต่อคณะอนุกรรมการพิจารณา</p>
+</div>
+
+<div class="duty-box adapt">
+<span class="duty-num">๒.</span> <span class="subhead">การกำหนดทิศทางและนโยบายเชิงยุทธศาสตร์:</span> <span class="tag tag-adapt">Adapt + กว้างขึ้น</span>
+<p class="source">v1 → v2: ตัด "GDP" เฉพาะ + ทำให้กว้างขึ้น</p>
+<p>ศึกษา วิเคราะห์ และจัดทำข้อเสนอเชิงนโยบาย ยุทธศาสตร์ และแผนงานด้านปัญญาประดิษฐ์สำหรับอุตสาหกรรมสร้างสรรค์ของประเทศ เพื่อยกระดับเศรษฐกิจสร้างสรรค์ของไทยและขับเคลื่อนสู่เวทีระดับสากล</p>
+</div>
+
+<div class="duty-box new">
+<span class="duty-num">๓.</span> <span class="subhead">การจัดตั้งและบริหารศูนย์ปฏิบัติการ:</span> <span class="tag tag-new">ใหม่ — ตามที่พี่ขอ</span>
+<p class="source">เติม Hub ตาม Pillar 1 — ที่หายไปก่อนหน้านี้</p>
+<p>จัดตั้งและบริหารศูนย์ปฏิบัติการความเป็นเลิศปัญญาประดิษฐ์สำหรับอุตสาหกรรมสร้างสรรค์ ทั้งในรูปแบบกายภาพและดิจิทัล เพื่อเป็นศูนย์กลางในการประสาน พัฒนา เผยแพร่องค์ความรู้ และให้บริการแก่ผู้ประกอบการ ผู้สร้างสรรค์ และเครือข่ายที่เกี่ยวข้อง</p>
+</div>
+
+<div class="duty-box adapt">
+<span class="duty-num">๔.</span> <span class="subhead">การบริหารจัดการระบบนิเวศ:</span> <span class="tag tag-adapt">Adapt + กว้างขึ้น</span>
+<p class="source">ตัด "AI Creative ที่ยั่งยืน" แบบ specific → กว้างกว่า</p>
+<p>เชื่อมโยงและบูรณาการความร่วมมือระหว่างสถาบันการศึกษา ภาคอุตสาหกรรมสร้างสรรค์ ผู้ประกอบการ ผู้สร้างสรรค์เนื้อหา ภาครัฐ และเครือข่ายระดับสากล เพื่อสร้างระบบนิเวศที่เอื้อต่อการประยุกต์ใช้ปัญญาประดิษฐ์</p>
+</div>
+
+<div class="duty-box adapt">
+<span class="duty-num">๕.</span> <span class="subhead">การพัฒนาโครงสร้างพื้นฐานและชุดข้อมูล:</span> <span class="tag tag-adapt">Adapt + กว้างขึ้น</span>
+<p class="source">ตัด "Thai Creative AI Dataset" ชื่อเฉพาะ → wording กว้าง</p>
+<p>ส่งเสริมและสนับสนุนการสร้างชุดข้อมูล โครงสร้างพื้นฐานข้อมูล และเครื่องมือปัญญาประดิษฐ์ที่เหมาะสมกับอุตสาหกรรมสร้างสรรค์ไทย โดยประสานความร่วมมือกับสถาบันข้อมูลขนาดใหญ่และหน่วยงานที่เกี่ยวข้อง</p>
+</div>
+
+<div class="duty-box adapt">
+<span class="duty-num">๖.</span> <span class="subhead">การพัฒนาโครงการต้นแบบและขยายผลเชิงพาณิชย์:</span> <span class="tag tag-adapt">Adapt + กว้างขึ้น</span>
+<p class="source">ตัด list สาขา (ภาพยนตร์/แอนิเมชัน/ดนตรี/...) → กว้าง</p>
+<p>พัฒนา สนับสนุน และขับเคลื่อนโครงการต้นแบบและกรณีการใช้งานจริงในอุตสาหกรรมสร้างสรรค์ ให้เกิดผลเป็นรูปธรรมและสามารถขยายผลเชิงพาณิชย์ได้</p>
+</div>
+
+<div class="duty-box adapt">
+<span class="duty-num">๗.</span> <span class="subhead">การกำกับดูแล มาตรฐานวิชาชีพ และจริยธรรม:</span> <span class="tag tag-adapt">Adapt + ปรับ wording</span>
+<p class="source">เปลี่ยน "AI Copyright" → "ทรัพย์สินทางปัญญา" / รวม Governance</p>
+<p>ผลักดันการจัดทำกรอบนโยบายทรัพย์สินทางปัญญาสำหรับผลงานที่สร้างจากปัญญาประดิษฐ์ มาตรฐานวิชาชีพ และจรรยาบรรณด้านปัญญาประดิษฐ์ในอุตสาหกรรมสร้างสรรค์ ภายใต้หลักธรรมาภิบาลปัญญาประดิษฐ์</p>
+</div>
+
+<div class="duty-box adapt">
+<span class="duty-num">๘.</span> <span class="subhead">การพัฒนากำลังคนและศักยภาพบุคลากร:</span> <span class="tag tag-adapt">Adapt + กว้างขึ้น</span>
+<p class="source">ตัด "Upskill/Reskill" + "Talent Pipeline" terms — กว้างกว่า</p>
+<p>ส่งเสริมการพัฒนาทักษะของผู้ประกอบการ ผู้สร้างสรรค์เนื้อหา และบุคลากรในอุตสาหกรรมสร้างสรรค์ ให้สามารถประยุกต์ใช้ปัญญาประดิษฐ์ได้อย่างมีประสิทธิภาพและต่อเนื่อง</p>
+</div>
+
+<div class="duty-box rev">
+<span class="duty-num">๙.</span> <span class="subhead">การส่งเสริมตลาดและการนำเสนอผลงาน:</span> <span class="tag tag-rev">Revised — ตัดชื่อ event + DITP</span>
+<p class="source">เดิม: "BICM + DITP" → ใหม่: กว้าง ไม่ผูกหน่วย/งาน เฉพาะ</p>
+<p>ส่งเสริมการนำผลงานและเครื่องมือปัญญาประดิษฐ์สำหรับอุตสาหกรรมสร้างสรรค์ของไทยเข้าสู่ตลาดทั้งในและต่างประเทศ ผ่านความร่วมมือกับหน่วยงานที่เกี่ยวข้องและเครือข่ายระดับสากล</p>
+</div>
+
+<div class="duty-box adapt">
+<span class="duty-num">๑๐.</span> <span class="subhead">การบริหารจัดการทั่วไป:</span> <span class="tag tag-std">Standard pattern</span>
+<p>แต่งตั้งคณะทำงานย่อยหรือเชิญผู้เชี่ยวชาญจากภาคส่วนต่าง ๆ เพื่อสนับสนุนการดำเนินงานเฉพาะด้านได้ตามความเหมาะสม</p>
+</div>
+
+<div class="duty-box std">
+<span class="duty-num">๑๑.</span> <span class="tag tag-std">Standard</span>
+<p>รายงานผลการดำเนินงาน รวมทั้งเสนอข้อเสนอเชิงนโยบาย ข้อเสนอแนะ และแนวทางการดำเนินการต่อคณะอนุกรรมการขับเคลื่อนแผนด้านปัญญาประดิษฐ์แห่งชาติเป็นระยะ</p>
+</div>
+
+<div class="duty-box std">
+<span class="duty-num">๑๒.</span> <span class="tag tag-std">Standard</span>
+<p>ปฏิบัติหน้าที่อื่นใดตามที่ได้รับมอบหมาย</p>
+</div>
+
+<!-- ════════════════ การใช้ "ปัญญาประดิษฐ์" ════════════════ -->
+
+<h2>📝 การใช้ "ปัญญาประดิษฐ์" ในแต่ละข้อ</h2>
+
+<table>
+  <thead><tr><th>ข้อ</th><th>เนื้อหา</th><th>มี "ปัญญาประดิษฐ์"</th></tr></thead>
+  <tbody>
+    <tr><td class="num center">๑</td><td>นโยบาย AI แห่งชาติ</td><td class="center">✅ มี</td></tr>
+    <tr><td class="num center">๒</td><td>ทิศทาง/นโยบาย</td><td class="center">✅ มี</td></tr>
+    <tr><td class="num center">๓</td><td>Hub</td><td class="center">✅ มี</td></tr>
+    <tr><td class="num center">๔</td><td>ระบบนิเวศ</td><td class="center">✅ มี (ท้ายข้อ)</td></tr>
+    <tr><td class="num center">๕</td><td>โครงสร้างพื้นฐาน + Dataset</td><td class="center">✅ มี</td></tr>
+    <tr><td class="num center">๖</td><td>Use Cases / Sandbox</td><td class="center">❌ ไม่จำเป็น</td></tr>
+    <tr><td class="num center">๗</td><td>มาตรฐาน + IP</td><td class="center">✅ มี</td></tr>
+    <tr><td class="num center">๘</td><td>กำลังคน</td><td class="center">✅ มี</td></tr>
+    <tr><td class="num center">๙</td><td>ตลาด + Export</td><td class="center">✅ มี</td></tr>
+    <tr><td class="num center">๑๐</td><td>แต่งตั้งย่อย</td><td class="center">❌ ไม่ต้อง (procedural)</td></tr>
+    <tr><td class="num center">๑๑</td><td>รายงาน</td><td class="center">❌ ไม่ต้อง (procedural)</td></tr>
+    <tr><td class="num center">๑๒</td><td>ปฏิบัติอื่น</td><td class="center">❌ ไม่ต้อง (procedural)</td></tr>
+  </tbody>
+</table>
+
+<blockquote class="info">
+<strong>8/12 ข้อ มี "ปัญญาประดิษฐ์"</strong> — ตาม pattern คณะอื่น (Section 1 มี 3/6, Section 5 มี 7/11)
+</blockquote>
+
+<!-- ════════════════ Before/After ════════════════ -->
+
+<h2>📊 v1 vs v2 — Side by Side</h2>
+
+<table>
+  <thead><tr><th>ประเด็น</th><th>v1 (เดิม)</th><th>v2 (ใหม่)</th></tr></thead>
+  <tbody>
+    <tr><td>จำนวนข้อ</td><td class="center">11</td><td class="center"><strong>12 (+Hub)</strong></td></tr>
+    <tr><td>Hub / สำนักงาน</td><td>❌ หายไป</td><td>✅ ข้อ ๓</td></tr>
+    <tr><td>ความ specific</td><td>🔴 specific (Health-style)</td><td>🟢 กว้าง (Education-style)</td></tr>
+    <tr><td>ระบุชื่อ event (BICM)</td><td>❌ มี</td><td>✅ ตัดออก</td></tr>
+    <tr><td>ระบุชื่อกรม DITP</td><td>❌ มี</td><td>✅ ตัด → "หน่วยงานที่เกี่ยวข้อง"</td></tr>
+    <tr><td>ระบุ list สาขา</td><td>❌ ภาพยนตร์/แอนิเมชัน/ดนตรี/...</td><td>✅ ตัด → "อุตสาหกรรมสร้างสรรค์"</td></tr>
+    <tr><td>ระบุ "Thai Creative AI Dataset"</td><td>❌ มี</td><td>✅ ตัด → "ชุดข้อมูล"</td></tr>
+    <tr><td>"ปัญญาประดิษฐ์" ในข้อ</td><td>~5/11</td><td>8/12 (ตาม pattern)</td></tr>
+  </tbody>
+</table>
+
+<!-- ════════════════ Confirm ════════════════ -->
+
+<h2>❓ ขอ Confirm</h2>
+
+<ol>
+  <li>OK <strong>12 ข้อ (เพิ่ม Hub)</strong> ตามนี้?</li>
+  <li>Wording ของข้อ ๓ (Hub) — เพียงพอมั้ย? หรืออยากเน้น "ทั้ง Physical + Digital" ให้ชัดกว่า?</li>
+  <li>มีข้ออื่นที่อยากเพิ่ม (เช่น <strong>"การส่งเสริมงบประมาณ + Feasibility Study"</strong> ตาม สดช. ฝาก)?</li>
+</ol>
+
+<div class="footer">
+COE AI Creative Economy · สมาคมสร้างสรรค์ปัญญาประดิษฐ์ไทย · พ.ค. 2569 · Duties Draft v2
+</div>
+
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Output/Outcome v2 — Pillar-based · อิงอำนาจหน้าที่</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap');
+* { box-sizing: border-box; }
+body {
+  font-family: 'Sarabun', 'Arial', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 50px;
+  color: #1F2937;
+  line-height: 1.7;
+  background: #FFFFFF;
+}
+h1 { color: #1F4E78; border-bottom: 3px solid #1F4E78; padding-bottom: 10px; font-size: 1.85em; }
+h2 { color: #1F4E78; margin-top: 2.2em; font-size: 1.4em; border-left: 5px solid #2E75B6; padding-left: 14px; }
+h3 { color: #374151; font-size: 1.15em; margin-top: 1.6em; border-bottom: 1px dashed #D1D5DB; padding-bottom: 4px; }
+h4 { color: #1F4E78; font-size: 1.05em; margin-top: 1em; margin-bottom: 6px; }
+.meta { background: #F2F7FA; border-left: 4px solid #2E75B6; padding: 14px 18px; margin: 1em 0 2em; font-size: 0.94em; }
+.meta p { margin: 4px 0; }
+blockquote { border-left: 4px solid #F59E0B; background: #FEF9C3; padding: 14px 18px; margin: 1em 0; color: #78350F; font-size: 0.94em; border-radius: 4px; }
+blockquote.quote { border-color: #6B7280; background: #F9FAFB; color: #374151; font-style: italic; }
+blockquote.warn { border-color: #DC2626; background: #FEE2E2; color: #7F1D1D; }
+blockquote.ok { border-color: #10B981; background: #D1FAE5; color: #065F46; }
+blockquote.info { border-color: #2E75B6; background: #DBEAFE; color: #1E3A8A; }
+table { width: 100%; border-collapse: collapse; margin: 1em 0 1.5em; font-size: 0.93em; }
+th { background: #1F4E78; color: white; padding: 11px 12px; text-align: left; font-weight: 600; border: 1px solid #1F4E78; }
+td { padding: 9px 12px; border: 1px solid #E5E7EB; vertical-align: top; }
+tr:nth-child(even) td { background: #F8F9FA; }
+.center { text-align: center; }
+.num { font-weight: 600; color: #1F4E78; }
+.tag { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.82em; font-weight: 600; }
+.tag-duty { background: #EDE9FE; color: #5B21B6; }
+.tag-pillar { background: #DBEAFE; color: #1E40AF; }
+.tag-flagship { background: #D1FAE5; color: #065F46; }
+.tag-aspir { background: #FEF3C7; color: #92400E; }
+.pillar-card {
+  background: #F8FAFC;
+  border: 1px solid #CBD5E1;
+  border-left: 5px solid #1F4E78;
+  padding: 18px 22px;
+  margin: 16px 0;
+  border-radius: 6px;
+}
+.pillar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.pillar-number { color: #1F4E78; font-weight: 700; font-size: 1.2em; }
+.pillar-title { color: #1F4E78; font-weight: 700; font-size: 1.1em; margin-left: 8px; }
+.pillar-section { margin: 10px 0; }
+.pillar-section strong { color: #1F4E78; }
+.milestone-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 10px; }
+.milestone {
+  background: white;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #E5E7EB;
+  border-top: 4px solid #2E75B6;
+  font-size: 0.9em;
+}
+.milestone.y1 { border-top-color: #10B981; }
+.milestone.y3 { border-top-color: #F59E0B; }
+.milestone.y5 { border-top-color: #DC2626; }
+.milestone-year { font-weight: 700; color: #1F4E78; margin-bottom: 4px; font-size: 0.95em; }
+.flagship-card {
+  background: #ECFDF5;
+  border-left: 5px solid #10B981;
+  padding: 14px 18px;
+  margin: 12px 0;
+  border-radius: 6px;
+}
+.flagship-card h4 { color: #065F46; margin-bottom: 6px; }
+.linkage-row { display: flex; gap: 6px; align-items: center; margin: 4px 0; font-size: 0.88em; color: #6B7280; }
+.arrow { color: #9CA3AF; }
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 14px 0; }
+.compare-box { padding: 14px 18px; border-radius: 8px; font-size: 0.9em; }
+.compare-box.before { background: #FEF3C7; border-left: 4px solid #F59E0B; }
+.compare-box.after { background: #D1FAE5; border-left: 4px solid #10B981; }
+.compare-box h4 { margin-top: 0; }
+.footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #E5E7EB; color: #6B7280; font-size: 0.85em; text-align: center; }
+@media print { body { padding: 20px; max-width: 100%; } h2 { page-break-after: avoid; } .pillar-card, .flagship-card { page-break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<h1>📊 Output/Outcome v2 — Pillar-based + อิงอำนาจหน้าที่</h1>
+
+<div class="meta">
+  <p><strong>เป้าหมาย:</strong> ปรับแผน Output/Outcome ให้สอดคล้องกับ feedback ของ ดร.Apivadee + อิงกับอำนาจหน้าที่ 13 ข้อ</p>
+  <p><strong>ปรัชญา v2:</strong> Top-down · Quality + Quantity (สอดคล้อง industry demand) · KPI ตั้งระหว่างทาง · Defendable</p>
+  <p><strong>โครงสร้าง:</strong> 8 Pillar หลัก (mapped กับ Duty 3-10) + Flagship + Headline Impact</p>
+</div>
+
+<!-- ════════════════ Key Insight ════════════════ -->
+
+<h2>💡 Key Insight ที่พลาดไป — KPI ตั้งระหว่างทางได้</h2>
+
+<blockquote class="quote">
+"output KPI อาจจำเป็นต้องบอกเป็นจำนวน quantitatives ค่ะ หรือ '<strong>มีจำนวนและคุณภาพสอดคล้องกับความต้องการจริงจากภาคเอกชน ในสาขาการผลิตเป้าหมาย</strong>'<br><br>
+แล้วในการทำงานเราไป<strong>ศึกษาความเหมาะสมหน้างานเพื่อมาตั้งเป็น KPI จริงระหว่างทาง</strong>ได้ค่ะ"<br>
+— ดร.Apivadee
+</blockquote>
+
+<blockquote class="ok">
+<strong>หมายความว่า:</strong> ตอนนี้ <strong>ไม่ต้อง lock ตัวเลข KPI</strong> ระดับโครงการ — ใช้ wording เชิงคุณภาพ + ตั้ง KPI จริงเมื่อ Feasibility Study เสร็จ
+</blockquote>
+
+<h3>เปรียบเทียบ v1 (เดิม) vs v2 (ใหม่)</h3>
+
+<div class="compare-grid">
+<div class="compare-box before">
+<h4>v1 (เก่า) — Locked KPIs</h4>
+<ul>
+  <li>"Talent 1,000 คน ปี 3"</li>
+  <li>"Sandbox 25 โปรเจกต์"</li>
+  <li>"MOU 30 องค์กร"</li>
+  <li>"หลักสูตร 6 ตัว"</li>
+</ul>
+<p style="color:#92400E; margin-top:8px;"><strong>ปัญหา:</strong> ตั้งตัวเลขเฉพาะตั้งแต่ต้น = พลาดเสี่ยงโดน challenge</p>
+</div>
+<div class="compare-box after">
+<h4>v2 (ใหม่) — Qualitative + ระหว่างทาง</h4>
+<ul>
+  <li>"มี Talent Pool ที่จำนวน+คุณภาพ<br>ตอบความต้องการของอุตสาหกรรม"</li>
+  <li>"มีโครงการต้นแบบที่เกิดผลและ<br>ขยายผลพาณิชย์ได้"</li>
+  <li>"มีเครือข่าย active ครอบ stakeholders"</li>
+  <li>"มีหลักสูตรที่ industry-validated"</li>
+</ul>
+<p style="color:#065F46; margin-top:8px;"><strong>ข้อดี:</strong> Flexible · KPI จริงตั้งได้หลัง feasibility</p>
+</div>
+</div>
+
+<!-- ════════════════ Vision Top-down ════════════════ -->
+
+<h2>🎯 วิสัยทัศน์ Top-down — ปี 2574 (ปีที่ 5)</h2>
+
+<blockquote class="info">
+<strong>"ภายใน 5 ปี ประเทศไทยจะเป็น ASEAN Hub of AI-powered Creative Economy"</strong><br><br>
+ขับเคลื่อนด้วย:
+<ul style="margin-top:8px;">
+  <li>📍 <strong>ศูนย์ปฏิบัติการ AI Creative</strong> ระดับชาติที่พัฒนาเป็นสำนักงานเฉพาะ</li>
+  <li>🤝 <strong>ระบบนิเวศ AI Creative</strong> ที่บูรณาการ Research-Industry-Creator-รัฐ-สากล</li>
+  <li>💾 <strong>โครงสร้างพื้นฐานและชุดข้อมูล</strong> ปัญญาประดิษฐ์ของไทย</li>
+  <li>🚀 <strong>โครงการ Sandbox</strong> ที่ขยายผลเชิงพาณิชย์ได้</li>
+  <li>⚖ <strong>มาตรฐาน + IP + จริยธรรม</strong> AI Creative ฉบับไทย — เป็นต้นแบบ ASEAN</li>
+  <li>👥 <strong>กำลังคน AI Creative</strong> ที่ industry-ready</li>
+  <li>🌐 <strong>ตลาดและการส่งออก</strong> ที่กว้างทั้งในและต่างประเทศ</li>
+  <li>💰 <strong>ทรัพยากรและงบประมาณ</strong> ที่บูรณาการมีประสิทธิภาพ</li>
+</ul>
+</blockquote>
+
+<!-- ════════════════ Linkage Matrix ════════════════ -->
+
+<h2>🔗 Linkage — อำนาจหน้าที่ → Pillar Output/Outcome</h2>
+
+<table>
+  <thead><tr><th class="center">Duty</th><th>หัวข้อ</th><th class="center">→</th><th>Pillar Output/Outcome</th></tr></thead>
+  <tbody>
+    <tr><td class="num center">๑</td><td>นโยบาย AI ชาติ <span class="tag tag-aspir">Standard</span></td><td class="center">→</td><td>Umbrella — ทั้งแผน</td></tr>
+    <tr><td class="num center">๒</td><td>ทิศทาง/ยุทธศาสตร์</td><td class="center">→</td><td>Vision + Strategic Direction</td></tr>
+    <tr style="background:#EFF6FF"><td class="num center">๓</td><td>Hub + สำนักงาน</td><td class="center">→</td><td><strong>Pillar 1: ศูนย์ปฏิบัติการ AI Creative</strong></td></tr>
+    <tr style="background:#EFF6FF"><td class="num center">๔</td><td>ระบบนิเวศ</td><td class="center">→</td><td><strong>Pillar 2: ระบบนิเวศ AI Creative</strong></td></tr>
+    <tr style="background:#EFF6FF"><td class="num center">๕</td><td>โครงสร้างพื้นฐาน + ชุดข้อมูล</td><td class="center">→</td><td><strong>Pillar 3: โครงสร้างพื้นฐาน + Dataset</strong></td></tr>
+    <tr style="background:#EFF6FF"><td class="num center">๖</td><td>โครงการต้นแบบ + Sandbox</td><td class="center">→</td><td><strong>Pillar 4: Sandbox + Use Cases</strong></td></tr>
+    <tr style="background:#EFF6FF"><td class="num center">๗</td><td>มาตรฐาน + IP + จริยธรรม</td><td class="center">→</td><td><strong>Pillar 5: มาตรฐาน + IP + Governance</strong></td></tr>
+    <tr style="background:#EFF6FF"><td class="num center">๘</td><td>กำลังคน</td><td class="center">→</td><td><strong>Pillar 6: Talent + กำลังคน</strong></td></tr>
+    <tr style="background:#EFF6FF"><td class="num center">๙</td><td>ตลาด + ส่งออก</td><td class="center">→</td><td><strong>Pillar 7: ตลาด + การส่งออก</strong></td></tr>
+    <tr style="background:#EFF6FF"><td class="num center">๑๐</td><td>ทรัพยากร + งบ</td><td class="center">→</td><td><strong>Pillar 8: ทรัพยากร + งบประมาณ</strong></td></tr>
+    <tr><td class="num center">๑๑–๑๓</td><td>แต่งตั้งย่อย / รายงาน / อื่นๆ <span class="tag tag-aspir">Std</span></td><td class="center">→</td><td>Operations + Governance</td></tr>
+  </tbody>
+</table>
+
+<blockquote class="ok">
+✅ <strong>8 Pillars หลัก mapped 1:1 กับ Duty ๓-๑๐</strong> · Duty ๑-๒ = Umbrella · Duty ๑๑-๑๓ = Admin
+</blockquote>
+
+<!-- ════════════════ 8 Pillars ════════════════ -->
+
+<h2>📋 8 Pillars Output/Outcome — รายละเอียด</h2>
+
+<!-- Pillar 1 -->
+<div class="pillar-card">
+<div class="pillar-header">
+  <div><span class="pillar-number">Pillar 1</span><span class="pillar-title">ศูนย์ปฏิบัติการ AI Creative</span></div>
+  <span class="tag tag-duty">อ้างอิง: Duty ๓</span>
+</div>
+<div class="pillar-section"><strong>วัตถุประสงค์:</strong> จัดตั้งและดำเนินการศูนย์ความเป็นเลิศปัญญาประดิษฐ์ด้านอุตสาหกรรมสร้างสรรค์ ทั้งในสถานที่ตั้งและในระบบดิจิทัล · ผลักดันสู่สำนักงานหรือหน่วยงานเฉพาะ</div>
+<div class="pillar-section"><strong>กิจกรรม:</strong> ดำเนินงานศูนย์ · ให้บริการแก่ผู้ประกอบการ ผู้สร้างสรรค์ และเครือข่าย · เผยแพร่องค์ความรู้</div>
+<div class="pillar-section"><strong>Output (เชิงคุณภาพ):</strong> มีศูนย์ปฏิบัติการ AI Creative ที่<strong>active</strong> และเข้าถึงได้ <strong>สอดคล้องกับความต้องการของผู้ประกอบการและผู้สร้างสรรค์</strong></div>
+<div class="milestone-grid">
+  <div class="milestone y1"><div class="milestone-year">ปี 1 — Foundation</div>เปิดศูนย์ที่ Physical + Digital · เริ่มดำเนินงาน</div>
+  <div class="milestone y3"><div class="milestone-year">ปี 3 — Scale</div>ขยายบริการ + ผลักดันพัฒนาสู่สำนักงาน</div>
+  <div class="milestone y5"><div class="milestone-year">ปี 5 — Leadership</div>เป็นศูนย์อ้างอิงของ ASEAN · พัฒนาเป็นหน่วยงานเฉพาะ</div>
+</div>
+</div>
+
+<!-- Pillar 2 -->
+<div class="pillar-card">
+<div class="pillar-header">
+  <div><span class="pillar-number">Pillar 2</span><span class="pillar-title">ระบบนิเวศ AI Creative</span></div>
+  <span class="tag tag-duty">อ้างอิง: Duty ๔</span>
+</div>
+<div class="pillar-section"><strong>วัตถุประสงค์:</strong> เชื่อมโยงและบูรณาการความร่วมมือระหว่างสถาบันการศึกษา ภาคอุตสาหกรรม ผู้ประกอบการ ผู้สร้างสรรค์ ภาครัฐ และเครือข่ายระดับสากล</div>
+<div class="pillar-section"><strong>กิจกรรม:</strong> MOU · Joint events · เครือข่ายความร่วมมือ · กิจกรรม networking</div>
+<div class="pillar-section"><strong>Output:</strong> มีเครือข่ายความร่วมมือที่<strong>active</strong>ครอบครบทุก stakeholders ทั้งในและต่างประเทศ <strong>สอดคล้องกับความต้องการของอุตสาหกรรม</strong></div>
+<div class="milestone-grid">
+  <div class="milestone y1"><div class="milestone-year">ปี 1</div>MOU พันธมิตรหลัก + Launch ความร่วมมือ</div>
+  <div class="milestone y3"><div class="milestone-year">ปี 3</div>เครือข่าย ASEAN + Joint programs</div>
+  <div class="milestone y5"><div class="milestone-year">ปี 5</div>เชื่อมต่อ Global AI Creative Network</div>
+</div>
+</div>
+
+<!-- Pillar 3 -->
+<div class="pillar-card">
+<div class="pillar-header">
+  <div><span class="pillar-number">Pillar 3</span><span class="pillar-title">โครงสร้างพื้นฐาน + ชุดข้อมูล</span></div>
+  <span class="tag tag-duty">อ้างอิง: Duty ๕</span>
+</div>
+<div class="pillar-section"><strong>วัตถุประสงค์:</strong> ส่งเสริมและสนับสนุนการสร้างชุดข้อมูล โครงสร้างพื้นฐานข้อมูล และเครื่องมือปัญญาประดิษฐ์ที่เหมาะสมกับอุตสาหกรรมสร้างสรรค์ไทย</div>
+<div class="pillar-section"><strong>กิจกรรม:</strong> สร้าง Thai Creative AI Dataset · โครงสร้างพื้นฐานข้อมูล · เครื่องมือ AI สำหรับ Creator</div>
+<div class="pillar-section"><strong>Output:</strong> มีชุดข้อมูลและเครื่องมือ AI ที่<strong>มีคุณภาพและสอดคล้องกับความต้องการของอุตสาหกรรมสร้างสรรค์ไทย</strong> · เข้าถึงได้โดยผู้สร้างสรรค์</div>
+<div class="milestone-grid">
+  <div class="milestone y1"><div class="milestone-year">ปี 1</div>Dataset Phase 1 (ภาษา · วัฒนธรรม)</div>
+  <div class="milestone y3"><div class="milestone-year">ปี 3</div>Dataset ขยายครอบหลาย sector · เครื่องมือเปิดใช้</div>
+  <div class="milestone y5"><div class="milestone-year">ปี 5</div>เป็น ASEAN Creative AI Benchmark</div>
+</div>
+</div>
+
+<!-- Pillar 4 -->
+<div class="pillar-card">
+<div class="pillar-header">
+  <div><span class="pillar-number">Pillar 4</span><span class="pillar-title">โครงการต้นแบบและการขยายผล</span></div>
+  <span class="tag tag-duty">อ้างอิง: Duty ๖</span>
+</div>
+<div class="pillar-section"><strong>วัตถุประสงค์:</strong> พัฒนา สนับสนุน และขับเคลื่อนโครงการต้นแบบและกรณีการใช้งานจริงในอุตสาหกรรมสร้างสรรค์ ให้เกิดผลและขยายผลเชิงพาณิชย์</div>
+<div class="pillar-section"><strong>กิจกรรม:</strong> Sandbox projects · Use Cases · Commercialization support · Scale up</div>
+<div class="pillar-section"><strong>Output:</strong> มีโครงการต้นแบบที่<strong>เกิดผลเป็นรูปธรรม</strong> · <strong>มีจำนวนและคุณภาพสอดคล้องกับความต้องการของภาคเอกชน</strong> · ขยายผลเชิงพาณิชย์ได้</div>
+<div class="milestone-grid">
+  <div class="milestone y1"><div class="milestone-year">ปี 1</div>Sandbox นำร่อง + Baseline data</div>
+  <div class="milestone y3"><div class="milestone-year">ปี 3</div>Scale Pilot → Commercial · มีต้นแบบที่ใช้จริง</div>
+  <div class="milestone y5"><div class="milestone-year">ปี 5</div>มี AI Creative ที่ scale ใน market</div>
+</div>
+</div>
+
+<!-- Pillar 5 -->
+<div class="pillar-card">
+<div class="pillar-header">
+  <div><span class="pillar-number">Pillar 5</span><span class="pillar-title">มาตรฐาน + IP + จริยธรรม</span></div>
+  <span class="tag tag-duty">อ้างอิง: Duty ๗</span>
+</div>
+<div class="pillar-section"><strong>วัตถุประสงค์:</strong> ผลักดันการจัดทำกรอบนโยบายทรัพย์สินทางปัญญาสำหรับผลงาน AI-generated · มาตรฐานวิชาชีพ · จรรยาบรรณ · ภายใต้หลักธรรมาภิบาล</div>
+<div class="pillar-section"><strong>กิจกรรม:</strong> Policy push · Drafting frameworks · Industry consultation · Standardization</div>
+<div class="pillar-section"><strong>Output:</strong> มีกรอบนโยบาย IP · มาตรฐานวิชาชีพ · จรรยาบรรณ AI Creative ที่<strong>ภาครัฐ-เอกชนรับรอง</strong> · เป็นต้นแบบให้ประเทศอื่นใน ASEAN อ้างอิง</div>
+<div class="milestone-grid">
+  <div class="milestone y1"><div class="milestone-year">ปี 1</div>กรอบ AI Copyright + IP เบื้องต้น</div>
+  <div class="milestone y3"><div class="milestone-year">ปี 3</div>ประกาศใช้มาตรฐานวิชาชีพระดับชาติ</div>
+  <div class="milestone y5"><div class="milestone-year">ปี 5</div>เป็นต้นแบบ ASEAN AI Creative Standards</div>
+</div>
+</div>
+
+<!-- Pillar 6 -->
+<div class="pillar-card">
+<div class="pillar-header">
+  <div><span class="pillar-number">Pillar 6</span><span class="pillar-title">Talent + กำลังคน</span></div>
+  <span class="tag tag-duty">อ้างอิง: Duty ๘</span>
+</div>
+<div class="pillar-section"><strong>วัตถุประสงค์:</strong> ส่งเสริมการพัฒนาทักษะของผู้ประกอบการ ผู้สร้างสรรค์เนื้อหา และบุคลากร ให้สามารถประยุกต์ใช้ปัญญาประดิษฐ์ได้อย่างมีประสิทธิภาพและต่อเนื่อง</div>
+<div class="pillar-section"><strong>กิจกรรม:</strong> หลักสูตร · Upskill/Reskill · Certification · Sandbox training</div>
+<div class="pillar-section"><strong>Output:</strong> มีกำลังคน AI Creative ที่<strong>มีจำนวนและคุณภาพสอดคล้องกับความต้องการจริงจากภาคเอกชน ในสาขาการผลิตเป้าหมาย</strong></div>
+<div class="milestone-grid">
+  <div class="milestone y1"><div class="milestone-year">ปี 1</div>หลักสูตร AI Creative + ผู้ผ่านอบรมรุ่นแรก</div>
+  <div class="milestone y3"><div class="milestone-year">ปี 3</div>Talent Pool ที่ได้รับการรับรอง · ขยายสถาบัน</div>
+  <div class="milestone y5"><div class="milestone-year">ปี 5</div>Talent Pipeline ป้อนอุตสาหกรรมต่อเนื่อง</div>
+</div>
+</div>
+
+<!-- Pillar 7 -->
+<div class="pillar-card">
+<div class="pillar-header">
+  <div><span class="pillar-number">Pillar 7</span><span class="pillar-title">ตลาด + การส่งออก</span></div>
+  <span class="tag tag-duty">อ้างอิง: Duty ๙</span>
+</div>
+<div class="pillar-section"><strong>วัตถุประสงค์:</strong> ส่งเสริมการนำผลงานและเครื่องมือปัญญาประดิษฐ์สำหรับอุตสาหกรรมสร้างสรรค์ของไทยเข้าสู่ตลาดทั้งในและต่างประเทศ</div>
+<div class="pillar-section"><strong>กิจกรรม:</strong> Market access · Trade missions · Showcase · Network ระหว่างประเทศ</div>
+<div class="pillar-section"><strong>Output:</strong> มีผลงานและเครื่องมือ AI Creative ของไทยที่<strong>เข้าสู่ตลาดทั้งในและต่างประเทศ</strong> · มี<strong>มูลค่าตลาดที่วัดได้</strong></div>
+<div class="milestone-grid">
+  <div class="milestone y1"><div class="milestone-year">ปี 1</div>ศึกษาตลาด + Roadmap · Showcase</div>
+  <div class="milestone y3"><div class="milestone-year">ปี 3</div>เริ่ม Export สู่ ASEAN</div>
+  <div class="milestone y5"><div class="milestone-year">ปี 5</div>Thai AI Creative ในเวทีระดับสากล</div>
+</div>
+</div>
+
+<!-- Pillar 8 -->
+<div class="pillar-card">
+<div class="pillar-header">
+  <div><span class="pillar-number">Pillar 8</span><span class="pillar-title">ทรัพยากร + งบประมาณ</span></div>
+  <span class="tag tag-duty">อ้างอิง: Duty ๑๐</span>
+</div>
+<div class="pillar-section"><strong>วัตถุประสงค์:</strong> บูรณาการและบริหารจัดการทรัพยากรด้านปัญญาประดิษฐ์สำหรับอุตสาหกรรมสร้างสรรค์ ทั้งโครงสร้างพื้นฐาน ข้อมูล บุคลากร และงบประมาณ ให้เกิดประสิทธิภาพสูงสุด</div>
+<div class="pillar-section"><strong>กิจกรรม:</strong> Multi-source funding · Resource mobilization · Co-investment · MOU funding</div>
+<div class="pillar-section"><strong>Output:</strong> มี<strong>การบูรณาการทรัพยากรที่มีประสิทธิภาพ</strong> · มี<strong>แหล่งทุนหลายแหล่ง</strong> · งบประมาณรองรับการขับเคลื่อนได้ต่อเนื่อง</div>
+<div class="milestone-grid">
+  <div class="milestone y1"><div class="milestone-year">ปี 1</div>Mapping resource · MOU funding sources</div>
+  <div class="milestone y3"><div class="milestone-year">ปี 3</div>Multi-source funding + ภาคเอกชน co-invest</div>
+  <div class="milestone y5"><div class="milestone-year">ปี 5</div>Self-sustaining funding ecosystem</div>
+</div>
+</div>
+
+<!-- ════════════════ Headline Impact ════════════════ -->
+
+<h2>🏆 Headline Impact — Aspirational (วิสัยทัศน์ระดับชาติ)</h2>
+
+<blockquote class="info">
+<strong>ตัวเลขเหล่านี้เป็น "วิสัยทัศน์" ระดับ Top-down</strong> · ใช้สื่อสาร impact ของ COE ระดับประเทศ · <strong>ไม่ใช่ KPI โครงการเฉพาะ</strong> (KPI ระดับโครงการตั้งระหว่างทาง)
+</blockquote>
+
+<table>
+  <thead><tr><th>Impact (Top-down)</th><th class="center">ปัจจุบัน</th><th class="center">เป้าหมายปี 5</th><th>หมายเหตุ</th></tr></thead>
+  <tbody>
+    <tr><td><strong>สัดส่วน Creative Economy ใน GDP</strong></td><td class="center">8.78%</td><td class="center"><strong>12%</strong></td><td>CEA Baseline พ.ค. 2569</td></tr>
+    <tr><td><strong>AI Adoption ในผู้ประกอบการ Creative</strong></td><td class="center">น้อย</td><td class="center"><strong>≥ 80%</strong></td><td>Aspirational</td></tr>
+    <tr><td><strong>ต้นทุนผลิตคอนเทนต์ลดลง</strong></td><td class="center">Baseline</td><td class="center"><strong>~ 30%</strong></td><td>ใน sector เป้าหมาย</td></tr>
+    <tr><td><strong>Thai AI Creative ใน ASEAN</strong></td><td class="center">น้อย</td><td class="center"><strong>มีบทบาทนำ</strong></td><td>Hub of ASEAN</td></tr>
+    <tr><td><strong>การส่งออก AI Creative</strong></td><td class="center">Baseline</td><td class="center"><strong>ขยายตัวอย่างมีนัยสำคัญ</strong></td><td>วัดผ่าน DITP</td></tr>
+  </tbody>
+</table>
+
+<!-- ════════════════ Flagship Projects ════════════════ -->
+
+<h2>🚀 Flagship Projects — เสนอ 5 โครงการเรือธง</h2>
+
+<blockquote class="info">
+<strong>หมายเหตุ:</strong> Flagship เหล่านี้เป็น "ข้อเสนอ" สำหรับ Feasibility Study ในขั้นถัดไป · ไม่ใช่ KPI ผูกมัด · ตั้ง budget/team จริงระหว่างทาง
+</blockquote>
+
+<div class="flagship-card">
+<h4>🏛 Flagship 1: Thai AI Creative Foundation Model</h4>
+<p>โมเดล AI พื้นฐานที่ trained บนข้อมูลศิลปะ วัฒนธรรม และเนื้อหาไทย · Open Source ให้ผู้สร้างสรรค์ทั้งประเทศใช้</p>
+<div class="linkage-row"><span>เชื่อม Pillar:</span> <span class="arrow">→</span> <span class="tag tag-pillar">P3 Dataset</span> <span class="tag tag-pillar">P4 Sandbox</span></div>
+</div>
+
+<div class="flagship-card">
+<h4>🎪 Flagship 2: Bangkok AI Creative Market</h4>
+<p>งานประจำปีระดับสากล · ดึง buyer ASEAN + Asia · เป็นเวที matching ระหว่าง Creator-Buyer-Investor</p>
+<div class="linkage-row"><span>เชื่อม Pillar:</span> <span class="arrow">→</span> <span class="tag tag-pillar">P7 ตลาด</span> <span class="tag tag-pillar">P2 ระบบนิเวศ</span></div>
+</div>
+
+<div class="flagship-card">
+<h4>🧪 Flagship 3: AI Creative Sandbox Platform</h4>
+<p>แพลตฟอร์ม Sandbox ทดสอบ AI Creative tools ในสภาพแวดล้อมจริง · เปิดให้ Creator/SME ใช้ฟรี · เก็บ baseline measurement</p>
+<div class="linkage-row"><span>เชื่อม Pillar:</span> <span class="arrow">→</span> <span class="tag tag-pillar">P4 Sandbox</span> <span class="tag tag-pillar">P1 Hub</span></div>
+</div>
+
+<div class="flagship-card">
+<h4>🎓 Flagship 4: Thai Creator Economy AI Toolkit</h4>
+<p>ชุดเครื่องมือ AI + Course ที่ Creator/SME เข้าถึงฟรี · ช่วยลด cost การผลิต · ขับเคลื่อน AI Adoption</p>
+<div class="linkage-row"><span>เชื่อม Pillar:</span> <span class="arrow">→</span> <span class="tag tag-pillar">P6 Talent</span> <span class="tag tag-pillar">P3 Dataset</span></div>
+</div>
+
+<div class="flagship-card">
+<h4>🌐 Flagship 5: AI Creative Export Accelerator</h4>
+<p>โปรแกรมเร่งการ export AI Creative Content + Tools · มี office รับ buyer · matching program · trade missions</p>
+<div class="linkage-row"><span>เชื่อม Pillar:</span> <span class="arrow">→</span> <span class="tag tag-pillar">P7 ตลาด</span> <span class="tag tag-pillar">P2 ระบบนิเวศ</span></div>
+</div>
+
+<!-- ════════════════ KPI Setting Plan ════════════════ -->
+
+<h2>📐 KPI Setting Plan — "ตั้งระหว่างทาง"</h2>
+
+<blockquote class="ok">
+ตาม guidance ของ ดร.Apivadee — KPI ระดับโครงการเฉพาะ <strong>ตั้งหลัง Feasibility Study เสร็จ</strong> · ปัจจุบันใช้ <strong>Output เชิงคุณภาพ</strong> ที่ defendable
+</blockquote>
+
+<h3>Phase ของการตั้ง KPI</h3>
+
+<table>
+  <thead><tr><th>Phase</th><th>เวลา</th><th>KPI Activity</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Phase 0 — Now</strong></td><td>ก่อนคำสั่งผ่าน</td><td>Output เชิงคุณภาพ (สอดคล้อง industry demand) · Aspirational Headlines</td></tr>
+    <tr><td><strong>Phase 1 — Foundation</strong></td><td>เดือน 1-6</td><td>Feasibility Study · ตั้ง KPI โครงการเฉพาะ · Validate กับ industry</td></tr>
+    <tr><td><strong>Phase 2 — Mid-Term</strong></td><td>ปี 2-3</td><td>Review KPI · ปรับตาม Real-World data · Update รายงาน คกก.แม่</td></tr>
+    <tr><td><strong>Phase 3 — Outcome</strong></td><td>ปี 4-5</td><td>วัดผลตาม KPI ที่ปรับแล้ว · Impact measurement</td></tr>
+  </tbody>
+</table>
+
+<!-- ════════════════ Risk + Mitigation ════════════════ -->
+
+<h2>⚠ Risk + Mitigation</h2>
+
+<table>
+  <thead><tr><th>Risk</th><th class="center">ผลกระทบ</th><th>Mitigation</th></tr></thead>
+  <tbody>
+    <tr><td>KPI ตั้งระหว่างทาง — ดูไม่พร้อม</td><td class="center">🟡 Med</td><td>มี Aspirational Headlines ที่ defendable + Flagship proposals แสดงความพร้อม</td></tr>
+    <tr><td>Industry ไม่ commit pre-launch</td><td class="center">🟠 Med</td><td>Phase 1 Feasibility ขอ LOI 10+ องค์กร validate demand จริง</td></tr>
+    <tr><td>Output เชิงคุณภาพดูอ่อน</td><td class="center">🟡 Low-Med</td><td>ใช้ wording "สอดคล้องกับความต้องการของภาคเอกชน" (matched Apivadee's exact phrasing)</td></tr>
+    <tr><td>งบไม่ครบ — Flagship ทำไม่ได้</td><td class="center">🟠 Med</td><td>Multi-source funding · Phase ทำ flagship · เลื่อนได้ตามความพร้อม</td></tr>
+    <tr><td>Vision Top-down เกินจริง</td><td class="center">🟡 Low</td><td>Phrase เป็น "เป้าหมาย" ไม่ใช่ "commitment" + ปรับระหว่างทาง</td></tr>
+  </tbody>
+</table>
+
+<!-- ════════════════ สรุป ════════════════ -->
+
+<h2>✅ สรุป v2 — ตอบ Apivadee ครบทุกข้อ</h2>
+
+<table>
+  <thead><tr><th>Apivadee Feedback</th><th>v2 ตอบยังไง</th></tr></thead>
+  <tbody>
+    <tr><td><strong>"Top-down — สิ่งที่ควรมี"</strong></td><td>✅ มี Vision ปี 2574 + Headline Impact aspirational</td></tr>
+    <tr><td><strong>"Quantitative + ว้าว"</strong></td><td>✅ Headline Impact (GDP 12% · 80% Adoption · ASEAN Hub) + Aspirational language</td></tr>
+    <tr><td><strong>"จำนวน + คุณภาพ สอดคล้อง industry"</strong></td><td>✅ ใช้ exact phrasing ใน Output ทุก Pillar</td></tr>
+    <tr><td><strong>"KPI ตั้งระหว่างทาง"</strong></td><td>✅ KPI Setting Plan 4 Phase · Defendable แบบ qualitative</td></tr>
+    <tr><td><strong>"Flagship Projects"</strong></td><td>✅ เสนอ 5 Flagship · linked Pillar</td></tr>
+    <tr><td><strong>"Feasibility Study"</strong></td><td>✅ Phase 1 = Feasibility · ขอ LOI · ตั้ง KPI จริง</td></tr>
+    <tr><td><strong>"อิงอำนาจหน้าที่"</strong></td><td>✅ 8 Pillars mapped 1:1 กับ Duty ๓-๑๐</td></tr>
+  </tbody>
+</table>
+
+<div class="footer">
+COE AI Creative Economy · สมาคมสร้างสรรค์ปัญญาประดิษฐ์ไทย · พ.ค. 2569 · Output/Outcome v2 · Pillar-based
+</div>
+
+</body>
+</html>

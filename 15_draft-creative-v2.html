@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>ร่าง Section ๙ — Creative Economy (v2)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+* { box-sizing: border-box; }
+body {
+  font-family: 'Sarabun', 'Arial', sans-serif;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 50px;
+  color: #1F2937;
+  line-height: 1.7;
+  background: #FFFFFF;
+}
+h1 { color: #1F4E78; border-bottom: 3px solid #1F4E78; padding-bottom: 10px; font-size: 1.85em; }
+h2 { color: #1F4E78; margin-top: 2.2em; font-size: 1.35em; border-left: 5px solid #2E75B6; padding-left: 14px; }
+h3 { color: #374151; font-size: 1.1em; margin-top: 1.8em; border-bottom: 1px dashed #D1D5DB; padding-bottom: 4px; }
+.meta { background: #F2F7FA; border-left: 4px solid #2E75B6; padding: 12px 18px; margin: 1em 0 2em; font-size: 0.92em; }
+.meta p { margin: 4px 0; }
+blockquote { border-left: 4px solid #F59E0B; background: #FEF9C3; padding: 12px 16px; margin: 1em 0; color: #78350F; font-size: 0.95em; }
+blockquote.warn { border-color: #DC2626; background: #FEE2E2; color: #7F1D1D; }
+blockquote.info { border-color: #2E75B6; background: #DBEAFE; color: #1E3A8A; }
+blockquote.ok { border-color: #10B981; background: #D1FAE5; color: #065F46; }
+table { width: 100%; border-collapse: collapse; margin: 1em 0 1.5em; font-size: 0.93em; }
+th { background: #1F4E78; color: white; padding: 11px 12px; text-align: left; font-weight: 600; border: 1px solid #1F4E78; }
+td { padding: 9px 12px; border: 1px solid #E5E7EB; vertical-align: top; }
+tr:nth-child(even) td { background: #F8F9FA; }
+tr:hover td { background: #EFF6FF; }
+.center { text-align: center; }
+.num { font-weight: 600; color: #1F4E78; }
+.subhead { font-weight: 700; color: #1F4E78; }
+ul, ol { padding-left: 24px; }
+li { margin: 0.3em 0; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.85em; font-weight: 600; }
+.tag-ok { background: #D1FAE5; color: #065F46; }
+.tag-warn { background: #FEF3C7; color: #92400E; }
+.tag-rec { background: #DBEAFE; color: #1E40AF; }
+.cite { color: #9CA3AF; font-style: italic; font-size: 0.88em; }
+.duty-box {
+  background: #F8FAFC; border: 1px solid #CBD5E1; border-left: 4px solid #1F4E78;
+  padding: 14px 18px; margin: 12px 0; border-radius: 4px;
+}
+.duty-num { font-weight: 700; color: #1F4E78; font-size: 1.05em; }
+.duty-tag { color: #6B7280; font-size: 0.85em; margin-left: 8px; }
+.footer { margin-top: 3em; padding-top: 1em; border-top: 1px solid #E5E7EB; color: #6B7280; font-size: 0.85em; text-align: center; }
+@media print {
+  body { padding: 20px; max-width: 100%; }
+  h2 { page-break-after: avoid; }
+  tr { page-break-inside: avoid; }
+  .duty-box { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<h1>ร่าง Section ๙ — Creative Economy (v2)</h1>
+
+<div class="meta">
+  <p><strong>สถานะ:</strong> Draft v2 — AICAT ประธาน + duties ใหม่ (อิงจาก pattern ของ Health/Education/Benchmarking sections)</p>
+  <p><strong>หลักการ:</strong> ใช้ตำแหน่ง/หน่วยงาน (ไม่ระบุชื่อ) · โครงสร้าง 17 ตาม template</p>
+  <p><strong>ขอบเขต:</strong> ส่วนที่ ๙ ของคำสั่งคณะกรรมการเฉพาะด้านฯ AI แห่งชาติ</p>
+</div>
+
+<!-- ════════════════ ส่วน 1: วิเคราะห์ Pattern ════════════════ -->
+
+<h2>📊 ส่วนที่ ๑ — วิเคราะห์ Pattern จาก 4 Sections ที่เขียนเสร็จ</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>มิติ</th>
+      <th class="center">ส่วน ๑<br>ทั่วไป</th>
+      <th class="center">ส่วน ๒<br>Education</th>
+      <th class="center">ส่วน ๕<br>Health</th>
+      <th class="center">ส่วน ๑๓<br>Benchmarking</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>จำนวนข้อ</strong></td><td class="center">6</td><td class="center">9</td><td class="center"><strong>11</strong></td><td class="center">9</td></tr>
+    <tr><td><strong>มี named subheading?</strong></td><td class="center">❌</td><td class="center">❌</td><td class="center"><strong>✅ (8 หัวข้อย่อย)</strong></td><td class="center">❌</td></tr>
+    <tr><td><strong>ความละเอียด</strong></td><td>กว้าง</td><td>ปานกลาง</td><td><strong>ละเอียดสุด</strong></td><td>ปานกลาง</td></tr>
+    <tr><td><strong>กล่าวถึง Ethics/Governance</strong></td><td class="center">—</td><td class="center">✅</td><td class="center"><strong>✅ (ELSI, AI Bias)</strong></td><td class="center">—</td></tr>
+    <tr><td><strong>เน้นด้าน</strong></td><td>Admin</td><td>นโยบาย + Use Case</td><td><strong>End-to-end ระบบนิเวศ</strong></td><td>มาตรฐาน + ทดสอบ</td></tr>
+  </tbody>
+</table>
+
+<h3>โครงสร้าง Pattern ที่พบในทุก Section</h3>
+
+<table>
+  <thead><tr><th>ลำดับ</th><th>หน้าที่</th><th>ความเหมือน</th></tr></thead>
+  <tbody>
+    <tr><td class="num center">ข้อแรก</td><td>"ศึกษา วิเคราะห์ ข้อเสนอเชิงนโยบาย... สอดคล้องกับแผน AI แห่งชาติ"</td><td><strong>เหมือนกัน 100%</strong> ทุก section</td></tr>
+    <tr><td class="num center">ข้อกลาง</td><td>หน้าที่เฉพาะด้าน (sector-specific)</td><td>ต่างกัน — สำคัญสุด</td></tr>
+    <tr><td class="num center">รองสุดท้าย</td><td>"แต่งตั้งคณะทำงานย่อย / เชิญผู้เชี่ยวชาญ"</td><td>เหมือนกัน</td></tr>
+    <tr><td class="num center">รองสุดท้าย-๑</td><td>"รายงานผลการดำเนินงาน..."</td><td><strong>เหมือนกัน 100%</strong></td></tr>
+    <tr><td class="num center">สุดท้าย</td><td>"ปฏิบัติหน้าที่อื่นใดตามที่ได้รับมอบหมาย"</td><td><strong>เหมือนกัน 100%</strong></td></tr>
+  </tbody>
+</table>
+
+<h3>🎯 Pattern ที่แนะนำสำหรับ Creative Economy</h3>
+
+<blockquote class="ok">
+<strong>เสนอใช้ Hybrid: "Health Section style" (มี named subheadings) + จำนวนข้อ ~10-11 ข้อ</strong><br><br>
+<strong>เหตุผล:</strong>
+<ul>
+  <li>Creative Economy ครอบคลุม <strong>หลายมิติ</strong> (Hub, Talent, Sandbox, Dataset, IP, Export) — ต้องการ subheading จัดระเบียบ</li>
+  <li>Health เป็น sector ใหญ่ที่มี value chain ซับซ้อน — Creative ก็เช่นกัน</li>
+  <li>มี subheading = ดูมีน้ำหนัก ทางการ defend ได้ง่าย</li>
+  <li>หลีกเลี่ยง pattern แบบ Generic (ส่วน ๑) ที่ดูบาง ไม่มี content</li>
+</ul>
+</blockquote>
+
+<!-- ════════════════ ส่วน 2: ร่าง องค์ประกอบ ════════════════ -->
+
+<h2>๙. คณะทำงานขับเคลื่อนศูนย์ความเป็นเลิศปัญญาประดิษฐ์<br>ด้านอุตสาหกรรมสร้างสรรค์ (Creative Economy)</h2>
+
+<h3>องค์ประกอบ (17 ที่นั่ง)</h3>
+
+<table>
+  <thead>
+    <tr><th style="width:8%">ข้อ</th><th style="width:62%">ตำแหน่ง / หน่วยงาน</th><th style="width:30%">บทบาท</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="num center">๙.๑</td><td><strong>นายกสมาคมสร้างสรรค์ปัญญาประดิษฐ์ไทย (AICAT)</strong></td><td>ประธานคณะทำงาน</td></tr>
+    <tr><td class="num center">๙.๒</td><td>ผู้ทรงคุณวุฒิ (๑) ผู้แทนสมาคมผู้กำกับภาพยนตร์ไทย</td><td>คณะทำงาน</td></tr>
+    <tr><td class="num center">๙.๓</td><td>ผู้ทรงคุณวุฒิ (๒) ผู้แทนสมาคมผู้ประกอบการแอนิเมชันและคอมพิวเตอร์กราฟิกไทย (TACGA)</td><td>คณะทำงาน</td></tr>
+    <tr><td class="num center">๙.๔</td><td>ผู้ทรงคุณวุฒิ (๓) ผู้แทนสมาคมโฆษณาดิจิทัล (DAAT)</td><td>คณะทำงาน</td></tr>
+    <tr><td class="num center">๙.๕</td><td>ผู้ทรงคุณวุฒิ (๔) ผู้แทนสมาคม Content Creator</td><td>คณะทำงาน</td></tr>
+    <tr><td class="num center">๙.๖</td><td>ผู้ทรงคุณวุฒิ (๕) ด้านกฎหมายทรัพย์สินทางปัญญาและปัญญาประดิษฐ์</td><td>คณะทำงาน</td></tr>
+    <tr><td class="num center">๙.๗</td><td>ผู้อำนวยการสำนักงานส่งเสริมเศรษฐกิจดิจิทัล (depa)</td><td>คณะทำงาน</td></tr>
+    <tr><td class="num center">๙.๘</td><td>อธิบดีกรมส่งเสริมวัฒนธรรม กระทรวงวัฒนธรรม</td><td>คณะทำงาน</td></tr>
+    <tr><td class="num center">๙.๙</td><td>ผู้อำนวยการสำนักงานส่งเสริมเศรษฐกิจสร้างสรรค์ (CEA)</td><td>คณะทำงาน</td></tr>
+    <tr><td class="num center">๙.๑๐</td><td>อธิบดีกรมทรัพย์สินทางปัญญา กระทรวงพาณิชย์</td><td>คณะทำงาน</td></tr>
+    <tr><td class="num center">๙.๑๑</td><td>ผู้อำนวยการสำนักงานนวัตกรรมแห่งชาติ (NIA)</td><td>คณะทำงาน</td></tr>
+    <tr><td class="num center">๙.๑๒</td><td>ผู้อำนวยการสถาบันข้อมูลขนาดใหญ่ (BDI)</td><td>คณะทำงาน</td></tr>
+    <tr><td class="num center">๙.๑๓</td><td>อธิบดีกรมส่งเสริมการค้าระหว่างประเทศ (DITP)</td><td>คณะทำงาน</td></tr>
+    <tr><td class="num center">๙.๑๔</td><td>ผู้แทนสมาคมสมาพันธ์โอเพนซอร์สแห่งประเทศไทย</td><td>คณะทำงาน</td></tr>
+    <tr><td class="num center">๙.๑๕</td><td>ผู้แทนสมาคมสร้างสรรค์ปัญญาประดิษฐ์ไทย (AICAT)</td><td>คณะทำงานและเลขานุการ</td></tr>
+    <tr><td class="num center">๙.๑๖</td><td>ผู้แทนสำนักงานส่งเสริมเศรษฐกิจสร้างสรรค์ (CEA)</td><td>คณะทำงานและผู้ช่วยเลขานุการ</td></tr>
+    <tr><td class="num center">๙.๑๗</td><td>ผู้แทนสำนักงานคณะกรรมการดิจิทัลเพื่อเศรษฐกิจและสังคมแห่งชาติ (สดช.)</td><td>คณะทำงานและผู้ช่วยเลขานุการร่วม</td></tr>
+  </tbody>
+</table>
+
+<!-- ════════════════ ส่วน 3: หน้าที่และอำนาจ (ใหม่) ════════════════ -->
+
+<h3>หน้าที่และอำนาจ (เสนอใหม่ — ใช้ Health style)</h3>
+
+<div class="duty-box">
+  <span class="duty-num">๑.</span> <span class="duty-tag">[Standard — เหมือนทุก section]</span><br>
+  ศึกษา วิเคราะห์ และจัดทำข้อเสนอเชิงนโยบาย แผนปฏิบัติการ แนวทางการดำเนินงาน และแผนงาน/โครงการด้านปัญญาประดิษฐ์ ที่สอดคล้องกับแผนปฏิบัติการด้านปัญญาประดิษฐ์แห่งชาติ เพื่อเสนอต่อคณะอนุกรรมการพิจารณา
+</div>
+
+<div class="duty-box">
+  <span class="duty-num">๒.</span> <span class="subhead">การกำหนดทิศทางและนโยบายเชิงยุทธศาสตร์:</span> <span class="duty-tag">[ใหม่]</span><br>
+  ศึกษา วิเคราะห์ และจัดทำข้อเสนอเชิงนโยบาย ยุทธศาสตร์ และแผนงานด้านปัญญาประดิษฐ์สำหรับอุตสาหกรรมสร้างสรรค์ (AI for Creative Economy) ที่สอดคล้องกับยุทธศาสตร์เศรษฐกิจสร้างสรรค์ของประเทศ เพื่อยกระดับสัดส่วน Creative Economy ใน GDP และขับเคลื่อนอุตสาหกรรมสร้างสรรค์ไทยสู่เวทีระดับสากล
+</div>
+
+<div class="duty-box">
+  <span class="duty-num">๓.</span> <span class="subhead">การบริหารจัดการระบบนิเวศ:</span> <span class="duty-tag">[ใหม่]</span><br>
+  ทำหน้าที่เป็นตัวกลางในการเชื่อมโยงและบูรณาการความร่วมมือระหว่างภาคสถาบันการศึกษา (Research) ภาคอุตสาหกรรมสร้างสรรค์ (Industry) ผู้ประกอบการและผู้สร้างสรรค์เนื้อหา (Creators) ภาครัฐ และเครือข่ายระดับสากล เพื่อสร้างระบบนิเวศ AI Creative ที่ยั่งยืน
+</div>
+
+<div class="duty-box">
+  <span class="duty-num">๔.</span> <span class="subhead">การขับเคลื่อนโครงสร้างพื้นฐานและชุดข้อมูล:</span> <span class="duty-tag">[ใหม่]</span><br>
+  ส่งเสริมและสนับสนุนการสร้างชุดข้อมูล Thai Creative AI Dataset (ภาษา วัฒนธรรม และทรัพยากรสร้างสรรค์ไทย) โครงสร้างพื้นฐานข้อมูล และเครื่องมือปัญญาประดิษฐ์ที่เหมาะสมกับอุตสาหกรรมสร้างสรรค์ไทย โดยประสานความร่วมมือกับสถาบันข้อมูลขนาดใหญ่ (BDI) และหน่วยงานที่เกี่ยวข้อง
+</div>
+
+<div class="duty-box">
+  <span class="duty-num">๕.</span> <span class="subhead">การพัฒนาโครงการต้นแบบและขยายผลเชิงพาณิชย์:</span> <span class="duty-tag">[ใหม่]</span><br>
+  พัฒนา สนับสนุน และขับเคลื่อนโครงการต้นแบบ (Sandbox / Use Cases) ในสาขาภาพยนตร์ แอนิเมชัน ดนตรี โฆษณา คอนเทนต์ดิจิทัล และผู้สร้างสรรค์เนื้อหา ให้เกิดผลเป็นรูปธรรมและสามารถขยายผลเชิงพาณิชย์ได้
+</div>
+
+<div class="duty-box">
+  <span class="duty-num">๖.</span> <span class="subhead">การกำกับดูแล มาตรฐานวิชาชีพ และจริยธรรม:</span> <span class="duty-tag">[ใหม่]</span><br>
+  ผลักดันการจัดทำกรอบนโยบาย AI Copyright และทรัพย์สินทางปัญญาสำหรับผลงาน AI-generated มาตรฐานวิชาชีพ AI Creative และจรรยาบรรณ AI Creative ฉบับไทย ภายใต้หลักธรรมาภิบาลปัญญาประดิษฐ์ (AI Governance)
+</div>
+
+<div class="duty-box">
+  <span class="duty-num">๗.</span> <span class="subhead">การพัฒนากำลังคนและ Talent Pipeline:</span> <span class="duty-tag">[ใหม่]</span><br>
+  วางแผนและส่งเสริมการพัฒนาทักษะ (Upskill/Reskill) ของผู้ประกอบการ ผู้สร้างสรรค์เนื้อหา และบุคลากรในอุตสาหกรรมสร้างสรรค์ ผ่านหลักสูตรการศึกษา การฝึกอบรม และระบบการรับรองมาตรฐาน เพื่อสร้าง Talent Pipeline ที่ป้อนอุตสาหกรรมได้อย่างต่อเนื่อง
+</div>
+
+<div class="duty-box">
+  <span class="duty-num">๘.</span> <span class="subhead">การส่งเสริมตลาดและการส่งออกระดับสากล:</span> <span class="duty-tag">[ใหม่]</span><br>
+  ส่งเสริมการนำผลงานและเครื่องมือ AI Creative ของไทยเข้าสู่ตลาดอาเซียนและระดับสากล ผ่านความร่วมมือกับกรมส่งเสริมการค้าระหว่างประเทศ (DITP) งาน Bangkok International Content Market และเครือข่ายพันธมิตรระหว่างประเทศ
+</div>
+
+<div class="duty-box">
+  <span class="duty-num">๙.</span> <span class="subhead">การบริหารจัดการทั่วไป:</span> <span class="duty-tag">[Standard pattern]</span><br>
+  แต่งตั้งคณะทำงานย่อยหรือเชิญผู้เชี่ยวชาญจากภาคส่วนต่าง ๆ เพื่อสนับสนุนการดำเนินงานเฉพาะด้านได้ตามความเหมาะสม
+</div>
+
+<div class="duty-box">
+  <span class="duty-num">๑๐.</span> <span class="duty-tag">[Standard — เหมือนทุก section]</span><br>
+  รายงานผลการดำเนินงาน รวมทั้งเสนอข้อเสนอเชิงนโยบาย ข้อเสนอแนะ และแนวทางการดำเนินการต่อคณะอนุกรรมการขับเคลื่อนแผนด้านปัญญาประดิษฐ์แห่งชาติเป็นระยะ
+</div>
+
+<div class="duty-box">
+  <span class="duty-num">๑๑.</span> <span class="duty-tag">[Standard — เหมือนทุก section]</span><br>
+  ปฏิบัติหน้าที่อื่นใดตามที่ได้รับมอบหมาย
+</div>
+
+<!-- ════════════════ ส่วน 4: Mapping ════════════════ -->
+
+<h2>🧩 Mapping: หน้าที่ใหม่ → Pillar Output/Outcome</h2>
+
+<table>
+  <thead><tr><th>หน้าที่</th><th>Pillar ที่ครอบ</th><th>เจ้าภาพหลัก</th></tr></thead>
+  <tbody>
+    <tr><td>๒. ทิศทาง/นโยบาย</td><td>All pillars (umbrella)</td><td>AICAT + CEA</td></tr>
+    <tr><td>๓. ระบบนิเวศ</td><td>1) Hub + 9) Partnerships</td><td>AICAT + CEA + depa</td></tr>
+    <tr><td>๔. โครงสร้างพื้นฐาน + Dataset</td><td>4) Thai Creative AI Dataset</td><td>BDI + depa</td></tr>
+    <tr><td>๕. โครงการต้นแบบ (Sandbox)</td><td>3) Sandbox + 6) ต้นทุนผลิต</td><td>NIA + AICAT + สมาคมต่างๆ</td></tr>
+    <tr><td>๖. มาตรฐาน + จริยธรรม</td><td>5) มาตรฐาน &amp; กฎหมาย IP</td><td>กรม IP + ผู้ทรงฯ Law + วธ.</td></tr>
+    <tr><td>๗. กำลังคน + Talent</td><td>2) Talent &amp; การศึกษา</td><td>CEA + AICAT + Academic</td></tr>
+    <tr><td>๘. ตลาดและส่งออก</td><td>7) Export + 8) ผลกระทบ GDP</td><td>DITP + DAAT</td></tr>
+  </tbody>
+</table>
+
+<blockquote class="ok">
+✅ ครอบ <strong>ทุก Pillar (1-9)</strong> ในแผน Output/Outcome — ไม่มี gap
+</blockquote>
+
+<!-- ════════════════ ส่วน 5: เทียบ ๔ ข้อเดิม vs ๘ ข้อใหม่ ════════════════ -->
+
+<h2>📊 เทียบ duties เดิม (๔ ข้อ) vs ใหม่ (๘ ข้อ)</h2>
+
+<table>
+  <thead><tr><th>มิติ</th><th>เดิม (v1 draft)</th><th>ใหม่ (v2)</th></tr></thead>
+  <tbody>
+    <tr><td><strong>จำนวนข้อเฉพาะ</strong></td><td>๔ ข้อ (๒-๕)</td><td><strong>๘ ข้อ (๒-๙)</strong></td></tr>
+    <tr><td><strong>Format</strong></td><td>Flat (Education-like)</td><td><strong>Named subheading (Health-like)</strong></td></tr>
+    <tr><td><strong>ครอบเสาหลัก</strong></td><td>7 / 8 เสา</td><td><strong>9 / 9 ครบ</strong></td></tr>
+    <tr><td><strong>กล่าว Ethics/Governance</strong></td><td>กล่าวสั้น</td><td><strong>มีหัวข้อ ๖ เน้นเฉพาะ</strong></td></tr>
+    <tr><td><strong>กล่าวระบบนิเวศ</strong></td><td>—</td><td><strong>มีหัวข้อ ๓ เน้นเฉพาะ</strong></td></tr>
+    <tr><td><strong>เทียบ Section อื่น</strong></td><td>Education (9 ข้อ)</td><td><strong>Health (11 ข้อ) — ทางการสุด</strong></td></tr>
+  </tbody>
+</table>
+
+<!-- ════════════════ ส่วน 6: ขอ feedback ════════════════ -->
+
+<h2>🎯 ขอ feedback</h2>
+
+<table>
+  <thead><tr><th>#</th><th>คำถาม</th><th>ปัจจุบัน</th></tr></thead>
+  <tbody>
+    <tr><td class="num center">1</td><td>ใช้ <strong>Health style</strong> (มี named subheading, 11 ข้อ) ตามนี้?</td><td class="center"><span class="tag tag-rec">แนะนำ</span></td></tr>
+    <tr><td class="num center">2</td><td>หรือเอา <strong>Education style</strong> (flat, 9 ข้อ) สั้นกว่า?</td><td class="center"><span class="tag tag-warn">เลือก</span></td></tr>
+    <tr><td class="num center">3</td><td>หรือ <strong>Benchmarking style</strong> (flat, 9 ข้อ เน้นมาตรฐาน)?</td><td class="center"><span class="tag tag-warn">เลือก</span></td></tr>
+    <tr><td class="num center">4</td><td>หัวข้อ ๒-๘ wording OK? มีตัวไหนต้อง revise?</td><td class="center"><span class="tag tag-warn">รอตอบ</span></td></tr>
+    <tr><td class="num center">5</td><td>องค์ประกอบ ๙.๑-๙.๑๗ ยังตามเดิม (AICAT ประธาน) ?</td><td class="center"><span class="tag tag-ok">confirm</span></td></tr>
+  </tbody>
+</table>
+
+<blockquote class="info">
+<strong>หลังพี่ตอบ:</strong> ผมจะนำไปลง .docx ของ สดช. ในส่วนที่ ๙ + อัปเดต .docx output
+</blockquote>
+
+<div class="footer">
+COE AI Creative Economy · สมาคมสร้างสรรค์ปัญญาประดิษฐ์ไทย (AICAT) · พ.ค. 2569 · Draft v2
+</div>
+
+</body>
+</html>
