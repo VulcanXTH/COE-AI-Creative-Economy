@@ -13,6 +13,3 @@ venv/
 # Editor/OS noise
 *.swp
 *~
-
-# Auto-push runtime log (would otherwise churn every 10 min)
-.autopush.log
