@@ -44,5 +44,4 @@
 ## การ sync ข้ามเครื่อง
 
 - **ทั้ง Mac และ Windows ใช้ push/pull เองด้วย git ปกติ** — **pull ก่อนเริ่ม, push เมื่อเสร็จ** (ไม่มี auto-push บนเครื่องไหนแล้ว — ยกเลิก launchd job บน Mac เมื่อ 5 มิ.ย. 2569)
-- `.autopush.sh` ในรูทเป็นสคริปต์เก่าของ Mac ที่ไม่ได้ใช้แล้ว (launchd job ถูกยกเลิก)
 - repo: https://github.com/VulcanXTH/COE-AI-Creative-Economy (branch `main`)
