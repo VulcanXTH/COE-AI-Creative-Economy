@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COE AI Creative Economy — เมนูโครงการ 8 เสาหลัก (Project Catalog Dashboard)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+:root{
+  --ink:#0A2540; --ink2:#103253; --ink3:#1B4A73;
+  --gold:#C8A24A; --gold-soft:#E7D8A8; --gold-deep:#9A7A2E;
+  --paper:#F6F2E9; --paper2:#FFFFFF; --paper3:#FBF8F1;
+  --text:#16202B; --muted:#5C6B7A; --line:#E5DCC6;
+  --green:#2F7A5B; --green-soft:#E1F0E8;
+  --terra:#B4521E; --terra-soft:#F7E6DC;
+  --blue:#2E75B6; --blue-soft:#E3EEF7;
+  --purple:#6D4AA7; --purple-soft:#ECE4F7;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'IBM Plex Sans Thai','Sarabun',sans-serif; color:var(--text); line-height:1.6; background:var(--paper);
+  background-image:radial-gradient(circle at 12% 6%, rgba(200,162,74,.07), transparent 40%),radial-gradient(circle at 88% 0%, rgba(10,37,64,.05), transparent 35%);
+  -webkit-font-smoothing:antialiased;
+}
+body::before{content:""; position:fixed; inset:0; z-index:9999; pointer-events:none; opacity:.022;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.wrap{max-width:1320px; margin:0 auto; padding:0 26px;}
+h1,h2,h3,h4,.kanit{font-family:'Kanit',sans-serif;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+
+/* nav */
+.topbar{position:sticky; top:0; z-index:200; background:rgba(10,37,64,.97); backdrop-filter:blur(8px); border-bottom:1px solid rgba(200,162,74,.35);}
+.topbar .wrap{display:flex; align-items:center; justify-content:space-between; height:54px;}
+.brand{display:flex; align-items:center; gap:10px; color:#fff; font-family:'Kanit'; font-weight:600; font-size:.95em;}
+.brand .dot{width:10px; height:10px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 4px rgba(200,162,74,.25);}
+.navlinks{display:flex; gap:3px;}
+.navlinks a{color:#cdd9e5; text-decoration:none; font-size:.8em; padding:6px 12px; border-radius:7px; font-family:'Kanit'; transition:.2s; white-space:nowrap;}
+.navlinks a:hover{color:#fff; background:rgba(255,255,255,.08);}
+@media(max-width:900px){.navlinks{display:none;}}
+
+/* hero */
+.hero{position:relative; overflow:hidden; color:#fff; background:linear-gradient(135deg,var(--ink) 0%,var(--ink2) 55%,var(--ink3) 120%); padding:50px 0 64px;}
+.hero::after{content:""; position:absolute; right:-120px; top:-80px; width:520px; height:520px; background:radial-gradient(circle, rgba(200,162,74,.22), transparent 62%); pointer-events:none;}
+.hero .wrap{position:relative; z-index:2;}
+.eyebrow{display:inline-flex; align-items:center; gap:9px; font-family:'Kanit'; font-weight:500; letter-spacing:.14em; text-transform:uppercase; font-size:.7em; color:var(--gold-soft); border:1px solid rgba(200,162,74,.4); padding:6px 15px; border-radius:30px; margin-bottom:18px;}
+.eyebrow::before{content:""; width:6px; height:6px; background:var(--gold); border-radius:50%;}
+.hero h1{font-size:2.5em; line-height:1.15; font-weight:700; max-width:22ch; letter-spacing:-.01em;}
+.hero h1 .hl{color:var(--gold-soft);}
+.hero .lead{margin-top:14px; font-size:1.02em; color:#c8d6e3; max-width:74ch; font-weight:300;}
+.hero .tags{margin-top:16px; display:flex; flex-wrap:wrap; gap:8px;}
+.hero .tags span{font-size:.78em; background:rgba(255,255,255,.08); border:1px solid rgba(200,162,74,.3); padding:5px 12px; border-radius:20px; color:#dfe9f2;}
+
+/* stat strip */
+.strip{margin-top:-38px; position:relative; z-index:5;}
+.strip-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:14px;}
+@media(max-width:900px){.strip-grid{grid-template-columns:repeat(2,1fr);}}
+.stat{background:var(--paper2); border:1px solid var(--line); border-radius:13px; padding:18px; box-shadow:0 14px 34px -18px rgba(10,37,64,.4); position:relative; overflow:hidden;}
+.stat::before{content:""; position:absolute; top:0; left:0; width:100%; height:3px; background:var(--gold);}
+.stat.g::before{background:var(--green);} .stat.b::before{background:var(--blue);} .stat.t::before{background:var(--terra);} .stat.p::before{background:var(--purple);}
+.stat .v{font-family:'Kanit'; font-weight:700; font-size:1.85em; color:var(--ink); line-height:1;}
+.stat .l{font-size:.8em; color:var(--muted); margin-top:6px;}
+
+/* sections */
+section{padding:46px 0 6px;}
+.sec-head{display:flex; align-items:baseline; gap:13px; margin-bottom:6px;}
+.sec-num{font-family:'IBM Plex Mono'; font-weight:600; color:var(--gold-deep); font-size:.88em;}
+.sec-head h2{font-size:1.7em; color:var(--ink); font-weight:600;}
+.sec-sub{color:var(--muted); margin:0 0 22px; max-width:80ch;}
+.rule{height:1px; background:linear-gradient(90deg,var(--gold),transparent); margin:0 0 24px; opacity:.6;}
+
+/* synthesis grids */
+.cols2{display:grid; grid-template-columns:1fr 1fr; gap:18px;} @media(max-width:920px){.cols2{grid-template-columns:1fr;}}
+.panel{background:var(--paper2); border:1px solid var(--line); border-radius:14px; padding:22px 24px;}
+.panel.flag{border-top:4px solid var(--gold);} .panel.qw{border-top:4px solid var(--green);}
+.panel h3{font-family:'Kanit'; color:var(--ink); font-size:1.2em; margin-bottom:14px; display:flex; align-items:center; gap:9px;}
+.li{display:flex; gap:11px; padding:11px 0; border-bottom:1px dashed var(--line);} .li:last-child{border:none;}
+.li .pill{flex:none; font-family:'IBM Plex Mono'; font-size:.68em; font-weight:600; height:fit-content; padding:3px 8px; border-radius:6px; background:var(--ink); color:#fff;}
+.li .txt b{font-family:'Kanit'; color:var(--ink); font-weight:600; font-size:.96em;}
+.li .txt p{font-size:.84em; color:var(--muted); margin-top:2px;}
+
+.notebox{background:var(--paper3); border:1px solid var(--line); border-left:4px solid var(--terra); border-radius:0 12px 12px 0; padding:18px 22px; margin-top:8px;}
+.notebox.warn{border-left-color:var(--terra);} .notebox.merge{border-left-color:var(--purple);}
+.notebox h4{font-family:'Kanit'; color:var(--ink); margin-bottom:10px;}
+.notebox ol,.notebox ul{margin-left:18px; font-size:.9em;} .notebox li{margin:6px 0;}
+
+/* timeline */
+.tl3{display:grid; grid-template-columns:repeat(3,1fr); gap:0;} @media(max-width:820px){.tl3{grid-template-columns:1fr;}}
+.tlc{padding:20px; border:1px solid var(--line); background:var(--paper2);}
+.tlc:first-child{border-radius:14px 0 0 14px;} .tlc:last-child{border-radius:0 14px 14px 0;} .tlc+.tlc{border-left:none;}
+@media(max-width:820px){.tlc{border-radius:12px!important; border:1px solid var(--line)!important; margin-bottom:10px;}}
+.tlc.y1{border-top:4px solid var(--green);} .tlc.y3{border-top:4px solid var(--gold);} .tlc.y5{border-top:4px solid var(--terra);}
+.tlc .yr{font-family:'Kanit'; font-weight:700; color:var(--ink); font-size:1.1em;}
+.tlc .sub{font-size:.8em; color:var(--gold-deep); margin-bottom:8px; font-family:'Kanit';}
+.tlc p{font-size:.86em; color:var(--text);}
+
+/* controls */
+.controls{position:sticky; top:54px; z-index:100; background:var(--paper); padding:14px 0 12px; border-bottom:1px solid var(--line); margin-bottom:8px;}
+.searchbar{display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
+.searchbar input{flex:1; min-width:220px; font-family:'IBM Plex Sans Thai'; font-size:.92em; padding:11px 16px; border:1px solid var(--line); border-radius:10px; background:var(--paper2); color:var(--text);}
+.searchbar input:focus{outline:none; border-color:var(--gold);}
+.count{font-family:'Kanit'; font-size:.86em; color:var(--muted); white-space:nowrap;}
+.count b{color:var(--ink);}
+.chips{display:flex; flex-wrap:wrap; gap:7px; margin-top:11px;}
+.chip{font-family:'Kanit'; font-weight:500; font-size:.8em; cursor:pointer; padding:7px 13px; border-radius:20px; border:1px solid var(--line); background:var(--paper2); color:var(--ink2); transition:.18s; user-select:none;}
+.chip:hover{border-color:var(--gold);}
+.chip.on{background:var(--ink); color:#fff; border-color:var(--ink);}
+.chip.t-qw.on{background:var(--green); border-color:var(--green);}
+.chip.t-fo.on{background:var(--blue); border-color:var(--blue);}
+.chip.t-fl.on{background:var(--gold-deep); border-color:var(--gold-deep);}
+.chip-sep{width:1px; background:var(--line); margin:0 4px;}
+
+/* project grid */
+.grid{display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin-top:18px;} @media(max-width:920px){.grid{grid-template-columns:1fr;}}
+.card{background:var(--paper2); border:1px solid var(--line); border-radius:14px; padding:0; overflow:hidden; transition:.2s; border-left:4px solid var(--blue);}
+.card.qw{border-left-color:var(--green);} .card.fo{border-left-color:var(--blue);} .card.fl{border-left-color:var(--gold);}
+.card.hide{display:none;}
+.card:hover{box-shadow:0 16px 34px -22px rgba(10,37,64,.4);}
+.card-head{padding:18px 20px; cursor:pointer; display:flex; gap:12px; align-items:flex-start;}
+.card-head .code{font-family:'IBM Plex Mono'; font-weight:600; font-size:.78em; color:#fff; background:var(--ink); padding:4px 9px; border-radius:7px; flex:none;}
+.card-head .ttl{flex:1;}
+.card-head .ttl h4{font-family:'Kanit'; font-size:1.04em; color:var(--ink); font-weight:600; line-height:1.32;}
+.card-head .ttl .en{font-size:.78em; color:var(--muted); font-family:'IBM Plex Mono'; margin-top:2px;}
+.card-head .ttl .one{font-size:.88em; color:#445; margin-top:7px;}
+.badge{flex:none; font-family:'Kanit'; font-size:.68em; font-weight:600; padding:4px 10px; border-radius:20px; white-space:nowrap; align-self:center;}
+.badge.qw{background:var(--green-soft); color:var(--green);} .badge.fo{background:var(--blue-soft); color:var(--blue);} .badge.fl{background:var(--gold-soft); color:var(--gold-deep);}
+.chev{flex:none; color:var(--gold-deep); font-size:.9em; transition:.25s; align-self:center;}
+.card.open .chev{transform:rotate(180deg);}
+.card-body{max-height:0; overflow:hidden; transition:max-height .35s ease; background:var(--paper3); border-top:0 solid var(--line);}
+.card.open .card-body{max-height:900px; border-top:1px solid var(--line);}
+.cb-inner{padding:18px 20px;}
+.io-row{margin-bottom:13px;}
+.io-row .lab{font-family:'Kanit'; font-weight:600; font-size:.74em; letter-spacing:.04em; text-transform:uppercase; margin-bottom:4px; display:inline-block; padding:2px 8px; border-radius:5px;}
+.io-row.out .lab{background:var(--blue-soft); color:var(--blue);} .io-row.outc .lab{background:var(--green-soft); color:var(--green);}
+.io-row.lead .lab{background:var(--purple-soft); color:var(--purple);} .io-row.ana .lab{background:var(--gold-soft); color:var(--gold-deep);}
+.io-row p{font-size:.88em; color:var(--text); margin-top:3px;}
+.io-row.ana p{font-size:.82em; color:var(--muted); font-style:italic;}
+.pillar-tag{display:inline-block; font-family:'Kanit'; font-size:.72em; color:var(--gold-deep); background:var(--gold-soft); padding:2px 9px; border-radius:14px; margin-top:10px;}
+
+.noresult{text-align:center; padding:50px; color:var(--muted); font-family:'Kanit'; display:none;}
+
+footer{margin-top:54px; background:var(--ink); color:#9fb3c6; padding:30px 0;}
+footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; align-items:center;}
+footer b{color:#fff; font-family:'Kanit';}
+footer .src{font-size:.76em; max-width:64ch; line-height:1.7;}
+.reveal{opacity:0; transform:translateY(20px); transition:.6s cubic-bezier(.2,.7,.2,1);} .reveal.in{opacity:1; transform:none;}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+  <div class="brand"><span class="dot"></span>COE · AI Creative Economy</div>
+  <nav class="navlinks">
+    <a href="#flagship">เรือธง</a><a href="#quickwin">Quick Win</a><a href="#merge">หลอมรวม</a>
+    <a href="#gaps">ช่องว่าง</a><a href="#timeline">ไทม์ไลน์</a><a href="#catalog">แคตตาล็อก</a>
+  </nav>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">เมนูโครงการ · ครบ 8 เสาหลัก · ตามอำนาจหน้าที่ 3–10</span>
+  <h1>โครงการ Output / Outcome<br><span class="hl">ให้เลือก ครบทุกเสา</span></h1>
+  <p class="lead">ผลจากการกระจาย AI Agent วิจัย 1 ตัว/เสา (ค้นเว็บจริง 63 ครั้ง) + 1 ตัวสังเคราะห์ — ทุกโครงการเลี่ยงคำ "THACCA/Soft Power" ยึดกรอบคงทนข้ามรัฐบาล และมีโครงการเทียบเคียงจริงทั้งไทยและต่างประเทศ</p>
+  <div class="tags">
+    <span>ยุทธศาสตร์ AI ชาติ 2565–2570</span><span>เศรษฐกิจสร้างสรรค์ / CEA</span><span>เศรษฐกิจดิจิทัล / depa</span><span>SME + เศรษฐกิจฐานราก</span><span>ลดความเหลื่อมล้ำการเข้าถึง</span>
+  </div>
+</div></header>
+
+<div class="wrap strip"><div class="strip-grid">
+  <div class="stat"><div class="v">45</div><div class="l">โครงการให้เลือก</div></div>
+  <div class="stat b"><div class="v">8</div><div class="l">เสาหลัก (อ.ห. 3–10)</div></div>
+  <div class="stat g"><div class="v">14</div><div class="l">🟢 Quick Win</div></div>
+  <div class="stat p"><div class="v">21</div><div class="l">🔵 Foundation</div></div>
+  <div class="stat t"><div class="v">10</div><div class="l">🟡 Flagship</div></div>
+</div></div>
+
+<!-- FLAGSHIP + QUICKWIN -->
+<section><div class="wrap reveal">
+  <div class="cols2">
+    <div id="flagship" class="panel flag">
+      <h3>⭐ เรือธง (Flagship) 7 โครงการเด่นข้ามเสา</h3>
+      <div id="flagList"></div>
+    </div>
+    <div id="quickwin" class="panel qw">
+      <h3>⚡ Quick Win 8 โครงการ (เห็นผลปี 1)</h3>
+      <div id="qwList"></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- MERGE + GAPS -->
+<section><div class="wrap reveal">
+  <div class="sec-head"><span class="sec-num">∑</span><h2>ข้อสังเกตเชิงพอร์ตโฟลิโอ</h2></div>
+  <div class="rule"></div>
+  <div id="merge" class="notebox merge">
+    <h4>⚠ จุดทับซ้อน 5 กลุ่ม ที่ควรหลอมรวม (กันงบซ้ำ)</h4>
+    <ol>
+      <li><b>พอร์ทัล One-Stop:</b> P1-1 + P8-1 → "พอร์ทัลกลาง COE" เดียว (depa เจ้าภาพ)</li>
+      <li><b>สตูดิโอ/Virtual Production:</b> P1-3 + P2-4 + P4-3 → สตูดิโอเรือธงเดียว (PPP กับ Figment/Studio X Beyond)</li>
+      <li><b>คูปองคอมพิวต์/GPU:</b> P3-4 + P8-2 → กลไกคูปองเดียว (depa+สวทช. บน ThaiSC/LANTA)</li>
+      <li><b>ข้อมูล+สิทธิ:</b> P3-1/2/3 + P5-5 + P8-4 → "สถาปัตยกรรมข้อมูล+สิทธิ" ชุดเดียว (แคตตาล็อก→คอร์ปัส→ทะเบียนสิทธิ→ทรัสต์)</li>
+      <li><b>จับคู่/มาร์เก็ตเพลส:</b> P2-3 + P7-1 + P7-5 → แพลตฟอร์มจับคู่+ข้อมูลตลาดเดียว</li>
+    </ol>
+  </div>
+  <div id="gaps" class="notebox warn" style="margin-top:16px;">
+    <h4>🕳 ช่องว่างที่ยังไม่มีโครงการรองรับ (กรรมการควรเติม)</h4>
+    <ol>
+      <li><b>Just transition</b> — ช่วยแรงงานสร้างสรรค์ที่ถูก AI แทนที่/ลดงาน (ทุกเสาเน้น upskill แต่ไม่มีกลไกรองรับคนเสียงาน) — ความเสี่ยงการเมือง</li>
+      <li><b>ติดตามผลกระทบ AI ต่อการจ้างงาน</b> (labour impact monitoring)</li>
+      <li><b>ระบบ M&E + งบรวมระดับพอร์ตทั้งศูนย์</b> — รายงานความคุ้มค่าข้าม 8 เสา</li>
+      <li><b>คุ้มครองผู้ชมไทย + รับมือดีปเฟกในประเทศ</b> (provenance เน้นส่งออก ยังไม่คุ้มครองในประเทศ)</li>
+      <li><b>ความยินยอมระดับชุมชน/ชาติพันธุ์</b> สำหรับข้อมูลวัฒนธรรม (มีสิทธิรายบุคคล แต่ขาดภูมิปัญญาชุมชน)</li>
+      <li><b>ฝังในหลักสูตร อว./อาชีวะ</b> (มีอบรมระยะสั้น แต่ยังไม่ฝังเป็นหลักสูตรทางการ)</li>
+    </ol>
+  </div>
+</div></section>
+
+<!-- TIMELINE -->
+<section id="timeline"><div class="wrap reveal">
+  <div class="sec-head"><span class="sec-num">🗓</span><h2>ลำดับการเสนอ ปี 1 / 3 / 5</h2></div>
+  <div class="rule"></div>
+  <div class="tl3">
+    <div class="tlc y1"><div class="yr">ปี 1</div><div class="sub">วางฐาน + เห็นผลเร็ว</div><p>พอร์ทัลกลาง (Q1+Q8) · คูปอง Sandbox/Compute (Q2+P3-4+P8-2) · แคตตาล็อกข้อมูล (Q3) · Use-Case Challenge (Q4) · หลักสูตรพื้นฐาน (Q5) · Copyright Toolkit (Q6) · Marketplace (Q7) — พร้อมเริ่มงานวางกฎ: กรอบสมรรถนะ (P6-2), Trusted-Use Sandbox (P4-2), กลไกสิทธิ (P3-3) + ตั้งกรอบ M&E และ just-transition</p></div>
+    <div class="tlc y3"><div class="yr">ปี 3</div><div class="sub">สร้างโครงสร้างหลัก</div><p>คอร์ปัสภาษา/เสียง (P3-2) · ทะเบียนสิทธิ+ทรัสต์ (P5-5+P8-4) · Provenance (P5-4) ให้ทันตลาด EU · Apprenticeship (P6-4) · ผู้แทนการค้า ตปท. (P7-3) · กองทุนร่วมลงทุน (P8-3) · ISO 42001 (P5-3) + เริ่มสร้างสตูดิโอเรือธง PPP</p></div>
+    <div class="tlc y5"><div class="yr">ปี 5</div><div class="sub">เรือธง + ขยายผล + ยั่งยืน</div><p>เปิดแพลตฟอร์มกลาง (P3-5) · ศูนย์ภูมิภาค (P8-5) · Scale-Up + Pavilion ส่งออก (P4-6+P7-4) · เจรจาเปิดตลาดข้ามแดน (P7-6) · ผลักดันตั้งหน่วยงานเฉพาะถาวร (P1-5)</p></div>
+  </div>
+</div></section>
+
+<!-- CATALOG -->
+<section id="catalog"><div class="wrap reveal">
+  <div class="sec-head"><span class="sec-num">📋</span><h2>แคตตาล็อกโครงการ — คลิกการ์ดเพื่อดูรายละเอียด</h2></div>
+  <p class="sec-sub">กรองตามเสา/ประเภท หรือค้นหาคำสำคัญ · แต่ละการ์ดคลิกเพื่อขยายดู Output · Outcome · เจ้าภาพ · โครงการเทียบเคียง</p>
+</div>
+<div class="controls"><div class="wrap">
+  <div class="searchbar">
+    <input id="search" type="text" placeholder="🔍 ค้นหาชื่อโครงการ / คำสำคัญ (เช่น สตูดิโอ, ลิขสิทธิ์, ส่งออก, voucher)">
+    <span class="count" id="count"></span>
+  </div>
+  <div class="chips" id="pillarChips"></div>
+  <div class="chips" id="typeChips">
+    <span class="chip t-all on" data-type="all">ทุกประเภท</span>
+    <span class="chip t-qw" data-type="Quick Win">🟢 Quick Win</span>
+    <span class="chip t-fo" data-type="Foundation">🔵 Foundation</span>
+    <span class="chip t-fl" data-type="Flagship">🟡 Flagship</span>
+  </div>
+</div></div>
+<div class="wrap">
+  <div class="grid" id="grid"></div>
+  <div class="noresult" id="noresult">ไม่พบโครงการที่ตรงกับเงื่อนไข</div>
+</div></section>
+
+<footer><div class="wrap">
+  <div><b>COE AI Creative Economy</b> · AICAT · เมนูโครงการ 8 เสาหลัก · มิ.ย. 2569</div>
+  <div class="src">เทียบเคียง: depa · CEA/TCDC · NECTEC/ThaiSC · BDI/ThaiLLM · DITP · ETDA · กรมทรัพย์สินทางปัญญา | KOCCA(เกาหลี) · IMDA/AI Singapore(สิงคโปร์) · UK Creative Clusters · EU AI Act/AI4Culture · NAIRR(สหรัฐ) · ISO/IEC 42001 · C2PA</div>
+</div></footer>
+
+<script>
+const PILLARS={
+ 1:'ศูนย์ปฏิบัติการ AI Creative (อ.ห. 3)',2:'ระบบนิเวศ AI Creative (อ.ห. 4)',3:'โครงสร้างพื้นฐาน+ชุดข้อมูล (อ.ห. 5)',4:'โครงการต้นแบบ+ขยายผล (อ.ห. 6)',
+ 5:'มาตรฐาน+IP+ธรรมาภิบาล (อ.ห. 7)',6:'กำลังคน (อ.ห. 8)',7:'ตลาด+การส่งออก (อ.ห. 9)',8:'ทรัพยากร+งบประมาณ (อ.ห. 10)'};
+const TYPEMAP={'Quick Win':'qw','Foundation':'fo','Flagship':'fl'};
+
+const D=[
+{p:1,code:'P1-1',type:'Quick Win',th:'แพลตฟอร์มบริการเบ็ดเสร็จ AI Creative แห่งชาติ',en:'National AI Creative One-Stop Digital Platform',one:'เปิดประตูดิจิทัลจุดเดียวให้ผู้ประกอบการสร้างสรรค์เข้าถึงเครื่องมือ AI บริการให้คำปรึกษา และมาตรการสนับสนุนของรัฐได้ครบในที่เดียว',output:'เว็บแพลตฟอร์มและไดเรกทอรีบริการ AI Creative ที่รวบรวมเครื่องมือ AI ที่ผ่านการคัดกรองคุณภาพ ช่องทางจองที่ปรึกษา และระบบลงทะเบียนรับสิทธิ์ จำนวนและประเภทบริการสอดคล้องกับความต้องการจริงที่สำรวจจากภาคเอกชน',outcome:'SME และฟรีแลนซ์ทั่วประเทศ โดยเฉพาะรายเล็กและในภูมิภาค เข้าถึงเทคโนโลยี AI และความช่วยเหลือของรัฐได้เร็วขึ้น ลดต้นทุนเริ่มต้นและลดความเหลื่อมล้ำในการเข้าถึงเทคโนโลยี',lead:'depa (หลัก) ร่วมกับ สศส./CEA และสำนักงาน AI แห่งชาติ (ดศช.)',ana:'IMDA/EnterpriseSG GenAI Sandbox (สิงคโปร์); depa SME Digital Coupon/Mini Voucher; US Commerce National AI Center'},
+{p:1,code:'P1-2',type:'Foundation',th:'ศูนย์ปฏิบัติการ AI Creative กายภาพ และเครือข่ายพื้นที่ในภูมิภาค',en:'Physical AI Creative Hub & Regional Node Network',one:'จัดตั้งศูนย์กายภาพหลักเป็นพื้นที่ทดลอง อบรม จับคู่ธุรกิจ พร้อมขยายจุดบริการผ่านเครือข่ายพื้นที่สร้างสรรค์เดิมในภูมิภาค',output:'ศูนย์กายภาพหลักพร้อมห้องปฏิบัติการ AI และพื้นที่ co-creation และจุดบริการในภูมิภาคที่ฝังในเครือข่ายพื้นที่สร้างสรรค์ที่มีอยู่ จำนวนจุดกำหนดตามความต้องการใช้งานจริง',outcome:'ผู้สร้างสรรค์และวิสาหกิจในภูมิภาคมีพื้นที่และอุปกรณ์ AI ระดับมืออาชีพที่ลงทุนเองไม่ไหว กระจายโอกาสเศรษฐกิจสร้างสรรค์ออกจากกรุงเทพฯ เสริมเศรษฐกิจฐานราก',lead:'สศส./CEA (เครือข่าย TCDC) ร่วมกับ depa และมหาวิทยาลัยในพื้นที่',ana:'เครือข่าย TCDC + Creative District 33 จังหวัด; Thailand Digital Valley (depa); GSA AI Center of Excellence (สหรัฐ)'},
+{p:1,code:'P1-3',type:'Flagship',th:'สตูดิโอกลาง AI Virtual Production และคลังทรัพยากรการผลิตร่วม',en:'Shared AI Virtual Production Studio & Resource Commons',one:'สร้างสตูดิโอผลิตคอนเทนต์ขั้นสูงที่ใช้ AI และ virtual production แบบใช้ร่วมกัน ให้ผู้ผลิตไทยเข้าถึงเทคโนโลยีระดับสากลในต้นทุนที่จับต้องได้',output:'สตูดิโอกลางพร้อม LED volume/virtual production และชุดเครื่องมือ AI สำหรับงานภาพยนตร์ แอนิเมชัน เกม โฆษณา เปิดให้เอกชนจองใช้ พร้อมทีมเทคนิคสนับสนุน',outcome:'ผู้ผลิตคอนเทนต์และสตูดิโอไทยยกระดับคุณภาพงานสู่มาตรฐานส่งออก แข่งขันในตลาดโลกได้ สร้างงานทักษะสูงและรายได้เข้าประเทศ',lead:'depa และ สศส./CEA ร่วมกับสมาคมผู้ประกอบการภาพยนตร์/แอนิเมชัน/เกม และพันธมิตรเอกชน',ana:'LED volume สาธารณะ Gran Canaria (สเปน); KOCCA virtual production (เกาหลี); depa Digital Content Accelerator'},
+{p:1,code:'P1-4',type:'Foundation',th:'ระบบติดตามอุปสงค์ภาคเอกชนและธรรมาภิบาลการดำเนินงานศูนย์',en:'Private-Sector Demand Intelligence & Hub Governance System',one:'วางระบบสำรวจความต้องการจากภาคเอกชนอย่างต่อเนื่องและกลไกกำกับคุณภาพบริการ เพื่อให้ศูนย์ออกแบบบริการตรงความต้องการจริง',output:'ระบบเก็บและวิเคราะห์ข้อมูลอุปสงค์จากภาคเอกชน ดัชนีความพึงพอใจผู้ใช้ และกรอบธรรมาภิบาล/ตัวชี้วัดการดำเนินงานที่ทบทวนเป็นรอบ',outcome:'ภาคเอกชนได้บริการตรงความต้องการและมีคุณภาพต่อเนื่อง รัฐใช้งบประมาณคุ้มค่า ศูนย์มีหลักฐานเชิงประจักษ์รองรับการรายงานต่อกรรมการ',lead:'สำนักงาน AI แห่งชาติ (ดศช.) ร่วมกับ depa และ สศส./CEA',ana:'GenAI Sandbox 2.0 (สิงคโปร์); US GAO framework การกำกับ AI ภาครัฐ; การประเมิน depa Transformation Fund'},
+{p:1,code:'P1-5',type:'Foundation',th:'การจัดตั้งหน่วยงานเฉพาะรองรับการดำเนินงานศูนย์ความเป็นเลิศ AI สร้างสรรค์',en:'Dedicated Operating Entity for the AI Creative Center of Excellence',one:'จัดทำแผนและกลไกเชิงสถาบันเพื่อยกระดับศูนย์จากโครงการนำร่องสู่หน่วยงานเฉพาะที่ยั่งยืนข้ามรัฐบาล',output:'ผลการศึกษาความเป็นไปได้ ทางเลือกรูปแบบนิติบุคคล (องค์การมหาชน/หน่วยงานในกำกับ) ร่างกฎหมาย/ระเบียบรองรับ และแผนการเงินยั่งยืน',outcome:'ศูนย์มีสถานะถาวรและงบประมาณต่อเนื่อง ผู้ประกอบการมั่นใจว่าบริการคงอยู่ระยะยาว ลดความเสี่ยงโครงการขาดช่วงเมื่อเปลี่ยนรัฐบาล',lead:'สำนักงาน AI แห่งชาติ (ดศช.) ร่วมกับ สศส./CEA และ depa ประสาน ก.พ.ร.',ana:'สศส./CEA เป็นองค์การมหาชน (ไทย); depa ภายใต้ พ.ร.บ.ดิจิทัลฯ; KOCCA (เกาหลี)'},
+
+{p:2,code:'P2-1',type:'Foundation',th:'เครือข่ายความร่วมมือ AI สร้างสรรค์ (สถาบันการศึกษา–อุตสาหกรรม–ผู้ประกอบการ)',en:'AI Creative Industry-Academia Consortium',one:'จัดตั้งกลไกเครือข่ายความร่วมมือกลางที่เชื่อมมหาวิทยาลัย ภาคเอกชน และผู้ประกอบการ ให้ทำวิจัย-พัฒนา-ถ่ายทอดเทคโนโลยีร่วมกันอย่างเป็นระบบ',output:'เครือข่ายสมาชิกจากสถาบันการศึกษาและเอกชนครอบคลุมสาขาสร้างสรรค์หลัก MOU กรอบแบ่งปัน IP และเวทีจับคู่โจทย์วิจัยกับความต้องการจริงของภาคเอกชน',outcome:'นักวิจัย/บัณฑิตได้ทำโจทย์จริงจากตลาด ภาคเอกชนเข้าถึงองค์ความรู้และกำลังคนเร็วขึ้น ลดช่องว่างวิจัย-พาณิชย์ สร้างฐานความร่วมมือคงทนข้ามรัฐบาล',lead:'depa (หลัก) ร่วมกับ CEA, ดศช., อว./มหาวิทยาลัยเครือข่าย, สภาอุตสาหกรรม/หอการค้า',ana:'Northern Ireland AICC (16.3 ล้านปอนด์); UK Creative Industries Clusters (80 ล้านปอนด์); NJ AI Hub (Princeton+Microsoft)'},
+{p:2,code:'P2-2',type:'Quick Win',th:'แซนด์บ็อกซ์ AI สร้างสรรค์สำหรับ SME และผู้ประกอบการ (Mini Voucher)',en:'GenAI Creative Sandbox & Voucher for SMEs',one:'ให้ SME ทดลองใช้เครื่องมือ AI ที่ผ่านการคัดเลือกแบบมีเงินสนับสนุน (voucher) ระยะสั้น เพื่อเริ่มใช้งานจริงทันทีในปีแรก',output:'ชุดเครื่องมือ AI ที่ผ่านการคัดกรอง (catalogue) คูปองสนับสนุนการทดลอง 3 เดือน และคู่มือประยุกต์ใช้รายสาขา จำนวน SME และประเภทเครื่องมือยึดตามที่สมัครจริง',outcome:'SME รายย่อย/ฐานรากเข้าถึงเครื่องมือ AI ราคาสูงได้โดยไม่ต้องลงทุนเองก่อน ลดต้นทุนผลิต เพิ่มผลิตภาพและรายได้ ลดความเหลื่อมล้ำระหว่างรายใหญ่-เล็ก',lead:'depa (depa Transformation Fund/Mini Voucher) ร่วมกับ CEA และ สสว.',ana:'IMDA Singapore GenAI Sandbox; depa Mini Voucher + Transformation Fund'},
+{p:2,code:'P2-3',type:'Foundation',th:'แพลตฟอร์มจับคู่และฐานข้อมูลกลางตลาด AI สร้างสรรค์',en:'AI Creative Matchmaking Platform & Data Observatory',one:'แพลตฟอร์มกลางจับคู่ผู้สร้างสรรค์–ผู้ประกอบการ–นักลงทุน–ผู้ซื้อ พร้อมระบบเก็บข้อมูลตลาด (observatory) เพื่อกำหนดนโยบายและวัดผลเชิงประจักษ์',output:'แพลตฟอร์มจับคู่งาน/ความร่วมมือ ฐานข้อมูลทักษะกำลังคน และแดชบอร์ดข้อมูลตลาด AI สร้างสรรค์ (ขนาดตลาด อุปสงค์-อุปทานกำลังคน)',outcome:'ผู้สร้างสรรค์อิสระและไมโครเอนเทอร์ไพรส์เข้าถึงงานและทุนได้กว้างขึ้น ภาครัฐมีข้อมูลจัดสรรงบ/ออกนโยบาย ลดภาวะ "มองไม่เห็น" ของเศรษฐกิจสร้างสรรค์รายย่อย',lead:'depa ร่วมกับ CEA และสำนักงานสถิติแห่งชาติ',ana:'CCSI Data Observatory (อียู); IFC Creative Industries platform; CEA CHANGEx2'},
+{p:2,code:'P2-4',type:'Flagship',th:'ศูนย์ทดสอบและสตูดิโอผลิตสร้างสรรค์ด้วย AI ร่วมรัฐ-เอกชน',en:'AI Creative Production Testbed & Shared Studio',one:'จัดตั้งศูนย์ทดสอบ/สตูดิโอผลิตกลางที่ผสาน Virtual Production กับเครื่องมือ AI ให้ SME ผู้สร้างสรรค์ และมหาวิทยาลัยใช้ร่วมกัน ผลิตผลงานมาตรฐานสากลและฝึกคนในที่เดียว',output:'shared facility ที่มี Virtual Production, AI lab และพื้นที่บ่มเพาะ พร้อมโปรแกรม co-production ระหว่างเอกชนกับสถาบันการศึกษา',outcome:'ผู้ประกอบการ-ผู้สร้างสรรค์ไทย โดยเฉพาะรายกลาง-เล็กและภูมิภาค เข้าถึงโครงสร้างผลิตระดับสากลโดยไม่ต้องลงทุนเอง ยกคุณภาพสู่ตลาดโลก ดึงงานผลิตจาก ตปท. เข้าไทย',lead:'depa (Thailand Digital Valley) ร่วมกับ CEA, อว./มหาวิทยาลัย, สตูดิโอเอกชน',ana:'depa Thailand Digital Valley; Figment Studio & Studio X Beyond (ไทย, งาน Netflix/FX); KOCCA cel Venture Complex (เกาหลี); IMDA TAP (สิงคโปร์ ~200 ลบ. SGD)'},
+{p:2,code:'P2-5',type:'Foundation',th:'เชื่อมเครือข่ายสากลและความร่วมมือผลิต-ส่งออกผลงาน AI สร้างสรรค์',en:'Global Network & Co-Production Gateway for AI Creative',one:'สร้างกลไกเชื่อมผู้ประกอบการและผู้สร้างสรรค์ไทยกับเครือข่ายสากล หน่วยงานคู่เทียบต่างประเทศ และเวทีร่วมผลิต/ลงทุนระดับนานาชาติ',output:'ข้อตกลงความร่วมมือกับหน่วยงานคู่เทียบ (KOCCA, IMDA) โปรแกรมพานักสร้างสรรค์ออกเวที/ตลาด ตปท. และทุนสนับสนุนการร่วมผลิต/ขยายตลาดโลก',outcome:'ผู้ประกอบการไทยเข้าถึงตลาด เงินทุนร่วมผลิต และพันธมิตรสากล สร้างรายได้ส่งออกผลงานสร้างสรรค์ที่ใช้ AI ยกระดับขีดความสามารถบนเวทีโลก',lead:'CEA และ depa ร่วมกับ กต./ทูตพาณิชย์ (DITP) และ ดศช.',ana:'IMDA Media Talent Progression & Overseas Development Grant; KOCCA global IP incubation; KOCCA–Pinkfong K-content AI export (7.3 ล้านดอลลาร์)'},
+{p:2,code:'P2-6',type:'Quick Win',th:'เวทีประจำปีและประชาคม AI สร้างสรรค์แห่งชาติ',en:'National AI Creative Forum & Community of Practice',one:'จัดเวทีประชุม/แสดงผลงานประจำปีและสร้างประชาคมนักปฏิบัติ เป็นจุดนัดพบของทุกภาคส่วนและจุดเริ่มต้นความร่วมมือใหม่',output:'งานเวทีประจำปี (forum/showcase) รวมสถาบันการศึกษา เอกชน ผู้สร้างสรรค์ และเครือข่ายสากล พร้อมเวทีจับคู่ธุรกิจ/วิจัย และประชาคมออนไลน์ต่อเนื่อง',outcome:'ทุกภาคส่วนมีจุดนัดพบสม่ำเสมอ เกิดความร่วมมือและดีลใหม่ ผู้สร้างสรรค์รุ่นใหม่และรายภูมิภาคได้เปิดตัวผลงานสู่ตลาด/นักลงทุน',lead:'CEA และ depa ร่วมกับ ดศช. และมหาวิทยาลัยเครือข่าย',ana:'Content Insight Korea / Global Content Insight (KOCCA); depa May Series; VivaTech'},
+
+{p:3,code:'P3-1',type:'Quick Win',th:'ชุดข้อมูลกลางอุตสาหกรรมสร้างสรรค์ไทย (Thai Creative Open Dataset Catalog)',en:'Thai Creative Open Dataset Catalog',one:'รวบรวมและจัดระเบียบชุดข้อมูลภาษา/ภาพ/เสียง/ลายไทยที่มีอยู่แล้วในหน่วยงานรัฐให้เป็นแคตตาล็อกกลางพร้อมใช้ ภายในปีแรก',output:'แคตตาล็อกข้อมูลกลางที่มีมาตรฐาน metadata และเงื่อนไขสิทธิการใช้ชัดเจน ครอบคลุมสาขาที่ภาคเอกชนต้องการจริง (ภาษาไทย/ถิ่น เสียงพากย์ ลายผ้า ภาพมรดกวัฒนธรรม)',outcome:'นักพัฒนา สตูดิโอ และ SME เข้าถึงข้อมูลตั้งต้นได้ทันทีโดยไม่ต้องลงทุนเก็บซ้ำ ลดต้นทุนเริ่มต้นและความเหลื่อมล้ำการเข้าถึงข้อมูลระหว่างรายใหญ่-เล็ก',lead:'NECTEC/สวทช. (เทคนิค), depa, CEA, สดช. ร่วมกับหอจดหมายเหตุ/หอภาพยนตร์/กรมศิลปากร',ana:'NECTEC Open Data Portal + LST20 Corpus; NSF NAIRR dataset integration (สหรัฐ); AI4Culture (อียู)'},
+{p:3,code:'P3-2',type:'Foundation',th:'คลังข้อมูลภาษาและเสียงไทยเพื่ออุตสาหกรรมสร้างสรรค์',en:'Thai Language & Voice Corpus for Creative AI',one:'สร้างคลังข้อมูลภาษาไทย ภาษาถิ่น และเสียงที่ได้รับความยินยอมถูกต้อง สำหรับฝึก AI ด้านบันเทิง พากย์ ซับไตเติล และคอนเทนต์',output:'คลังคอร์ปัสภาษาไทย/ถิ่น (อีสาน เหนือ ใต้) และเสียงพูด-อารมณ์ ที่มีคุณภาพการบันทึกและการกำกับข้อมูล (annotation) พร้อมสัญญาความยินยอมและสิทธิการใช้ชัดเจน',outcome:'ผู้ผลิตคอนเทนต์ สตูดิโอพากย์ แพลตฟอร์ม OTT และนักพัฒนาไทยสร้างเครื่องมือพากย์/ซับ/ผู้ช่วยภาษาไทยคุณภาพสูงได้ ลดการพึ่งโมเดลต่างชาติ สร้างงานให้ผู้ให้เสียง/นักภาษาศาสตร์',lead:'NECTEC/สวทช. (หลัก), สถาบันการศึกษาด้านภาษาศาสตร์, depa, CEA',ana:'LST20 Corpus, PyThaiNLP, THAI-SER, Isan speech corpus (ไทย); Korean national speech/NLP corpora'},
+{p:3,code:'P3-3',type:'Foundation',th:'กลไกสิทธิและการอนุญาตใช้ข้อมูลสร้างสรรค์เพื่อฝึก AI อย่างเป็นธรรม',en:'Fair Creative Data Licensing & Consent Framework',one:'วางมาตรฐานสัญญา การให้ความยินยอมแบบ opt-in และกลไกค่าตอบแทน เมื่อนำผลงานสร้างสรรค์ไทยไปฝึก AI',output:'ชุดสัญญามาตรฐาน เครื่องหมายสิทธิที่อ่านได้ด้วยเครื่อง (machine-readable rights) และแนวทางค่าตอบแทนเป็นธรรม ออกแบบร่วมกับสมาคมวิชาชีพและผู้พัฒนา AI',outcome:'ครีเอเตอร์ ศิลปิน และผู้ถือลิขสิทธิ์ไทยได้รับการคุ้มครองและค่าตอบแทนเมื่อผลงานถูกใช้ฝึก AI นักพัฒนาได้ข้อมูลที่ใช้ได้ถูกกฎหมาย ลดข้อพิพาท',lead:'กรมทรัพย์สินทางปัญญา, CEA, สดช., สมาคมวิชาชีพสร้างสรรค์',ana:'EU collective licensing + machine-readable opt-out (Copyright Directive 2019/790, EU AI Act 2026); Content ARCs'},
+{p:3,code:'P3-4',type:'Quick Win',th:'คูปองพลังประมวลผลและทรัพยากร AI สำหรับผู้ประกอบการสร้างสรรค์',en:'Creative AI Compute & Resource Voucher Scheme',one:'ให้คูปองเข้าถึง GPU/คลาวด์และเครื่องมือ AI บนโครงสร้างพื้นฐานรัฐ (GDCC/LANTA) แก่ SME และสตาร์ทอัพสร้างสรรค์',output:'ระบบคูปองและแพลตฟอร์มจับคู่อุปสงค์-อุปทาน ที่ให้สิทธิเข้าถึงพลังประมวลผลและเครื่องมือ AI ตามความต้องการจริงของโครงการ พร้อมที่ปรึกษาช่วยพัฒนา MVP',outcome:'SME สตาร์ทอัพ และครีเอเตอร์รายย่อยในภูมิภาคทดลองและผลิตงาน AI ได้โดยไม่ต้องลงทุนฮาร์ดแวร์ราคาสูง ลดความเหลื่อมล้ำและเร่งการสร้างรายได้จริง',lead:'depa (คูปอง), สวทช. (LANTA/HPC), สดช. (GDCC), CEA',ana:'Korea AI Voucher Programme (NIPA); Korea SME GPU program; Singapore Enterprise Compute Initiative (150 ลบ. SGD)'},
+{p:3,code:'P3-5',type:'Flagship',th:'แพลตฟอร์มกลางข้อมูลและเครื่องมือ AI ด้านเศรษฐกิจสร้างสรรค์แห่งชาติ',en:'National Creative AI Data & Tools Platform',one:'แพลตฟอร์มเรือธงรวมชุดข้อมูล เครื่องมือ AI พร้อมใช้ พลังประมวลผล และระบบสิทธิ ให้บริการครบวงจรแก่ภาคสร้างสรรค์ไทย',output:'แพลตฟอร์มกลางบูรณาการแคตตาล็อกข้อมูล คอร์ปัสภาษา/เสียง เครื่องมือ AI สำเร็จรูป (แปลภาษา พากย์ สร้างภาพลายไทย คำบรรยาย) การเข้าถึงคลาวด์ และระบบจัดการสิทธิ-ค่าตอบแทน บนโครงสร้างพื้นฐานรัฐ',outcome:'ยกระดับขีดความสามารถอุตสาหกรรมสร้างสรรค์ไทยทั้งระบบให้แข่งขันสากล ผู้ประกอบการรายย่อยถึงสตูดิโอใหญ่เข้าถึงทรัพยากร AI จากจุดเดียว วางฐานข้อมูลคงทนข้ามรัฐบาล',lead:'ดศช./สดช. (กำกับ), depa + NECTEC/สวทช. (พัฒนา), CEA (เนื้อหา)',ana:'AI4Culture data space (อียู); National AI Service Platform ตามยุทธศาสตร์ AI ไทย + GDCC/LANTA; NAIRR Pilot (สหรัฐ)'},
+
+{p:4,code:'P4-1',type:'Quick Win',th:'เวทีประลองกรณีใช้งาน AI เพื่ออุตสาหกรรมสร้างสรรค์',en:'Creative AI Use-Case Challenge',one:'เวทีแข่งขัน/บ่มเพาะระยะสั้น 3–4 เดือน ให้ผู้ประกอบการนำ AI ไปแก้โจทย์ธุรกิจจริงและจัดแสดงผลงานต้นแบบ',output:'ชุดกรณีใช้งานต้นแบบ (use-case prototypes) ที่ผ่านการคัดเลือกและจัดแสดง ครอบคลุมภาพยนตร์/แอนิเมชัน เกม คอนเทนต์ ออกแบบ หัตถกรรม พร้อมรายงานบทเรียนและ playbook',outcome:'ผู้ประกอบการและ SME เห็นผลลัพธ์ AI ที่จับต้องได้ภายในปีแรก เกิดความเชื่อมั่นในการลงทุน ลดความเหลื่อมล้ำ และสร้างกระแสตื่นตัวให้ศูนย์ตั้งแต่ปีแรก',lead:'ศูนย์ฯ COE ร่วมกับ depa และ CEA; ประสานผู้ให้บริการ AI',ana:'depa–Alibaba Cloud "Eye for Thailand"; IMDA & Enterprise Singapore GenAI Sandbox'},
+{p:4,code:'P4-2',type:'Foundation',th:'แซนด์บ็อกซ์ทดสอบ AI ภาคสร้างสรรค์ และแนวปฏิบัติที่เชื่อถือได้',en:'Creative AI Regulatory & Trusted-Use Sandbox',one:'พื้นที่ทดสอบควบคุมสำหรับนำ AI มาใช้ในงานสร้างสรรค์ พร้อมแนวปฏิบัติด้านลิขสิทธิ์ การเปิดเผยการใช้ AI และความน่าเชื่อถือของผลงาน',output:'กรอบแนวปฏิบัติและชุดเงื่อนไขการทดสอบ (ความโปร่งใส การกำกับข้อมูล การระบุที่มาผลงาน) ที่ทดสอบกับกรณีจริง พร้อมข้อเสนอเชิงนโยบายต่อหน่วยงานกำกับ',outcome:'ผู้สร้างสรรค์และผู้ลงทุนมีความชัดเจนเรื่องกติกาการใช้ AI ลดความเสี่ยงลิขสิทธิ์/ข้อพิพาท ทำให้เอกชนกล้านำ AI ไปใช้เชิงพาณิชย์ ไทยมีฐานกติกาคงทนข้ามรัฐบาล',lead:'ดศช./ศูนย์ฯ ร่วมกับ ETDA, กรมทรัพย์สินทางปัญญา และ CEA',ana:'UK AI Growth Lab / DSIT sandbox (2025); Singapore AI Verify & Global AI Assurance Sandbox; UK DCMS copyright-and-AI consultation'},
+{p:4,code:'P4-3',type:'Flagship',th:'สตูดิโอผลิตคอนเทนต์อัจฉริยะแห่งชาติ (National Creative AI Production Studio & IP Pipeline)',en:'National Creative AI Production Studio & IP Pipeline',one:'สตูดิโอกลางและสายการผลิตคอนเทนต์ด้วย AI (virtual production, แอนิเมชัน, IP ต่อยอด) เปิดให้ผู้ประกอบการเข้าถึงและผลิตผลงานสู่ตลาดสากล',output:'ผลงาน/IP ต้นแบบเชิงพาณิชย์ที่ผลิตผ่านสายการผลิต AI ของศูนย์ พร้อมโครงสร้างสตูดิโอกลางและ pipeline ที่ผู้ประกอบการใช้ซ้ำได้',outcome:'ยกระดับขีดความสามารถการผลิตคอนเทนต์ไทยสู่ตลาดโลก เพิ่มรายได้และการจ้างงานในห่วงโซ่อุตสาหกรรม วางไทยเป็นศูนย์กลางการผลิตคอนเทนต์ของภูมิภาค',lead:'ศูนย์ฯ ร่วมกับ CEA, depa และพันธมิตรสตูดิโอ/แพลตฟอร์มเอกชน; เชื่อม BICM',ana:'KOCCA "AI Content Production Support" (1.98 หมื่นล้านวอน 2026) + Pinkfong K-Content AI (~7.3 ล้านดอลลาร์); CEA Content Lab / BICM 2026'},
+{p:4,code:'P4-4',type:'Foundation',th:'คลังกรณีใช้งานและธนาคารข้อมูลสร้างสรรค์เพื่อการต่อยอด AI',en:'Creative Use-Case Repository & Sectoral Data Bank',one:'คลังกลางรวบรวมกรณีใช้งาน AI ที่สำเร็จ พร้อมชุดข้อมูลและทรัพยากรร่วมสำหรับฝึก/ทดสอบโมเดลในบริบทสร้างสรรค์ไทย',output:'คลังกรณีใช้งานและชุดข้อมูล/ทรัพยากรร่วมที่เปิดให้ผู้ประกอบการเข้าถึง คัดเลือกตามความต้องการจริง พร้อมมาตรฐานการจัดทำที่มาข้อมูลและการอนุญาตใช้',outcome:'ลดต้นทุนและเวลาเริ่มต้นของ SME/สตาร์ทอัพในการนำ AI ไปใช้ กรณีสำเร็จขยายผลและทำซ้ำได้ทั่วประเทศ เป็นโครงสร้างความรู้คงทนของศูนย์',lead:'ศูนย์ฯ ร่วมกับ depa, สถาบันข้อมูลขนาดใหญ่ (BDI) และ CEA',ana:'depa Digital Service/e-learning + Alibaba Cloud; KOCCA reusable IP pipelines; data commons ของ AI Verify Foundation (สิงคโปร์)'},
+{p:4,code:'P4-5',type:'Quick Win',th:'นำร่อง AI ยกระดับผู้ประกอบการสร้างสรรค์ฐานราก',en:'Grassroots Creative AI Adoption Pilot',one:'นำร่องนำ AI ช่วยออกแบบแบรนด์ เล่าเรื่อง และทำการตลาดให้วิสาหกิจชุมชน/ผู้ประกอบการสร้างสรรค์ในภูมิภาค',output:'ชุดกรณีนำร่องระดับชุมชน/ภูมิภาคที่ใช้ AI ยกระดับแบรนด์และการตลาดผลิตภัณฑ์สร้างสรรค์ท้องถิ่น พร้อมแนวทางขยายผล',outcome:'วิสาหกิจชุมชนและผู้ประกอบการฐานรากเข้าถึง AI ได้จริง สร้างรายได้และมูลค่าเพิ่มให้สินค้าสร้างสรรค์ท้องถิ่น ลดความเหลื่อมล้ำดิจิทัลเมือง-ภูมิภาค',lead:'ศูนย์ฯ ร่วมกับ depa (d-transform/d-voucher) และ CEA; ประสานเครือข่าย OTOP/วิสาหกิจชุมชน',ana:'depa "One Tambon One Digital (OTOD)" + d-transform/d-voucher; OTOP digital marketplace; OTOP branding'},
+{p:4,code:'P4-6',type:'Flagship',th:'เร่งขยายผลกรณีใช้งานสู่เชิงพาณิชย์และตลาดสากล',en:'Creative AI Scale-Up & Go-to-Market Accelerator',one:'กลไกเร่งการขยายผลกรณีใช้งานที่พิสูจน์แล้วให้เข้าสู่ตลาดและการลงทุนเชิงพาณิชย์ ทั้งในและต่างประเทศ',output:'ชุดกรณีใช้งานที่ผ่านการเร่งขยายผลและจับคู่กับผู้ลงทุน/ผู้ซื้อ คัดตามความต้องการจริงของตลาด พร้อมเวทีจับคู่ธุรกิจและกลไกร่วมลงทุน',outcome:'กรณีใช้งาน AI ภาคสร้างสรรค์ของไทยแปลงเป็นรายได้และการลงทุนจริง สร้างผู้ประกอบการที่เติบโตได้ระดับสากล เพิ่มขีดความสามารถในการแข่งขันของประเทศ',lead:'ศูนย์ฯ ร่วมกับ depa, CEA และ DITP; เชื่อม BICM / Thailand Content Market',ana:'KOCCA AI Content Production Support (entry/leading/cooperative สู่ตลาดโลก); CEA Content Project Market (จับคู่ 70+ ราย) + BICM2026'},
+
+{p:5,code:'P5-1',type:'Quick Win',th:'คู่มือและบริการช่วยจดแจ้งลิขสิทธิ์ผลงานที่สร้างสรรค์ร่วมกับ AI',en:'Human-in-the-Loop Copyright Registration Toolkit',one:'ชุดคู่มือ แบบฟอร์ม และคลินิกให้คำปรึกษา ช่วยครีเอเตอร์บันทึก "ร่องรอยการสร้างสรรค์ของมนุษย์" เพื่อยื่นจดแจ้งลิขสิทธิ์งานที่ใช้ AI ตามแนวทางกรมทรัพย์สินทางปัญญา',output:'playbook + แบบฟอร์มประกาศการมีส่วนร่วมของมนุษย์ (human-authorship declaration) + เทมเพลตบันทึก workflow (prompt log, การคัดเลือก/แก้ไข) + คลินิกให้คำปรึกษาเคลื่อนที่ในคลัสเตอร์สร้างสรรค์',outcome:'ครีเอเตอร์ SME สตูดิโอ และฟรีแลนซ์ยืนยันและคุ้มครองสิทธิ์ในผลงานที่ใช้ AI ได้จริง ลดความเสี่ยงถูกปฏิเสธการจดแจ้ง เพิ่มความสามารถสร้างรายได้/ขายสิทธิ์เชิงพาณิชย์',lead:'กรมทรัพย์สินทางปัญญา (DIP, หลัก) ร่วมกับ CEA และสมาคมวิชาชีพสร้างสรรค์',ana:'U.S. Copyright Office, Copyright & AI Part 2 (2025) หลัก human authorship; แนวทาง DIP; โครงการ Copyright 101 ของ DIP × Google (2026)'},
+{p:5,code:'P5-2',type:'Foundation',th:'จรรยาบรรณวิชาชีพและระบบรับรองสมรรถนะการใช้ AI อย่างมีความรับผิดชอบ',en:'Code of Conduct & Responsible-AI Competency Certification',one:'วางจรรยาบรรณวิชาชีพการใช้ AI ในงานสร้างสรรค์ (การเปิดเผยการใช้ AI การเคารพสิทธิ์ต้นทาง) พร้อมกรอบสมรรถนะและตรารับรองบุคคลที่ภาคเอกชนยอมรับ',output:'ประมวลจรรยาบรรณวิชาชีพ + กรอบสมรรถนะแบ่งระดับ + หลักสูตรและการสอบรับรองบุคคล (responsible-AI creator credential) ออกแบบร่วมกับสมาคมวิชาชีพและสตูดิโอชั้นนำ',outcome:'บุคลากรสร้างสรรค์มีเครื่องยืนยันทักษะและความน่าเชื่อถือในการใช้ AI อย่างมีจริยธรรม เพิ่มโอกาสจ้างงาน/ค่าตอบแทน ยกระดับความเชื่อมั่นของผู้ว่าจ้างทั้งในและต่างประเทศ',lead:'CEA ร่วมกับ depa, ETDA (AI Governance Center), สถาบันคุณวุฒิวิชาชีพ (TPQI) และสมาคมวิชาชีพ',ana:'UNESCO AI Competency Framework; Alan Turing Institute AI Skills; Google AI Professional Certificate; ETDA Generative AI Guideline'},
+{p:5,code:'P5-3',type:'Foundation',th:'นำร่องมาตรฐานการจัดการ AI (ISO/IEC 42001) และตรารับรอง AI ที่ไว้วางใจได้',en:'Trusted-AI Management Standard (ISO/IEC 42001) Pilot & Assurance Mark',one:'สนับสนุนให้ SME สร้างสรรค์/ดิจิทัลปรับใช้ระบบบริหารจัดการ AI ตาม ISO/IEC 42001 และพัฒนาตรารับรอง "Trusted AI" ระดับชาติที่เชื่อมมาตรฐานสากล',output:'แนวปฏิบัติปรับใช้ ISO/IEC 42001 ฉบับย่อสำหรับ SME + โครงการนำร่อง + กลไกตรารับรอง Trusted AI ระดับชาติและการเตรียม body รับรองตาม ISO/IEC 42006',outcome:'ผู้ประกอบการไทยมีหลักฐานธรรมาภิบาล AI ที่เป็นที่ยอมรับสากล เพิ่มขีดความสามารถแข่งขันและการเข้าถึงห่วงโซ่อุปทานต่างประเทศ ลดต้นทุนการพิสูจน์ความน่าเชื่อถือสำหรับ SME',lead:'สมอ. (TISI) และ depa ร่วมกับ ETDA และสภาอุตสาหกรรม/หอการค้า',ana:'ISO/IEC 42001:2023 (AIMS, certifiable ฉบับแรก) + ISO/IEC 42006:2025; โมเดล BSI (UKAS) และ ANAB (สหรัฐ)'},
+{p:5,code:'P5-4',type:'Flagship',th:'ระบบแสดงแหล่งที่มาและสถานะ AI ของผลงานดิจิทัลเพื่อการส่งออกคอนเทนต์',en:'Content Provenance & AI-Disclosure Infrastructure for Export',one:'วางโครงสร้างพื้นฐานแสดงแหล่งที่มา/ร่องรอยการแก้ไข/สถานะการใช้ AI ของผลงานดิจิทัลตามมาตรฐานสากล (Content Credentials/C2PA) เพื่อให้คอนเทนต์ไทยผ่านเกณฑ์ความโปร่งใสของตลาดส่งออก',output:'เครื่องมือและบริการฝัง/ตรวจสอบ Content Credentials (provenance metadata) สำหรับครีเอเตอร์/สำนักผลิต + แนวทางการเปิดเผยการใช้ AI สอดคล้องข้อกำหนดสากล + จุดบริการตรวจสอบความถูกต้องของสื่อ',outcome:'ผู้ผลิตคอนเทนต์ ภาพยนตร์ โฆษณา เกม สื่อดิจิทัลไทยส่งออกได้โดยไม่ติดข้อกำหนดความโปร่งใส/ติดฉลาก AI ของตลาด ตปท. (เช่น EU) รักษามูลค่าส่งออกและสร้างความไว้วางใจต่อแบรนด์คอนเทนต์ไทย',lead:'depa (หลัก) ร่วมกับ ETDA, CEA, กรมทรัพย์สินทางปัญญา และสมาคมผู้ผลิตสื่อ/ภาพยนตร์',ana:'C2PA/Content Credentials (สมาชิก 6,000+ Adobe, Microsoft, Google, OpenAI, BBC, Sony); IPTC 2025.1; EU AI Act Article 50 (มีผล ส.ค. 2026); Google SynthID'},
+{p:5,code:'P5-5',type:'Flagship',th:'คลังสิทธิ์และกลไกอนุญาตใช้ข้อมูลสร้างสรรค์ไทยสำหรับการฝึก AI อย่างเป็นธรรม',en:'National Creative Data Rights Registry & Fair Licensing for AI Training',one:'สร้างคลังทะเบียนสิทธิ์และกลไกอนุญาตใช้งานสร้างสรรค์ไทย (เพลง ภาพ วรรณกรรม ลายผ้า ศิลปวัฒนธรรม) สำหรับฝึก AI พร้อมระบบ opt-in/opt-out และการแบ่งปันผลตอบแทน',output:'ทะเบียนสิทธิ์กลาง (rights registry) + กลไกอนุญาตแบบรวมหมู่ (collective licensing) + opt-in/opt-out + ระบบติดตามการใช้และจัดสรรผลตอบแทน ครอบคลุมประเภทงานและภูมิภาคตามความต้องการใช้จริง',outcome:'ศิลปิน ช่างฝีมือ ชุมชนวัฒนธรรม และเจ้าของสิทธิ์ฐานรากได้ค่าตอบแทนเมื่อผลงานถูกใช้ฝึก AI สร้างรายได้ใหม่สู่เศรษฐกิจฐานราก ผู้พัฒนา AI ไทยเข้าถึงข้อมูลถูกกฎหมายและมีคุณภาพ',lead:'กรมทรัพย์สินทางปัญญา (DIP) ร่วมกับ CEA, depa, องค์กรจัดเก็บค่าลิขสิทธิ์ และกระทรวงวัฒนธรรม',ana:'UK collective licensing CLA/ALCS/PLS (Q3 2025); EU มอบ EUIPO เป็น trusted intermediary จัดการ opt-out; DECORAIT registry; U.S. Copyright Office Part 3 (2025)'},
+{p:5,code:'P5-6',type:'Foundation',th:'ศูนย์ธรรมาภิบาลและกลไกระงับข้อพิพาท AI ในงานสร้างสรรค์',en:'Creative-AI Governance & Dispute Resolution Center',one:'จัดตั้งกลไกกลางให้คำปรึกษาด้านธรรมาภิบาล AI การไกล่เกลี่ยข้อพิพาทเรื่องสิทธิ์/การละเมิดจาก AI และการรับเรื่องร้องเรียนการใช้ AI ที่ไม่เป็นธรรม',output:'แนวปฏิบัติธรรมาภิบาล AI เฉพาะภาคสร้างสรรค์ (ต่อยอด AI Governance Guideline) + ช่องทางให้คำปรึกษา/รับเรื่องร้องเรียน + กระบวนการไกล่เกลี่ยทางเลือก (mediation) รวดเร็วต้นทุนต่ำสำหรับรายย่อย',outcome:'ครีเอเตอร์และผู้ประกอบการรายย่อยเข้าถึงการระงับข้อพิพาท AI ได้โดยไม่ต้องแบกต้นทุนฟ้องร้อง ลดความเหลื่อมล้ำในการบังคับใช้สิทธิ์ สร้างความเชื่อมั่นต่อระบบนิเวศ',lead:'ETDA (AI Governance Center) ร่วมกับกรมทรัพย์สินทางปัญญา CEA และสถาบันอนุญาโตตุลาการ/ศูนย์ไกล่เกลี่ย',ana:'ETDA AI Governance Center (ยกระดับเป็น UNESCO-affiliated practice center); ETDA Generative AI Guideline; คณะทำงาน AI เชิงสร้างสรรค์ของ DIP'},
+
+{p:6,code:'P6-1',type:'Quick Win',th:'เสริมศักยภาพผู้ประกอบการและผู้สร้างสรรค์ด้วย AI ระดับพื้นฐาน',en:'AI-Ready Creators & Entrepreneurs Programme',one:'หลักสูตรอบรม AI พื้นฐานเชิงปฏิบัติเป็นภาษาไทย เน้น Generative AI สำหรับงานเนื้อหา การตลาด และการบริหาร เปิดให้เข้าถึงทั่วประเทศภายในปีแรก',output:'ชุดหลักสูตรพื้นฐานภาษาไทยพร้อมกรณีศึกษาเฉพาะอุตสาหกรรม (ภาพยนตร์/ซีรีส์ แอนิเมชัน ดนตรี เกม ออกแบบ โฆษณา) ออกแบบจากการสำรวจความต้องการทักษะร่วมกับสมาคมอุตสาหกรรม',outcome:'ผู้ประกอบการรายย่อย ฟรีแลนซ์ และผู้สร้างสรรค์ในภูมิภาคใช้ AI ลดต้นทุน-เพิ่มผลผลิตได้ทันที ลดความเหลื่อมล้ำเมืองหลัก-ต่างจังหวัด เพิ่มรายได้ระยะสั้น',lead:'depa (หลัก) ร่วมกับ CEA, สถาบันคุณวุฒิวิชาชีพ (สคช.), สมาคมอุตสาหกรรมสร้างสรรค์',ana:'depa/NECTEC แผนพัฒนากำลังคน AI; ก.แรงงาน × Microsoft (280+ หลักสูตร AI ไทย, อบรม 100,000+); Google AI Professional Certificate'},
+{p:6,code:'P6-2',type:'Foundation',th:'จัดทำกรอบสมรรถนะและระบบใบรับรองทักษะ AI สำหรับอุตสาหกรรมสร้างสรรค์',en:'AI Competency Framework & Micro-Credential System',one:'วางมาตรฐานสมรรถนะและระบบใบรับรอง/ไมโครเครเดนเชียลด้านการประยุกต์ใช้ AI ในงานสร้างสรรค์ ที่ภาคเอกชนยอมรับและใช้คัดเลือก-จ้างงานได้จริง',output:'กรอบสมรรถนะทักษะ AI สำหรับสายอาชีพสร้างสรรค์ พร้อมระบบใบรับรองที่เชื่อมกับกรอบคุณวุฒิวิชาชีพ ระดับและสาขาออกแบบให้สอดคล้องกับความต้องการจ้างงานจริง เปิดให้สถาบันฝึกอบรมอ้างอิงร่วมได้',outcome:'เกิด "ภาษากลาง" ด้านทักษะ AI ที่นายจ้างเชื่อถือ แรงงานมีเส้นทางอาชีพชัดเจน ลดช่องว่างหลักสูตร-ตลาด เป็นโครงสร้างพื้นฐานคงทนข้ามรัฐบาลให้ทุกโครงการอ้างอิง',lead:'สถาบันคุณวุฒิวิชาชีพ (สคช.) ร่วมกับ depa, CEA, ดศช., สภาอุตสาหกรรม/สมาคมวิชาชีพ',ana:'Singapore TeSA Skills Framework; NVIDIA Generative AI Certification; GSDC GenAI Professional Certification; กรอบคุณวุฒิวิชาชีพ สคช.'},
+{p:6,code:'P6-3',type:'Foundation',th:'พัฒนาวิทยากรและครูพี่เลี้ยงด้าน AI สำหรับเศรษฐกิจสร้างสรรค์ (Train-the-Trainer)',en:'Creative AI Train-the-Trainer & Mentor Network',one:'สร้างเครือข่ายวิทยากรและครูพี่เลี้ยงที่ได้รับการรับรอง เพื่อขยายการอบรม AI ลงสู่ภูมิภาคและฐานรากอย่างต่อเนื่องและมีคุณภาพสม่ำเสมอ',output:'เครือข่ายวิทยากร/ครูพี่เลี้ยงที่ผ่านการรับรอง กระจายตามภูมิภาคและสาขาอุตสาหกรรม พร้อมชุดสื่อการสอนมาตรฐาน จำนวนและพื้นที่ครอบคลุมกำหนดตามอุปสงค์การอบรมจริง',outcome:'ระบบนิเวศการเรียนรู้ AI ขยายตัวได้เองอย่างยั่งยืนโดยไม่พึ่งงบส่วนกลางตลอดเวลา ผู้สร้างสรรค์ต่างจังหวัดเข้าถึงผู้สอนคุณภาพใกล้บ้าน ลดความเหลื่อมล้ำเชิงพื้นที่',lead:'depa ร่วมกับ CEA (เครือข่ายเขตเศรษฐกิจสร้างสรรค์ 60 จังหวัด), อุดมศึกษาในภูมิภาค, สคช.',ana:'AI CERTs Certified Trainer (AICT); CEA เครือข่ายเขตเศรษฐกิจสร้างสรรค์; โมเดล TeSA TIP Alliance'},
+{p:6,code:'P6-4',type:'Flagship',th:'ฝึกปฏิบัติงานจริงด้าน AI สำหรับบุคลากรสร้างสรรค์ร่วมกับภาคเอกชน',en:'Creative AI Apprenticeship Programme',one:'โครงการฝึกปฏิบัติงานจริงเชิงลึก (apprenticeship) ระยะ 6–9 เดือน จับคู่บุคลากรสร้างสรรค์กับสตูดิโอ/บริษัทเอกชน เพื่อผลิตผลงาน AI ใช้งานได้จริงและจ้างงานต่อ',output:'โครงการฝึกปฏิบัติแบบมีพี่เลี้ยงในสถานประกอบการจริง ผลิตผลงาน/โครงการ AI ที่นำไปใช้เชิงพาณิชย์ได้ จำนวนตำแหน่งและสาขาเปิดตามความต้องการรับคนของสตูดิโอ/บริษัทที่เข้าร่วม',outcome:'เกิดบุคลากร AI สายสร้างสรรค์ที่พร้อมทำงานทันที อัตราการได้งาน/ต่อยอดอาชีพสูง ยกระดับขีดความสามารถการแข่งขันของอุตสาหกรรม ดึงการลงทุนจากเอกชนเข้าสู่การพัฒนาคน',lead:'depa ร่วมกับ CEA (Content Lab), ดศช., สมาคมผู้ผลิตภาพยนตร์/แอนิเมชัน/เกม และบริษัทเอกชนเจ้าภาพ',ana:'AI Singapore AI Apprenticeship Programme (AIAP, 6–9 เดือน, วางคนสู่ตำแหน่ง AI >90%); Singapore TeSA Company-Led Training; CEA Content Lab'},
+{p:6,code:'P6-5',type:'Flagship',th:'แพลตฟอร์มการเรียนรู้และฐานข้อมูลทักษะ AI สร้างสรรค์แห่งชาติ',en:'National Creative AI Learning Platform & Skills Intelligence Hub',one:'แพลตฟอร์มกลางการเรียนรู้ AI สำหรับเศรษฐกิจสร้างสรรค์ พร้อมระบบวิเคราะห์อุปสงค์ทักษะ (skills intelligence) เพื่อชี้ทิศหลักสูตรให้ตรงตลาดต่อเนื่อง',output:'แพลตฟอร์มเรียนรู้ออนไลน์รวมหลักสูตร AI สร้างสรรค์ภาษาไทย เชื่อมระบบใบรับรอง พร้อมแดชบอร์ดวิเคราะห์ช่องว่างทักษะจากข้อมูลความต้องการจ้างงานจริง',outcome:'ผู้สร้างสรรค์ทั่วประเทศเข้าถึงการเรียนรู้ AI ได้ทุกที่ทุกเวลาแบบไม่มีกำแพงค่าใช้จ่าย ผู้กำหนดนโยบายเห็นช่องว่างทักษะแบบเรียลไทม์เพื่อจัดงบตรงจุด ลดความเหลื่อมล้ำ',lead:'depa (แพลตฟอร์ม) ร่วมกับ NECTEC/สวทช. (ข้อมูล+AI), CEA, ดศช.',ana:'Singapore National AI Impact Programme (เป้า 100,000 คนภายใน 2029) + TeSA; THAI Academy/Microsoft (1.5 ล้านคน); Grow with Google; YouTube × BBC × NFTS'},
+
+{p:7,code:'P7-1',type:'Quick Win',th:'แพลตฟอร์มกลางจับคู่ธุรกิจ AI x อุตสาหกรรมสร้างสรรค์ไทย',en:'Thai Creative AI Marketplace & Business Matching Platform',one:'ตลาดกลางดิจิทัลรวมผลงานและเครื่องมือ AI ด้านสร้างสรรค์ของผู้ประกอบการไทย พร้อมระบบจับคู่ผู้ซื้อในและต่างประเทศ',output:'แพลตฟอร์มออนไลน์พร้อมโปรไฟล์ผลงาน/บริการ AI ที่ผ่านการคัดกรอง ระบบจับคู่ธุรกิจ และโชว์เคสผลงานภาษาอังกฤษ จำนวน/ประเภทผู้ประกอบการสอดคล้องกับความต้องการจริงของผู้ซื้อ',outcome:'SME สตูดิโอ และฟรีแลนซ์ที่ใช้ AI เข้าถึงช่องทางขายและคู่ค้าใหม่โดยไม่ต้องลงทุนการตลาดเอง เกิดดีลและรายได้ใหม่ ลดความเหลื่อมล้ำการเข้าถึงตลาดรายใหญ่-เล็ก',lead:'depa (แพลตฟอร์ม) ร่วมกับ DITP และ CEA',ana:'Thaitrade.com (B2B e-marketplace ของ DITP); welcon Content Export Marketing Platform (KOCCA); MOU DITP–Amazon Global Selling/Shopee'},
+{p:7,code:'P7-2',type:'Quick Win',th:'เตรียมความพร้อมและรับรองมาตรฐานผลงาน AI สร้างสรรค์เพื่อการส่งออก',en:'Export-Ready Creative AI Certification & Readiness Program',one:'หลักสูตรเร่งรัดและตรารับรองช่วยผู้ประกอบการเตรียมผลงาน AI สร้างสรรค์ให้ผ่านเกณฑ์ตลาดต่างประเทศ (ลิขสิทธิ์ ที่มาข้อมูล มาตรฐานเนื้อหา)',output:'โปรแกรมเตรียมความพร้อมส่งออกครอบคลุมการจัดการสิทธิ์ในผลงาน AI การเปิดเผยที่มาข้อมูลฝึก การปฏิบัติตามกฎหมายปลายทาง และตรา "Export-Ready" ที่ผู้ซื้อ ตปท. เชื่อถือ',outcome:'ผู้ประกอบการไทยลดความเสี่ยงด้านกฎหมาย/ลิขสิทธิ์เมื่อเข้าตลาด ตปท. ปิดดีลได้เร็วขึ้นเพราะผู้ซื้อมั่นใจในธรรมาภิบาลของผลงาน สร้างแบรนด์ "Creative AI by Thailand"',lead:'CEA ร่วมกับกรมทรัพย์สินทางปัญญา ETDA และ depa',ana:'เกณฑ์ consortia แบบ full-stack ของ American AI Exports Program; แนวทาง responsible-AI/provenance disclosure ของตลาด EU และสหรัฐ'},
+{p:7,code:'P7-3',type:'Foundation',th:'เครือข่ายผู้แทนการค้า AI สร้างสรรค์ไทยในต่างประเทศ',en:'Thai Creative AI Trade Representatives & Soft-Landing Network',one:'ติดตั้งจุดประสานงานเฉพาะด้าน AI สร้างสรรค์ในสำนักงานส่งเสริมการค้าในต่างประเทศ (สคต.) ที่มีอยู่ เป็นฐานช่วยผู้ประกอบการไทยลงตลาดต่างแดน',output:'เครือข่ายผู้แทน/จุดประสานในตลาดเป้าหมายสำคัญ (ญี่ปุ่น เกาหลี อาเซียน สหรัฐ ยุโรป) ให้บริการ market intelligence จับคู่คู่ค้า สนับสนุน soft-landing และพื้นที่ทำงานชั่วคราว',outcome:'ผู้ประกอบการ AI สร้างสรรค์ไทยมีฐานสนับสนุนจริงใน ตปท. ลดต้นทุนและความเสี่ยงในการบุกตลาด เพิ่มอัตราการอยู่รอดและสัดส่วนรายได้จากการส่งออก',lead:'DITP (ผ่านโครงข่าย สคต.) ร่วมกับ depa และ CEA',ana:'KOCCA Global Business Centers 8 แห่งใน 7 ประเทศ; โครงข่าย Thai Trade Centres 58 แห่งของ DITP; National AI Center (สหรัฐ)'},
+{p:7,code:'P7-4',type:'Flagship',th:'ศาลานิทรรศการเรือธง "Creative AI by Thailand" ในเวทีและงานแสดงระดับโลก',en:'Creative AI by Thailand Flagship Pavilion at Global Markets',one:'พาวิลเลียนและคณะผู้แทนการค้าเรือธงนำผลงาน AI สร้างสรรค์ไทยจัดแสดงและเจรจาธุรกิจในงานระดับโลกและเวทีในประเทศ',output:'ศาลานิทรรศการแบรนด์เดียวระดับประเทศที่เข้าร่วมงานแสดงสินค้า/เทศกาลคอนเทนต์และเทคโนโลยีชั้นนำทั้งในและต่างประเทศ พร้อมเซสชันเจรจาจับคู่ธุรกิจ',outcome:'เกิดดีลส่งออกและความร่วมมือข้ามชาติมูลค่าสูง ยกระดับการรับรู้แบรนด์ "Creative AI by Thailand" ในตลาดโลก ผู้ประกอบการไทยเข้าถึงผู้ซื้อนานาชาติที่ปกติเข้าถึงยาก',lead:'CEA และ DITP (เจ้าภาพร่วม) สนับสนุนโดย depa และคณะทำงาน COE',ana:'BIDC + STYLE Bangkok (DITP/CEA — BIDC 2024 จับคู่ 770 ครั้ง ~950 ลบ.); คณะผู้แทนการค้าสร้างสรรค์ UK ไป SXSW & Cannes Lions'},
+{p:7,code:'P7-5',type:'Foundation',th:'ระบบข้อมูลตลาดและพยากรณ์อุปสงค์อุตสาหกรรม AI สร้างสรรค์เพื่อการส่งออก',en:'Creative AI Export Market Intelligence Dashboard',one:'แดชบอร์ดข้อมูลกลางวิเคราะห์อุปสงค์ ราคา และโอกาสตลาดต่างประเทศสำหรับผลงานและเครื่องมือ AI สร้างสรรค์ของไทย',output:'ระบบข้อมูลกลางรวบรวมและวิเคราะห์แนวโน้มตลาด ความต้องการผู้ซื้อ คู่แข่ง และช่องทางในแต่ละประเทศเป้าหมาย เปิดให้ผู้ประกอบการและหน่วยงานใช้ตัดสินใจ',outcome:'ผู้ประกอบการไทยเลือกตลาดและออกแบบผลิตภัณฑ์บนข้อมูลจริงแทนการเดา ลดความสูญเปล่าในการบุกตลาดที่ไม่เหมาะ รัฐกำหนดนโยบายส่งเสริมการส่งออกบนหลักฐาน',lead:'depa (ระบบข้อมูล) ร่วมกับ DITP และ CEA',ana:'งานวิเคราะห์การค้าสร้างสรรค์ของ Creative Industries PEC (UK); market intelligence ของ KOCCA และ DITP'},
+{p:7,code:'P7-6',type:'Flagship',th:'เจรจาเปิดตลาดและสร้างการยอมรับมาตรฐานผลงาน AI สร้างสรรค์ข้ามพรมแดน',en:'Cross-Border Market Access & Mutual Recognition Initiative',one:'งานทูตเศรษฐกิจเชิงรุกผลักดันความตกลงยอมรับมาตรฐาน ลดอุปสรรค และเปิดตลาดผลงาน/บริการ AI สร้างสรรค์ไทยในตลาดยุทธศาสตร์',output:'กรอบความร่วมมือและ MOU กับประเทศ/แพลตฟอร์มเป้าหมาย ครอบคลุมการยอมรับตรารับรอง การคุ้มครองลิขสิทธิ์ข้ามแดน และช่องทางชำระเงิน/กระจายผลงาน',outcome:'ผลงานและบริการ AI สร้างสรรค์ไทยเข้าตลาด ตปท. คล่องขึ้นด้วยต้นทุนและอุปสรรคที่ลดลง ยกระดับขีดความสามารถแข่งขันของประเทศ สร้างรายได้ส่งออกระยะยาว',lead:'DITP และกระทรวงพาณิชย์ ร่วมกับ กต. กรมทรัพย์สินทางปัญญา และ ดศช.',ana:'American AI Exports Program (EO 14320) + National AI Center (สหรัฐ); MOU DITP–Amazon/Shopee เป็นต้นแบบช่องทางข้ามแดน'},
+
+{p:8,code:'P8-1',type:'Quick Win',th:'แพลตฟอร์มกลางบริหารทรัพยากร AI เพื่ออุตสาหกรรมสร้างสรรค์',en:'Creative AI Resource Gateway (One-Stop Resource Portal)',one:'ศูนย์รวมจุดเดียว (one-stop) ให้ผู้ประกอบการค้นหาและขอใช้ทรัพยากร AI ของรัฐที่มีอยู่แล้ว ทั้งคอมพิวต์ ชุดข้อมูล โมเดล ทุน และผู้เชี่ยวชาญ',output:'แพลตฟอร์มออนไลน์ที่รวบรวมและจัดหมวดทรัพยากร AI ภาครัฐ (ThaiSC/LANTA, ThaiLLM, กองทุน depa/DEF, ชุดข้อมูลเปิด, ผู้เชี่ยวชาญ) ในที่เดียว พร้อมระบบยื่นคำขอ/จับคู่ทรัพยากรรวดเร็ว',outcome:'ผู้ประกอบการ โดยเฉพาะ SME และรายย่อยในภูมิภาค ลดเวลาและต้นทุนเข้าถึงทรัพยากร AI ของรัฐจากหลายหน่วยงานเหลือจุดเดียว ลดความเหลื่อมล้ำการเข้าถึงรายใหญ่-เล็ก',lead:'CEA ร่วมกับ depa (หลัก), NSTDA/NECTEC (ThaiSC) และสำนักงาน AI แห่งชาติ',ana:'NAIRR Portal (สหรัฐ, NSF) รวมคอมพิวต์+ข้อมูล+โมเดล; depa Digital Service / SME Digital Coupon'},
+{p:8,code:'P8-2',type:'Quick Win',th:'คูปองทรัพยากรประมวลผล AI สำหรับผู้ประกอบการสร้างสรรค์',en:'Creative AI Compute & Cloud Credit Voucher Scheme',one:'คูปองสิทธิ์ใช้ทรัพยากรประมวลผล (GPU/คลาวด์) บนโครงสร้างพื้นฐานรัฐที่มีอยู่ (ThaiSC/LANTA) และคลาวด์พันธมิตร สำหรับงานสร้างสรรค์ด้วย AI',output:'ระบบคูปอง/เครดิตประมวลผลที่ผู้ประกอบการและสตูดิโอรายย่อยใช้ขอเวลา GPU บน ThaiSC/LANTA หรือคลาวด์พันธมิตรในอัตราอุดหนุน ปริมาณ/เงื่อนไขออกแบบตามภาระงานจริง',outcome:'สตูดิโอ ครีเอเตอร์ และ SME ที่ไม่มีทุนซื้อ GPU เอง ผลิตงานคุณภาพสูงด้วย AI ได้ ลดต้นทุนคงที่ เพิ่มขีดความสามารถแข่งขันกับผู้เล่นต่างชาติ กระจายโอกาสสู่ภูมิภาค',lead:'NSTDA/NECTEC (ThaiSC), depa (คูปอง/d-voucher), CEA (คัดกรองกลุ่มสร้างสรรค์)',ana:'ThaiSC/LANTA Service Node-Hours (เริ่ม 5,000 บาท); NAIRR cloud credits (Azure 20 ล้านดอลลาร์, NVIDIA); depa d-voucher; Canada AI Compute Access Fund'},
+{p:8,code:'P8-3',type:'Foundation',th:'กองทุนร่วมลงทุนเศรษฐกิจสร้างสรรค์ขับเคลื่อนด้วย AI',en:'Creative AI Co-Investment & Matching Fund',one:'กลไกการเงินแบบผสม (blended finance) ที่รัฐร่วมลงทุน/สมทบทุนกับเอกชนและกองทุนเอกชนในโครงการและสตาร์ทอัพสร้างสรรค์ที่ใช้ AI',output:'กองทุน/กลไกร่วมลงทุนที่รัฐสมทบเงินไปกับนักลงทุนเอกชนตามสัดส่วน พร้อมเกณฑ์คัดเลือกที่อิงความต้องการและศักยภาพเชิงพาณิชย์จริง รวมช่องทุนสำหรับรายเล็ก/ภูมิภาค',outcome:'สตาร์ทอัพและผู้ประกอบการสร้างสรรค์ด้าน AI เข้าถึงทุนขยายกิจการที่ตลาดเอกชนยังไม่กล้าลงเต็มที่ ดึงเงินลงทุนเอกชนเข้าภาคสร้างสรรค์ สร้างงานทักษะสูง ลดการพึ่งงบอุดหนุนรัฐล้วน',lead:'CEA และ depa ร่วมกับ NIA, ธนาคารรัฐ/บสย. และกองทุน DEF',ana:'Startup SG Equity (Enterprise Singapore/SEEDS Capital, co-invest 7:3 & 1:1); K-Content & Media Strategy Fund (เกาหลี, 6 แสนล้านวอน); depa d-transform Fund'},
+{p:8,code:'P8-4',type:'Foundation',th:'คลังข้อมูลและทรัสต์ข้อมูลวัฒนธรรมสร้างสรรค์แห่งชาติเพื่อพัฒนา AI',en:'National Creative & Cultural Data Trust for AI',one:'คลังข้อมูลกลางและกลไกทรัสต์ข้อมูลที่รวบรวมข้อมูลศิลปวัฒนธรรม/สร้างสรรค์ของไทยอย่างถูกลิขสิทธิ์ เพื่อเป็นวัตถุดิบฝึกและพัฒนา AI สร้างสรรค์ที่เข้าใจบริบทไทย',output:'คลังชุดข้อมูลสร้างสรรค์-วัฒนธรรมที่จัดเตรียม ทำความสะอาด ติดป้ายกำกับ และมีกลไกธรรมาภิบาล/แบ่งปันผลตอบแทนแก่เจ้าของผลงาน เชื่อมกับ National Data Bank ที่มีอยู่',outcome:'นักพัฒนา AI ไทย สตูดิโอ และครีเอเตอร์สร้างโมเดล/เครื่องมือที่เข้าใจภาษา ลวดลาย ดนตรี และมรดกวัฒนธรรมไทยได้ ศิลปิน/เจ้าของ IP ได้รับการคุ้มครองและส่วนแบ่งรายได้ รักษาอธิปไตยข้อมูลของชาติ',lead:'CEA และ BDI (สถาบันข้อมูลขนาดใหญ่) ร่วมกับ NECTEC, กรมทรัพย์สินทางปัญญา, หอสมุดแห่งชาติ/กระทรวงวัฒนธรรม',ana:'National Data Bank + ThaiLLM (NECTEC/BDI/DEF, 80 ลบ.); INDIAai dataset platform; แนวคิด data trust แบ่งปันผลตอบแทนแก่เจ้าของข้อมูล'},
+{p:8,code:'P8-5',type:'Flagship',th:'ศูนย์ทรัพยากร AI สร้างสรรค์ครบวงจรระดับภูมิภาค',en:'Regional Creative AI Resource & Production Hubs',one:'ศูนย์เรือธงระดับภูมิภาคที่รวมทรัพยากร AI ครบวงจร (คอมพิวต์ + ชุดข้อมูล + สตูดิโอผลิต + ที่ปรึกษา + ช่องทุน) ในจุดเดียว สำหรับผู้ประกอบการนอกกรุงเทพฯ',output:'เครือข่ายศูนย์ทรัพยากรในจังหวัดเศรษฐกิจสร้างสรรค์หลัก ให้บริการพื้นที่ผลิต อุปกรณ์ AI/เรนเดอร์ การเข้าถึงคอมพิวต์รัฐ ที่ปรึกษา และการจับคู่ทุน-ตลาด',outcome:'ครีเอเตอร์และ SME ในภูมิภาคเข้าถึงทรัพยากรระดับเดียวกับส่วนกลาง สร้างงาน-รายได้ในท้องถิ่น กระจายเศรษฐกิจสร้างสรรค์สู่ฐานราก ลดการกระจุกตัวในกรุงเทพฯ',lead:'CEA (หลัก) ร่วมกับ depa (สาขาภูมิภาค), NSTDA (คอมพิวต์), มหาวิทยาลัยในพื้นที่ และ อปท.',ana:'Content Korea Lab (CKL) ของ KOCCA — one-stop พื้นที่ผลิต+บ่มเพาะ+ทุน + ขยายสู่ภูมิภาค (Gyeongbuk CKL); depa OTOD (7 จังหวัดนำร่อง)'},
+{p:8,code:'P8-6',type:'Foundation',th:'บริหารจัดการกำลังคน AI สร้างสรรค์แบบใช้ทรัพยากรร่วม',en:'Creative AI Talent Pool & Shared Expertise Scheme',one:'กลไกรวมและจัดสรรผู้เชี่ยวชาญ AI/สร้างสรรค์ให้ SME และโครงการรัฐใช้ร่วมกัน แทนที่แต่ละรายต้องจ้างเองซึ่งต้นทุนสูง',output:'ทะเบียน/แพลตฟอร์มผู้เชี่ยวชาญและที่ปรึกษา AI สร้างสรรค์ พร้อมกลไกจัดสรร (ที่ปรึกษาประจำพื้นที่, secondment, mentor) ให้ผู้ประกอบการเข้าถึงในอัตราอุดหนุน',outcome:'SME และผู้ประกอบการรายย่อยที่ขาดบุคลากร AI เข้าถึงผู้เชี่ยวชาญได้โดยไม่ต้องแบกต้นทุนจ้างเต็มเวลา เร่งการนำ AI ไปใช้จริง สร้างเส้นทางอาชีพใหม่ให้บุคลากร AI ไทย',lead:'depa (Digital Manpower) และ CEA ร่วมกับ สคช., มหาวิทยาลัย และสมาคมอุตสาหกรรม',ana:'depa Digital Manpower / Transformation Fund; NAIRR (federate ผู้เชี่ยวชาญ+ทรัพยากร); CKL mentoring network (KOCCA)'},
+];
+
+const FLAGSHIPS=[
+ {c:'P3-5',p:3,t:'แพลตฟอร์มกลางข้อมูล+เครื่องมือ AI สร้างสรรค์แห่งชาติ',w:'แกนกลางรวมข้อมูล+เครื่องมือ+คอมพิวต์+สิทธิ ต่อยอด GDCC/LANTA/ThaiLLM คุ้มงบ ทุกเสาอ้างอิงได้'},
+ {c:'P1-3',p:1,t:'สตูดิโอกลาง AI Virtual Production ใช้ร่วม',w:'หน้าตาที่จับต้องได้ ยกคุณภาพคอนเทนต์สู่มาตรฐานส่งออก ทำ PPP กับสตูดิโอเอกชน'},
+ {c:'P5-4',p:5,t:'ระบบ Provenance / AI-Disclosure เพื่อส่งออก',w:'EU AI Act ม.50 มีผล ส.ค. 2026 — ถ้าไม่เตรียม คอนเทนต์ไทยติดกำแพงตลาด'},
+ {c:'P5-5',p:5,t:'คลังสิทธิ์+กลไกอนุญาตใช้ข้อมูลฝึก AI อย่างเป็นธรรม',w:'สร้างรายได้ใหม่สู่ศิลปิน/ชุมชนฐานราก + ให้ผู้พัฒนาไทยใช้ข้อมูลถูกกฎหมาย'},
+ {c:'P6-4',p:6,t:'ฝึกปฏิบัติงานจริง AI ร่วมเอกชน (Apprenticeship)',w:'แปลงการพัฒนาคนเป็นการจ้างงานจริง (โมเดล AI Singapore วางคนสู่งาน >90%)'},
+ {c:'P7-4',p:7,t:'ศาลาเรือธง "Creative AI by Thailand" เวทีโลก',w:'สร้างแบรนด์ประเทศ ปิดดีลส่งออก เกาะปฏิทิน BICM/STYLE Bangkok'},
+ {c:'P8-5',p:8,t:'ศูนย์ทรัพยากร AI สร้างสรรค์ครบวงจรระดับภูมิภาค',w:'รวมคอมพิวต์+ข้อมูล+สตูดิโอ+ทุนลงพื้นที่จริงนอก กทม. (โมเดล Content Korea Lab)'},
+];
+const QWINS=[
+ {c:'P1-1',p:1,t:'แพลตฟอร์มบริการเบ็ดเสร็จ AI Creative แห่งชาติ',w:'พอร์ทัลจุดเดียว ทำได้เร็วปี 1 — ควรรวมกับ P8-1'},
+ {c:'P2-2',p:2,t:'แซนด์บ็อกซ์ AI + Voucher สำหรับ SME',w:'ต่อยอด depa Mini Voucher ใช้ได้ทันที'},
+ {c:'P3-1',p:3,t:'ชุดข้อมูลกลางอุตสาหกรรมสร้างสรรค์ไทย',w:'รวมข้อมูลรัฐที่มีอยู่ ต้นทุนต่ำ เป็นวัตถุดิบให้แพลตฟอร์มเรือธง'},
+ {c:'P4-1',p:4,t:'เวทีประลองกรณีใช้งาน AI (Use-Case Challenge)',w:'บ่มเพาะ 3-4 เดือน สร้างต้นแบบ+กระแสปีแรก'},
+ {c:'P6-1',p:6,t:'หลักสูตร AI พื้นฐานสำหรับผู้สร้างสรรค์',w:'ต่อยอดโมเดล ก.แรงงาน × Microsoft'},
+ {c:'P5-1',p:5,t:'คู่มือ+คลินิกช่วยจดลิขสิทธิ์ผลงานที่ใช้ AI',w:'แก้ช่องว่างจริง มีพันธมิตร DIP × Google'},
+ {c:'P7-1',p:7,t:'แพลตฟอร์มจับคู่ธุรกิจ AI สร้างสรรค์ (Marketplace)',w:'ต่อยอด Thaitrade.com ของ DITP'},
+ {c:'P8-1',p:8,t:'พอร์ทัลกลางบริหารทรัพยากร AI (Resource Gateway)',w:'รวมทรัพยากรรัฐจุดเดียว — ควรหลอมรวมกับ P1-1'},
+];
+
+// render synthesis lists
+function renderMini(arr, el){
+  document.getElementById(el).innerHTML=arr.map(x=>`<div class="li"><span class="pill">${x.c}</span><div class="txt"><b>${x.t}</b><p>เสา ${x.p} · ${x.w}</p></div></div>`).join('');
+}
+renderMini(FLAGSHIPS,'flagList'); renderMini(QWINS,'qwList');
+
+// pillar chips
+const pc=document.getElementById('pillarChips');
+pc.innerHTML='<span class="chip on" data-pillar="all">ทุกเสา</span>'+Object.keys(PILLARS).map(k=>`<span class="chip" data-pillar="${k}">เสา ${k}</span>`).join('');
+
+// state
+let fPillar='all', fType='all', fSearch='';
+const grid=document.getElementById('grid');
+
+function render(){
+  let n=0;
+  grid.innerHTML=D.map((d,i)=>{
+    const tc=TYPEMAP[d.type];
+    const match=(fPillar==='all'||d.p==fPillar)&&(fType==='all'||d.type===fType)&&
+      (fSearch===''||(d.th+d.en+d.one+d.output+d.outcome+d.code).toLowerCase().includes(fSearch));
+    if(match)n++;
+    return `<div class="card ${tc} ${match?'':'hide'}" data-i="${i}">
+      <div class="card-head" onclick="toggle(${i})">
+        <span class="code">${d.code}</span>
+        <div class="ttl"><h4>${d.th}</h4><div class="en">${d.en}</div><div class="one">${d.one}</div></div>
+        <span class="badge ${tc}">${d.type}</span>
+        <span class="chev">▼</span>
+      </div>
+      <div class="card-body"><div class="cb-inner">
+        <div class="io-row out"><span class="lab">Output (เชิงคุณภาพ)</span><p>${d.output}</p></div>
+        <div class="io-row outc"><span class="lab">Outcome (เปลี่ยนชีวิตใคร)</span><p>${d.outcome}</p></div>
+        <div class="io-row lead"><span class="lab">เจ้าภาพ</span><p>${d.lead}</p></div>
+        <div class="io-row ana"><span class="lab">เทียบเคียง</span><p>${d.ana}</p></div>
+        <span class="pillar-tag">เสา ${d.p} — ${PILLARS[d.p]}</span>
+      </div></div>
+    </div>`;
+  }).join('');
+  document.getElementById('count').innerHTML=`พบ <b>${n}</b> / ${D.length} โครงการ`;
+  document.getElementById('noresult').style.display=n?'none':'block';
+}
+function toggle(i){
+  const c=grid.querySelector(`.card[data-i="${i}"]`);
+  c.classList.toggle('open');
+}
+document.getElementById('pillarChips').addEventListener('click',e=>{
+  if(!e.target.dataset.pillar)return;
+  [...pc.children].forEach(c=>c.classList.remove('on')); e.target.classList.add('on');
+  fPillar=e.target.dataset.pillar; render();
+});
+document.getElementById('typeChips').addEventListener('click',e=>{
+  if(!e.target.dataset.type)return;
+  [...document.getElementById('typeChips').children].forEach(c=>c.classList.remove('on')); e.target.classList.add('on');
+  fType=e.target.dataset.type; render();
+});
+document.getElementById('search').addEventListener('input',e=>{fSearch=e.target.value.toLowerCase().trim(); render();});
+render();
+
+// reveal
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in'); io.unobserve(e.target);}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

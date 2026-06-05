@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>COE AI Creative Economy — Timeline & Responsibility Dashboard</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap');
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Sarabun', 'Arial', sans-serif;
+  color: #1F2937;
+  line-height: 1.6;
+  background: #F1F5F9;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 30px 40px; }
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #1F4E78 0%, #2E75B6 100%);
+  color: white;
+  padding: 35px 40px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 20px rgba(31, 78, 120, 0.2);
+}
+.header h1 { font-size: 2.2em; margin-bottom: 8px; font-weight: 700; }
+.header p { font-size: 1.05em; opacity: 0.92; }
+.header-meta { display: flex; gap: 30px; margin-top: 18px; font-size: 0.95em; flex-wrap: wrap; }
+.header-meta-item { background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 8px; }
+
+/* Section */
+.section { background: white; padding: 28px 32px; border-radius: 12px; margin-bottom: 26px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
+.section h2 {
+  color: #1F4E78;
+  font-size: 1.5em;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #2E75B6;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section h2 .icon { font-size: 1.3em; }
+.section h3 { color: #374151; font-size: 1.15em; margin: 20px 0 12px; padding-left: 12px; border-left: 4px solid #2E75B6; }
+
+/* Quick stats */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 26px; }
+.stat-card {
+  background: white;
+  padding: 20px 24px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-left: 5px solid #2E75B6;
+}
+.stat-card.green { border-left-color: #10B981; }
+.stat-card.orange { border-left-color: #F59E0B; }
+.stat-card.purple { border-left-color: #8B5CF6; }
+.stat-card.red { border-left-color: #DC2626; }
+.stat-value { font-size: 2.1em; font-weight: 700; color: #1F4E78; line-height: 1; }
+.stat-label { color: #6B7280; font-size: 0.95em; margin-top: 4px; }
+.stat-sub { color: #9CA3AF; font-size: 0.82em; margin-top: 2px; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 0.93em; }
+th { background: #1F4E78; color: white; padding: 10px 12px; text-align: left; font-weight: 600; }
+td { padding: 9px 12px; border-bottom: 1px solid #E5E7EB; vertical-align: top; }
+tr:nth-child(even) td { background: #F8F9FA; }
+.center { text-align: center; }
+.num { font-weight: 600; color: #1F4E78; }
+
+/* Grids */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+/* Cards */
+.card {
+  background: #F8FAFC;
+  padding: 18px 20px;
+  border-radius: 8px;
+  border-left: 4px solid #2E75B6;
+}
+.card.green { background: #ECFDF5; border-left-color: #10B981; }
+.card.yellow { background: #FEF9C3; border-left-color: #F59E0B; }
+.card.red { background: #FEE2E2; border-left-color: #DC2626; }
+.card.purple { background: #EDE9FE; border-left-color: #8B5CF6; }
+.card h4 { color: #1F4E78; margin-bottom: 8px; font-size: 1em; }
+.card p { font-size: 0.9em; color: #4B5563; }
+
+/* Tags */
+.tag { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.82em; font-weight: 600; margin-right: 4px; white-space: nowrap; }
+.tag-green { background: #D1FAE5; color: #065F46; }
+.tag-blue { background: #DBEAFE; color: #1E40AF; }
+.tag-yellow { background: #FEF3C7; color: #92400E; }
+.tag-red { background: #FEE2E2; color: #991B1B; }
+.tag-purple { background: #EDE9FE; color: #5B21B6; }
+.tag-gray { background: #E5E7EB; color: #374151; }
+
+/* Timeline */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 3px; background: #2E75B6;
+}
+.timeline-item { position: relative; padding-bottom: 28px; }
+.timeline-item::before {
+  content: ''; position: absolute; left: -28px; top: 6px; width: 14px; height: 14px;
+  background: #1F4E78; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 2px #2E75B6;
+}
+.timeline-item.done::before { background: #10B981; box-shadow: 0 0 0 2px #10B981; }
+.timeline-item.current::before { background: #F59E0B; box-shadow: 0 0 0 2px #F59E0B; }
+.timeline-item h4 { color: #1F4E78; font-size: 1.1em; margin-bottom: 2px; }
+.timeline-item .date { color: #6B7280; font-size: 0.85em; margin-bottom: 8px; }
+.qa-table { font-size: 0.9em; }
+.qa-table td:first-child { width: 90px; color: #6B7280; }
+
+/* Power bar */
+.power-bar { display: flex; height: 40px; border-radius: 8px; overflow: hidden; margin: 16px 0 8px; }
+.power-segment { display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.85em; }
+.power-aicat { background: #10B981; }
+.power-ally { background: #F59E0B; }
+.power-neutral { background: #9CA3AF; }
+
+/* Pillar responsibility */
+.pillar-row td:first-child { font-weight: 700; color: #1F4E78; white-space: nowrap; }
+.owner { font-weight: 600; color: #065F46; }
+
+/* Gap priority */
+.gap-priority { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+.gap-red { background: #DC2626; }
+.gap-yellow { background: #F59E0B; }
+
+.footer { text-align: center; color: #9CA3AF; font-size: 0.85em; padding: 20px 0; }
+
+@media (max-width: 900px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .container { padding: 16px; }
+}
+@media print {
+  body { background: white; }
+  .section { box-shadow: none; border: 1px solid #E5E7EB; page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>🗂️ COE AI Creative Economy — Project Timeline & Responsibility</h1>
+    <p>สรุปเส้นทางการตัดสินใจตั้งแต่เริ่มโครงการ · อำนาจหน้าที่กรรมการรายเสาหลัก (Pillar) · ช่องว่าง Stakeholder ที่ต้องเติม</p>
+    <div class="header-meta">
+      <div class="header-meta-item">📅 25 พ.ค. — 4 มิ.ย. 2569</div>
+      <div class="header-meta-item">📄 เอกสาร 27 ชุด · 4 Phase</div>
+      <div class="header-meta-item">✅ สถานะ: พร้อมส่ง สดช.</div>
+    </div>
+  </div>
+
+  <!-- QUICK STATS -->
+  <div class="stats">
+    <div class="stat-card green">
+      <div class="stat-value">17</div>
+      <div class="stat-label">ที่นั่งคณะทำงาน (Lock แล้ว)</div>
+      <div class="stat-sub">+ ที่ปรึกษา 4 (Annex B)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">13</div>
+      <div class="stat-label">อำนาจหน้าที่ (ข้อ ๑–๑๓)</div>
+      <div class="stat-sub">ครอบ 8 Pillars แบบ 1:1</div>
+    </div>
+    <div class="stat-card purple">
+      <div class="stat-value">744 <span style="font-size:0.5em">MB</span></div>
+      <div class="stat-label">งบประมาณ 5 ปี (Mid Scenario)</div>
+      <div class="stat-sub">ปี 1 = 83 MB</div>
+    </div>
+    <div class="stat-card orange">
+      <div class="stat-value">5</div>
+      <div class="stat-label">Flagship Projects</div>
+      <div class="stat-sub">รอ Feasibility Study Phase 1</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-value">7</div>
+      <div class="stat-label">ช่องว่าง Stakeholder</div>
+      <div class="stat-sub">4 ขาดชัดเจน + 3 เชิงกลไก</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: TIMELINE -->
+  <div class="section">
+    <h2><span class="icon">⏱️</span> Timeline: คำถาม–คำตอบ ตั้งแต่เริ่มจนปัจจุบัน</h2>
+    <div class="timeline">
+
+      <div class="timeline-item done">
+        <h4>Phase 1 — ออกแบบโครงสร้างคณะทำงาน</h4>
+        <div class="date">25 พ.ค. 2569 · ไฟล์ 01–08</div>
+        <table class="qa-table">
+          <tr><td>❓ ถาม</td><td>โครงสร้างคณะเป็นอย่างไร? ใครเป็นประธาน? เลือกหน่วยงานรัฐชุดไหน? งบเท่าไหร่?</td></tr>
+          <tr><td>✅ ตอบ</td><td>17 ที่นั่ง 4 บล็อก สัดส่วนรัฐ:เอกชน 50:50 · เดิมเลือก <b>CEA (ดร.ชาคริต) เป็นประธาน</b> (Scenario Y+) · หน่วยงานรัฐ Combo 1 Balanced: วธ. + กรม IP + NIA + BDI + DITP + STO · แผน 1-3-5 ปี → งบ <b>744 ล้านบาท/5 ปี</b></td></tr>
+        </table>
+      </div>
+
+      <div class="timeline-item done">
+        <h4>Phase 2 — พลิกโครงสร้าง: AICAT นำ + กลไกปฏิบัติ + Output/Outcome ร่างแรก</h4>
+        <div class="date">25–27 พ.ค. 2569 · ไฟล์ 09–13</div>
+        <table class="qa-table">
+          <tr><td>❓ ถาม</td><td>เลือก v1 (CEA นำ) หรือ v2 (AICAT นำ)? กลไกทำงานจริงเป็นอย่างไร? Output/Outcome เป็นไปได้จริงไหม?</td></tr>
+          <tr><td>✅ ตอบ</td><td><b>พลิกมาเลือก v2</b> — นายสุธัช เจริญผล (นายก AICAT) เป็นประธาน, CEA ลดเป็นกรรมการ · กลไก 3 ชั้น: คณะหลัก (2 เดือน/ครั้ง) → อนุคณะ 4 ชุด (ทุกเดือน) → เลขา (รายวัน) · ร่าง 10 Pillars แต่พบ <span class="tag tag-red">Attribution Risk</span> GDP 8.78%→12% ใหญ่เกินจะเคลมคนเดียว</td></tr>
+        </table>
+      </div>
+
+      <div class="timeline-item done">
+        <h4>Phase 3 — ร่างคำสั่งทางการ (Section ๙) + Feedback สดช.</h4>
+        <div class="date">29–30 พ.ค. 2569 · ไฟล์ 14–23</div>
+        <table class="qa-table">
+          <tr><td>❓ ถาม</td><td>เขียน Section ๙ รูปแบบไหน? สดช. feedback อะไร? Roster และอำนาจหน้าที่สุดท้ายคืออะไร?</td></tr>
+          <tr><td>✅ ตอบ</td><td>เลือก <b>Health-style</b> + ใช้ "ผู้แทน[หน่วยงาน]" แทนชื่อบุคคล · สดช. อนุมัติ AICAT เป็นประธาน แต่ขอ <b>Feasibility Study + KPI "ว้าว" + Top-down vision</b> · <b>Lock Roster 17 ที่นั่ง</b> + Annex A (ผู้ทรงคุณวุฒิ 5) + Annex B (ที่ปรึกษา 4) · อำนาจหน้าที่ <b>13 ข้อ</b> → ออก docx/pdf Final</td></tr>
+        </table>
+      </div>
+
+      <div class="timeline-item current">
+        <h4>Phase 4 — ปรับ Output/Outcome ตามแนวทาง ดร.อภิรดี (ปัจจุบัน)</h4>
+        <div class="date">31 พ.ค. – 4 มิ.ย. 2569 · ไฟล์ 24–27</div>
+        <table class="qa-table">
+          <tr><td>❓ ถาม</td><td>KPI ควรล็อกตัวเลขในคำสั่ง หรือปล่อยเชิงคุณภาพ?</td></tr>
+          <tr><td>✅ ตอบ</td><td><b>Output เชิงคุณภาพ ไม่ล็อกตัวเลข</b> — "มี...สอดคล้องความต้องการภาคเอกชน" แล้วตั้ง KPI จริงหลัง Feasibility Study (Phase 1) · เพิ่ม Mega Hook: <i>"COE = เครื่องยนต์ AI ของ Soft Power 4 ล้านล้าน"</i> · เสนอ <b>5 Flagship Projects</b></td></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 2: POWER MATH -->
+  <div class="section">
+    <h2><span class="icon">⚖️</span> โครงสร้างคณะทำงาน 17 ที่นั่ง — Vote Math</h2>
+    <div class="power-bar">
+      <div class="power-segment power-aicat" style="width: 47%;">AICAT Direct — 8 ที่นั่ง</div>
+      <div class="power-segment power-ally" style="width: 12%;">NIA — 2</div>
+      <div class="power-segment power-neutral" style="width: 41%;">Neutral (รัฐ) — 7 ที่นั่ง</div>
+    </div>
+    <p style="font-size:0.9em; color:#6B7280;">🟢 AICAT: ประธาน + ผู้ทรงคุณวุฒิ 5 + โอเพนซอร์ส + เลขาฯ &nbsp;|&nbsp; 🟡 NIA: กรรมการ + ผู้ช่วยเลขาฯ &nbsp;|&nbsp; ⬜ Neutral: depa, วธ., CEA, IP, BDI, DITP, สดช. &nbsp;→&nbsp; <b>Majority 10/17 = 59%</b> ✅</p>
+  </div>
+
+  <!-- SECTION 3: PILLAR RESPONSIBILITY -->
+  <div class="section">
+    <h2><span class="icon">🏛️</span> อำนาจหน้าที่ → กรรมการรับผิดชอบราย Pillar</h2>
+    <table>
+      <tr>
+        <th style="width:60px;">Pillar</th>
+        <th>ขอบเขตงาน</th>
+        <th style="width:90px;" class="center">อำนาจหน้าที่</th>
+        <th style="width:240px;">🎯 กรรมการเจ้าภาพหลัก</th>
+        <th style="width:200px;">🤝 ผู้สนับสนุน</th>
+      </tr>
+      <tr class="pillar-row">
+        <td>P1</td>
+        <td><b>Hub &amp; Operations</b> — ศูนย์ปฏิบัติการ AI Creative ที่ผู้ประกอบการเข้าถึงได้</td>
+        <td class="center num">ข้อ ๓</td>
+        <td><span class="owner">ผู้แทน CEA</span> + ประธาน (AICAT)</td>
+        <td>TCDC</td>
+      </tr>
+      <tr class="pillar-row">
+        <td>P2</td>
+        <td><b>ระบบนิเวศ / Partnerships</b> — เชื่อม Research–Industry–Creator–รัฐ–สากล</td>
+        <td class="center num">ข้อ ๔</td>
+        <td><span class="owner">ประธาน (AICAT)</span></td>
+        <td>depa, DITP</td>
+      </tr>
+      <tr class="pillar-row">
+        <td>P3</td>
+        <td><b>โครงสร้างพื้นฐาน + Thai Creative AI Dataset</b> — อธิปไตยข้อมูลไทย</td>
+        <td class="center num">ข้อ ๕</td>
+        <td><span class="owner">ผู้แทน BDI</span></td>
+        <td>AICAT, สมาคมโอเพนซอร์ส</td>
+      </tr>
+      <tr class="pillar-row">
+        <td>P4</td>
+        <td><b>Sandbox &amp; ต้นแบบ</b> — พัฒนา · ขยายผล · พาณิชย์ <span class="tag tag-purple">งบใหญ่สุด 35%</span></td>
+        <td class="center num">ข้อ ๖</td>
+        <td><span class="owner">ผู้แทน NIA + ผู้แทน BDI</span></td>
+        <td>AICAT</td>
+      </tr>
+      <tr class="pillar-row">
+        <td>P5</td>
+        <td><b>มาตรฐาน + IP + จริยธรรม</b> — AI Copyright · ธรรมาภิบาล · จรรยาบรรณ</td>
+        <td class="center num">ข้อ ๗</td>
+        <td><span class="owner">ผู้แทนกรมทรัพย์สินทางปัญญา</span> + ผู้ทรงคุณวุฒิด้านกฎหมาย IP/AI</td>
+        <td>กรมส่งเสริมวัฒนธรรม (วธ.)</td>
+      </tr>
+      <tr class="pillar-row">
+        <td>P6</td>
+        <td><b>Talent &amp; กำลังคน</b> — Upskill/Reskill ผู้ประกอบการ + ครีเอเตอร์ เชื่อม OFOS</td>
+        <td class="center num">ข้อ ๘</td>
+        <td><span class="owner">ผู้แทน depa</span> + CEA</td>
+        <td>สถาบันการศึกษา</td>
+      </tr>
+      <tr class="pillar-row">
+        <td>P7</td>
+        <td><b>ตลาด + ส่งออก ASEAN</b> — ผลงาน/เครื่องมือ AI ไทยเข้าตลาดใน-ต่างประเทศ</td>
+        <td class="center num">ข้อ ๙</td>
+        <td><span class="owner">ผู้แทน DITP</span> + ผู้ทรงคุณวุฒิ DAAT</td>
+        <td>สมาคมคอนเทนต์ครีเอเตอร์</td>
+      </tr>
+      <tr class="pillar-row">
+        <td>P8</td>
+        <td><b>ทรัพยากร + งบประมาณ</b> — บูรณาการ infra + data + คน + งบ หลายแหล่งทุน</td>
+        <td class="center num">ข้อ ๑๐</td>
+        <td><span class="owner">ประธาน + เลขานุการ (AICAT / NIA / สดช.)</span></td>
+        <td>ทุกหน่วยงานรัฐ</td>
+      </tr>
+    </table>
+    <p style="font-size:0.85em; color:#9CA3AF; margin-top:8px;">หมายเหตุ: ข้อ ๑–๒ = นโยบาย/ยุทธศาสตร์ (ทั้งคณะ) · ข้อ ๑๑–๑๓ = แต่งตั้งอนุคณะ/รายงานผล/หน้าที่อื่น (Standard)</p>
+
+    <h3>บทบาทตามกลุ่ม</h3>
+    <div class="grid-3">
+      <div class="card green">
+        <h4>👑 ประธาน + เลขานุการ</h4>
+        <p><b>นายก AICAT (ประธาน)</b>: ทิศทาง · เซ็น Resolution · รายงาน คกก.แม่<br><b>เลขาฯ 3 ราย</b> (AICAT + NIA + สดช.): Agenda · Minutes · Follow-up รายวัน</p>
+      </div>
+      <div class="card">
+        <h4>🏢 กรรมการรัฐ 7 หน่วยงาน</h4>
+        <p>depa · วธ. · CEA · กรม IP · NIA · BDI · DITP — Policy alignment · เปิดประตูงบประมาณ · Approve Sandbox</p>
+      </div>
+      <div class="card yellow">
+        <h4>🎨 ผู้ทรงคุณวุฒิ 5 ราย (Demand-side)</h4>
+        <p>ผู้กำกับภาพยนตร์ (Film) · TACGA (Animation/CG) · DAAT (โฆษณาดิจิทัล) · Content Creator · กฎหมาย IP/AI — Industry input + เจ้าภาพอนุคณะ</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: STAKEHOLDER GAPS -->
+  <div class="section">
+    <h2><span class="icon">🧩</span> ช่องว่าง Stakeholder — ที่ควรต้องมีเพิ่มใน COE</h2>
+
+    <h3>🔴 ขาดชัดเจน (ควรเติมก่อนเริ่มงาน)</h3>
+    <table>
+      <tr>
+        <th style="width:30px;"></th>
+        <th style="width:260px;">Stakeholder ที่ขาด</th>
+        <th>ความร่วมมือที่ต้องการ</th>
+        <th style="width:180px;">กระทบ Pillar</th>
+      </tr>
+      <tr>
+        <td><span class="gap-priority gap-red"></span></td>
+        <td><b>ภาคเอกชนผู้ใช้จริง (Demand-side)</b></td>
+        <td>Letter of Intent (LOI) จาก 10+ องค์กร เพื่อ validate demand จริง — จำเป็นต่อ Feasibility Study Phase 1</td>
+        <td><span class="tag tag-blue">ทุก Pillar</span></td>
+      </tr>
+      <tr>
+        <td><span class="gap-priority gap-red"></span></td>
+        <td><b>Broadcast / Streaming / Media ตัวจริง</b></td>
+        <td>เสียงช่องทีวี-แพลตฟอร์มสตรีมมิ่งในคณะหลัก (ตอนนี้มีแค่ WorkPoint ใน Annex B ที่ปรึกษา)</td>
+        <td><span class="tag tag-blue">P7 ตลาด</span></td>
+      </tr>
+      <tr>
+        <td><span class="gap-priority gap-red"></span></td>
+        <td><b>สถาบันการศึกษา / มหาวิทยาลัย</b></td>
+        <td>หลักสูตร · Research · Talent pipeline (ที่ปรึกษา "นักวิจัย AI" ยังไม่ระบุตัวจริง)</td>
+        <td><span class="tag tag-blue">P6 Talent</span></td>
+      </tr>
+      <tr>
+        <td><span class="gap-priority gap-red"></span></td>
+        <td><b>THACCA / STO (Soft Power)</b></td>
+        <td>ช่องทางประสานอย่างเป็นทางการ — Combo เดิมมี STO แต่ roster สุดท้ายตัดออก ทั้งที่ Mega Hook คือ "เครื่องยนต์ Soft Power 4 ล้านล้าน"</td>
+        <td><span class="tag tag-blue">P2 ระบบนิเวศ</span></td>
+      </tr>
+    </table>
+
+    <h3>🟡 ขาดเชิงกลไก (ต้องสร้างใน Phase 1)</h3>
+    <table>
+      <tr>
+        <th style="width:30px;"></th>
+        <th style="width:260px;">ช่องว่าง</th>
+        <th>สิ่งที่ต้องทำ</th>
+        <th style="width:180px;">เจ้าภาพ</th>
+      </tr>
+      <tr>
+        <td><span class="gap-priority gap-yellow"></span></td>
+        <td><b>Cost Index Methodology</b></td>
+        <td>สร้างวิธีวัด "ต้นทุนผลิตลด 30%" — ถ้าไม่มี วัด KPI หลักไม่ได้</td>
+        <td><span class="tag tag-green">BDI + DAAT</span></td>
+      </tr>
+      <tr>
+        <td><span class="gap-priority gap-yellow"></span></td>
+        <td><b>Individual Creators รายย่อย</b></td>
+        <td>กลไกรับฟังครีเอเตอร์อิสระรายเล็ก — ผู้ทรงคุณวุฒิ 5 รายเป็นระดับนายกสมาคม เสียงรายย่อยอาจไม่ถึง</td>
+        <td><span class="tag tag-green">อนุคณะ Hub &amp; Capacity</span></td>
+      </tr>
+      <tr>
+        <td><span class="gap-priority gap-yellow"></span></td>
+        <td><b>แหล่งทุนเอกชน (Co-invest)</b></td>
+        <td>ดึงตัวแทน VC / ธนาคาร / BOI — Pillar 8 ตั้งเป้าเอกชนร่วมลงทุน แต่ยังไม่มีในโครงสร้าง</td>
+        <td><span class="tag tag-green">ประธาน + NIA</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- SECTION 5: NEXT STEPS -->
+  <div class="section">
+    <h2><span class="icon">🚀</span> Next Steps</h2>
+    <div class="grid-3">
+      <div class="card red">
+        <h4>1. Confirm ชื่อจริง Annex A</h4>
+        <p>นายกสมาคมคอนเทนต์ครีเอเตอร์ไทย + ผู้เชี่ยวชาญกฎหมาย IP/AI (อ.สมชาย — ยืนยันนามสกุลเต็ม)</p>
+      </div>
+      <div class="card yellow">
+        <h4>2. Feasibility Study + LOI (Phase 1)</h4>
+        <p>เดือน 1–6: ศึกษาความเป็นไปได้ 5 Flagship Projects + ขอ LOI 10+ องค์กร → ตั้ง KPI จริง</p>
+      </div>
+      <div class="card green">
+        <h4>3. ส่งเอกสารชุด Final ให้ สดช.</h4>
+        <p>คำสั่งแต่งตั้ง Final (21) + Section ๙ Standalone (22) + Output/Outcome v3 (26–27) — พร้อมแล้ว</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    COE AI Creative Economy — Timeline &amp; Responsibility Dashboard · สรุปจากเอกสารโครงการ 01–27 · จัดทำ 4 มิ.ย. 2569
+  </div>
+
+</div>
+</body>
+</html>

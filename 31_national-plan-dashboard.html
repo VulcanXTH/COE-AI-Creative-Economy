@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COE AI Creative Economy · แผนชาติ Alignment</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap');
+:root{
+  --bg:#ffffff; --bg2:#f5f5f7; --bg3:#fafafa;
+  --ink:#1d1d1f; --sub:#6e6e73; --faint:#86868b;
+  --line:#d2d2d7; --line2:#e8e8ed;
+  --blue:#0066cc; --blue2:#0071e3;
+  --green:#1d8a4e; --amber:#9a6a00; --violet:#6e57c8;
+  --card:#ffffff;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue","Noto Sans Thai",system-ui,sans-serif;
+  color:var(--ink); background:var(--bg); line-height:1.5; letter-spacing:-.003em;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+}
+.wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+.wide{max-width:1240px;}
+
+/* nav */
+.nav{position:sticky; top:0; z-index:100; height:48px; background:rgba(255,255,255,.72); backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid var(--line2);}
+.nav .wrap{height:100%; display:flex; align-items:center; justify-content:space-between;}
+.nav .logo{font-size:15px; font-weight:600; letter-spacing:-.01em;}
+.nav .logo span{color:var(--faint); font-weight:400;}
+.nav ul{display:flex; gap:26px; list-style:none;}
+.nav a{color:var(--ink); text-decoration:none; font-size:12.5px; font-weight:400; opacity:.82; transition:.2s;}
+.nav a:hover{opacity:1; color:var(--blue);}
+@media(max-width:820px){.nav ul{display:none;}}
+
+/* hero */
+.hero{text-align:center; padding:92px 0 72px; background:var(--bg);}
+.kick{font-size:19px; font-weight:600; color:var(--blue); letter-spacing:-.01em; margin-bottom:8px;}
+.hero h1{font-size:clamp(40px,7vw,80px); font-weight:700; line-height:1.04; letter-spacing:-.025em; max-width:16ch; margin:0 auto;}
+.hero p.lede{font-size:clamp(19px,2.4vw,26px); color:var(--sub); font-weight:400; max-width:40ch; margin:22px auto 0; line-height:1.35;}
+.hero .links{margin-top:26px; display:flex; gap:26px; justify-content:center; flex-wrap:wrap;}
+.hero .links a{color:var(--blue); text-decoration:none; font-size:18px;}
+.hero .links a:hover{text-decoration:underline;}
+
+/* section scaffolding */
+section{padding:88px 0;}
+section.gray{background:var(--bg2);}
+.shead{text-align:center; max-width:30ch; margin:0 auto 52px;}
+.shead.left{text-align:left; max-width:none; margin-left:0;}
+.eyebrow{font-size:14px; font-weight:600; color:var(--faint); text-transform:uppercase; letter-spacing:.04em; margin-bottom:10px;}
+.shead h2{font-size:clamp(30px,4.5vw,48px); font-weight:700; letter-spacing:-.02em; line-height:1.08;}
+.shead p{font-size:19px; color:var(--sub); margin-top:14px; line-height:1.45;}
+
+/* stat band */
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; text-align:center;}
+@media(max-width:780px){.stats{grid-template-columns:repeat(2,1fr); gap:36px;}}
+.stat .n{font-size:clamp(46px,6vw,72px); font-weight:600; letter-spacing:-.03em; line-height:1; background:linear-gradient(180deg,#1d1d1f,#494951); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.stat .c{font-size:15px; color:var(--sub); margin-top:10px;}
+
+/* plan alignment two-col */
+.cards2{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+@media(max-width:820px){.cards2{grid-template-columns:1fr;}}
+.panel{background:var(--card); border:1px solid var(--line2); border-radius:20px; padding:32px;}
+.panel h3{font-size:22px; font-weight:600; letter-spacing:-.01em; margin-bottom:6px;}
+.panel .h3sub{font-size:14px; color:var(--faint); margin-bottom:20px;}
+.prow{display:flex; gap:13px; padding:13px 0; border-top:1px solid var(--line2); align-items:baseline;}
+.prow:first-of-type{border-top:none;}
+.prow .dot{flex:none; width:8px; height:8px; border-radius:50%; margin-top:7px;}
+.dot.hi{background:var(--blue);} .dot.mid{background:#a1a1a6;} .dot.no{background:#d2d2d7;}
+.prow .pt{flex:1;}
+.prow .pt b{font-size:15.5px; font-weight:600;}
+.prow .pt span{font-size:13.5px; color:var(--sub); display:block; margin-top:2px; line-height:1.4;}
+.prow .tag{flex:none; font-size:11px; font-weight:600; padding:3px 9px; border-radius:20px; align-self:center;}
+.tag.hi{background:#e6f0fb; color:var(--blue);} .tag.mid{background:#efeff1; color:var(--sub);} .tag.no{background:#f5f5f7; color:var(--faint);}
+
+/* matrix */
+.matrix{background:var(--card); border:1px solid var(--line2); border-radius:20px; overflow:hidden;}
+.mrow{display:grid; grid-template-columns:1fr auto; gap:18px; padding:20px 28px; border-top:1px solid var(--line2); align-items:start;}
+.mrow:first-child{border-top:none;}
+.mrow .mi b{font-size:16px; font-weight:600; letter-spacing:-.01em;}
+.mrow .mi p{font-size:13.5px; color:var(--sub); margin-top:6px; line-height:1.5;}
+.strength{flex:none; font-size:12px; font-weight:600; padding:4px 12px; border-radius:20px; white-space:nowrap; align-self:center;}
+.strength.s-สูง{background:#e6f0fb; color:var(--blue);}
+.strength.s-กลาง{background:#f3eefc; color:var(--violet);}
+
+/* mega themes */
+.mega{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+@media(max-width:920px){.mega{grid-template-columns:1fr 1fr;}}
+@media(max-width:620px){.mega{grid-template-columns:1fr;}}
+.mcard{background:var(--card); border:1px solid var(--line2); border-radius:20px; padding:28px; transition:.25s;}
+.mcard:hover{transform:translateY(-4px); box-shadow:0 18px 40px -24px rgba(0,0,0,.22);}
+.mcard .em{font-size:30px; line-height:1; margin-bottom:14px;}
+.mcard h4{font-size:19px; font-weight:600; letter-spacing:-.01em; line-height:1.25;}
+.mcard .from{font-size:13px; color:var(--faint); margin-top:10px; line-height:1.5;}
+
+/* topwow */
+.wowlist{counter-reset:w; display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+@media(max-width:820px){.wowlist{grid-template-columns:1fr;}}
+.wow{background:var(--card); border:1px solid var(--line2); border-radius:18px; padding:24px 26px; position:relative;}
+.wow::before{counter-increment:w; content:counter(w); position:absolute; top:22px; right:26px; font-size:34px; font-weight:700; color:var(--line); letter-spacing:-.03em;}
+.wow h4{font-size:17.5px; font-weight:600; letter-spacing:-.01em; line-height:1.3; max-width:90%;}
+.wow .al{font-size:12.5px; color:var(--blue); margin-top:10px; font-weight:500;}
+.wow .why{font-size:13.5px; color:var(--sub); margin-top:8px; line-height:1.5;}
+
+/* controls */
+.controls{position:sticky; top:48px; z-index:50; background:rgba(245,245,247,.82); backdrop-filter:saturate(180%) blur(20px); padding:18px 0; border-bottom:1px solid var(--line2);}
+.csearch{display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
+.csearch input{flex:1; min-width:220px; font-family:inherit; font-size:15px; padding:11px 18px; border:1px solid var(--line); border-radius:980px; background:var(--card); color:var(--ink);}
+.csearch input:focus{outline:none; border-color:var(--blue); box-shadow:0 0 0 4px rgba(0,113,227,.15);}
+.cnt{font-size:13.5px; color:var(--faint); white-space:nowrap;}
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
+.chip{font-family:inherit; font-size:13px; font-weight:500; cursor:pointer; padding:7px 15px; border-radius:980px; border:1px solid var(--line); background:var(--card); color:var(--ink); transition:.18s;}
+.chip:hover{border-color:#b0b0b5;}
+.chip.on{background:var(--ink); color:#fff; border-color:var(--ink);}
+
+/* project cards */
+.pgrid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:30px;}
+@media(max-width:820px){.pgrid{grid-template-columns:1fr;}}
+.pc{background:var(--card); border:1px solid var(--line2); border-radius:18px; overflow:hidden; transition:.2s;}
+.pc.hide{display:none;}
+.pc-h{padding:24px 26px; cursor:pointer;}
+.pc-top{display:flex; align-items:center; gap:10px; margin-bottom:12px;}
+.pc-code{font-size:12px; font-weight:600; color:var(--faint); letter-spacing:.02em;}
+.btype{font-size:11px; font-weight:600; padding:3px 10px; border-radius:980px;}
+.btype.Flagship{background:#fdeede; color:var(--amber);}
+.btype.Foundation{background:#e6f0fb; color:var(--blue);}
+.btype.QuickWin{background:#e7f4ec; color:var(--green);}
+.pc-h h4{font-size:18px; font-weight:600; letter-spacing:-.01em; line-height:1.32;}
+.pc-h .en{font-size:12.5px; color:var(--faint); margin-top:3px;}
+.pc-h .one{font-size:14.5px; color:var(--sub); margin-top:11px; line-height:1.5;}
+.altags{display:flex; gap:7px; flex-wrap:wrap; margin-top:14px;}
+.altag{font-size:11.5px; padding:4px 10px; border-radius:7px; background:#f5f5f7; color:var(--sub);}
+.altag.b{background:#e6f0fb; color:var(--blue);}
+.chev{float:right; color:var(--faint); transition:.25s; font-size:13px;}
+.pc.open .chev{transform:rotate(180deg);}
+.pc-body{max-height:0; overflow:hidden; transition:max-height .4s cubic-bezier(.4,0,.2,1);}
+.pc.open .pc-body{max-height:1400px;}
+.pc-inner{padding:0 26px 26px;}
+.field{margin-top:16px;}
+.field .lab{font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--faint); margin-bottom:5px;}
+.field p{font-size:14px; color:var(--ink); line-height:1.55;}
+.field.wow .lab{color:var(--amber);}
+.field.wow p{color:#3a2e10;}
+.hr{height:1px; background:var(--line2); margin:20px 0 0;}
+
+/* gaps + narrative */
+.note{background:var(--card); border:1px solid var(--line2); border-radius:20px; padding:30px 34px;}
+.note h4{font-size:18px; font-weight:600; margin-bottom:14px;}
+.note ul{list-style:none;}
+.note li{font-size:14.5px; color:var(--sub); padding:9px 0 9px 22px; position:relative; line-height:1.5; border-top:1px solid var(--line2);}
+.note li:first-child{border-top:none;}
+.note li::before{content:"—"; position:absolute; left:0; color:var(--faint);}
+.quote{background:var(--ink); color:#f5f5f7; border-radius:24px; padding:48px 52px;}
+.quote .em{font-size:15px; color:#86868b; text-transform:uppercase; letter-spacing:.05em; margin-bottom:18px;}
+.quote p{font-size:clamp(18px,2.1vw,22px); line-height:1.6; font-weight:400; letter-spacing:-.01em;}
+.quote p b{color:#fff; font-weight:600;}
+
+footer{padding:48px 0; text-align:center; background:var(--bg2); border-top:1px solid var(--line2);}
+footer .ft{font-size:12px; color:var(--faint); line-height:1.7; max-width:80ch; margin:0 auto;}
+footer b{color:var(--sub); font-weight:600;}
+
+/* exec summary */
+.exec{background:var(--card); border:1px solid var(--line2); border-radius:24px; padding:48px 54px;}
+.exec p{font-size:17.5px; color:var(--ink); line-height:1.7; letter-spacing:-.005em;}
+.exec p + p{margin-top:18px;}
+.exec p b{font-weight:600;}
+.exec .sig{margin-top:28px; padding-top:22px; border-top:1px solid var(--line2); font-size:14px; color:var(--faint);}
+/* principle list */
+.princ{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+@media(max-width:760px){.princ{grid-template-columns:1fr;}}
+.pr{background:var(--card); border:1px solid var(--line2); border-radius:18px; padding:28px;}
+.pr .pnum{font-size:13px; font-weight:700; color:var(--blue); letter-spacing:.02em;}
+.pr h4{font-size:18.5px; font-weight:600; letter-spacing:-.01em; margin:9px 0 9px; line-height:1.3;}
+.pr p{font-size:14px; color:var(--sub); line-height:1.6;}
+/* logic flow */
+.flow{display:flex; align-items:stretch; flex-wrap:wrap; border:1px solid var(--line2); border-radius:18px; overflow:hidden; background:var(--card);}
+.flow .step{flex:1; min-width:150px; padding:24px 18px; text-align:center; border-left:1px solid var(--line2);}
+.flow .step:first-child{border-left:none;}
+.flow .step .k{font-size:12px; color:var(--faint); font-weight:600; text-transform:uppercase; letter-spacing:.05em;}
+.flow .step .v{font-size:14.5px; color:var(--ink); margin-top:9px; line-height:1.45;}
+.flow .step.hl{background:#f5f8fd;}
+.flow .step.hl .k{color:var(--blue);}
+@media(max-width:760px){.flow .step{min-width:46%; border-left:none; border-top:1px solid var(--line2);}}
+/* orchestration */
+.orch{background:var(--card); border:1px solid var(--line2); border-radius:20px; overflow:hidden;}
+.orow{display:grid; grid-template-columns:1.05fr 1.15fr 1.4fr; gap:22px; padding:20px 28px; border-top:1px solid var(--line2); align-items:start;}
+.orow.head{background:var(--bg2); font-weight:600; font-size:12px; color:var(--faint); text-transform:uppercase; letter-spacing:.04em;}
+.orow:first-child{border-top:none;}
+.orow .pn{font-size:15px; font-weight:600;}
+.orow .pn small{display:block; color:var(--faint); font-weight:400; font-size:12px; margin-top:3px;}
+.orow .ag{font-size:13.5px; color:var(--ink); line-height:1.5;}
+.orow .ag b{font-weight:600;}
+.orow .role{font-size:13px; color:var(--blue); line-height:1.5;}
+@media(max-width:760px){.orow{grid-template-columns:1fr; gap:7px;} .orow.head{display:none;} .orow .ag::before{content:"เจ้าภาพ: "; color:var(--faint);} .orow .role::before{content:"บทบาทคณะทำงาน: "; color:var(--faint);}}
+/* levers */
+.levers{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:30px;}
+@media(max-width:880px){.levers{grid-template-columns:1fr 1fr;}}
+@media(max-width:520px){.levers{grid-template-columns:1fr;}}
+.lever{background:var(--card); border:1px solid var(--line2); border-radius:18px; padding:26px;}
+.lever .ln{font-size:30px; font-weight:700; color:var(--line); letter-spacing:-.03em; line-height:1;}
+.lever h4{font-size:16.5px; font-weight:600; margin:12px 0 7px; letter-spacing:-.01em; line-height:1.3;}
+.lever p{font-size:13px; color:var(--sub); line-height:1.55;}
+.conductor{background:var(--ink); color:#f5f5f7; border-radius:24px; padding:44px 50px; margin-top:30px; text-align:center;}
+.conductor .em{font-size:14px; color:#86868b; text-transform:uppercase; letter-spacing:.05em; margin-bottom:16px;}
+.conductor p{font-size:clamp(20px,2.4vw,28px); line-height:1.5; font-weight:500; letter-spacing:-.015em; max-width:30ch; margin:0 auto;}
+.conductor p b{color:#fff;}
+.cadence{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:26px;}
+.cadence span{font-size:13px; color:#c7c7cc; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); padding:8px 16px; border-radius:980px;}
+
+.reveal{opacity:0; transform:translateY(24px); transition:.7s cubic-bezier(.16,.8,.3,1);}
+.reveal.in{opacity:1; transform:none;}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="wrap wide">
+  <div class="logo">COE AI Creative Economy <span>· แผนชาติ</span></div>
+  <ul>
+    <li><a href="#exec">บทสรุป</a></li>
+    <li><a href="#principle">หลักคิด</a></li>
+    <li><a href="#logic">ผลผลิต–ผลลัพธ์</a></li>
+    <li><a href="#govern">การกำกับงาน</a></li>
+    <li><a href="#align">Alignment</a></li>
+    <li><a href="#projects">24 โครงการ</a></li>
+    <li><a href="#pitch">บทเสนอ</a></li>
+  </ul>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="kick">คณะทำงานขับเคลื่อนศูนย์ความเป็นเลิศ AI ด้านเศรษฐกิจสร้างสรรค์</div>
+  <h1>วิสัยทัศน์ หลักคิด<br>และการกำกับงาน</h1>
+  <p class="lede">กรอบข้อเสนอโครงการระยะ 5 ปี (พ.ศ. 2569–2574) — ล้อยุทธศาสตร์ชาติ 20 ปี และแผนพัฒนาฯ ฉบับที่ 13 พร้อมสถาปัตยกรรมการกำกับและบูรณาการหน่วยงานร่วม</p>
+  <div class="links">
+    <a href="#exec">บทสรุปผู้บริหาร ›</a>
+    <a href="#govern">สถาปัตยกรรมการกำกับ ›</a>
+  </div>
+</div></header>
+
+<!-- STATS -->
+<section class="gray"><div class="wrap reveal">
+  <div class="stats">
+    <div class="stat"><div class="n">69</div><div class="c">โครงการรวม (ฐาน 45 + ต่อยอด 24)</div></div>
+    <div class="stat"><div class="n">8</div><div class="c">เสาหลัก ตามอำนาจหน้าที่ 3–10</div></div>
+    <div class="stat"><div class="n">6</div><div class="c">เรือธงเมกะ บูรณาการ</div></div>
+    <div class="stat"><div class="n">5</div><div class="c">ปีงบประมาณ 2569–2574</div></div>
+  </div>
+</div></section>
+
+<!-- EXEC SUMMARY -->
+<section id="exec"><div class="wrap">
+  <div class="shead reveal"><div class="eyebrow">บทสรุปผู้บริหาร</div><h2>กรอบข้อเสนอโดยสังเขป</h2></div>
+  <div class="exec reveal">
+    <p>คณะทำงานขับเคลื่อนศูนย์ความเป็นเลิศด้านปัญญาประดิษฐ์เพื่อเศรษฐกิจสร้างสรรค์ (COE AI Creative Economy) ได้จัดทำ<b>กรอบข้อเสนอโครงการระยะ 5 ปี (พ.ศ. 2569–2574)</b> ภายใต้อำนาจหน้าที่ 13 ประการ ที่ได้รับมอบหมายจากคณะกรรมการเฉพาะด้านการขับเคลื่อนแผนปฏิบัติการด้านปัญญาประดิษฐ์แห่งชาติ (ดศช.) โดยมีสมาคมสร้างสรรค์ปัญญาประดิษฐ์ไทย (AICAT) เป็นหน่วยประสานหลัก</p>
+    <p>กรอบข้อเสนอประกอบด้วยโครงการรวม <b>69 โครงการ</b> (โครงการฐานครอบคลุมอำนาจหน้าที่ 45 โครงการ และโครงการต่อยอดที่ล้อแผนชาติ 24 โครงการ) จัดระเบียบเป็น <b>8 เสาหลัก</b> ตามอำนาจหน้าที่ 3–10 และหลอมรวมเป็น <b>6 เรือธงเมกะ</b> เพื่อความคุ้มค่าและกันความซ้ำซ้อนของงบประมาณ ทุกโครงการ<b>สอดคล้องและต่อยอด</b>ยุทธศาสตร์ชาติ 20 ปี และแผนพัฒนาเศรษฐกิจและสังคมแห่งชาติ ฉบับที่ 13 อย่างชัดเจน</p>
+    <p>เป้าหมายเชิงยุทธศาสตร์คือการเปลี่ยนประเทศไทยจาก <b>“ผู้รับจ้างผลิต” สู่ “เจ้าของทรัพย์สินทางปัญญามูลค่าสูง”</b> และวางตำแหน่งประเทศเป็น <b>ศูนย์กลางปัญญาประดิษฐ์ด้านเศรษฐกิจสร้างสรรค์ของอาเซียน</b> ผ่านการลงทุนใน “อธิปไตยทางปัญญาประดิษฐ์ของชาติ” ควบคู่กับการคุ้มครองและเสริมพลังบุคลากรสร้างสรรค์ไทย</p>
+    <div class="sig">เอกสารประกอบการพิจารณาของคณะกรรมการ · จัดทำโดยคณะทำงานฯ · มิถุนายน 2569</div>
+  </div>
+</div></section>
+
+<!-- DESIGN PHILOSOPHY -->
+<section id="principle" class="gray"><div class="wrap">
+  <div class="shead reveal"><div class="eyebrow">หลักคิดการออกแบบโครงการ</div><h2>7 หลักการที่ใช้ร่างทุกโครงการ</h2><p>หลักคิดที่อยู่เบื้องหลังการคัดเลือกและเขียนโครงการ — เพื่อให้ข้อเสนอมีความชอบธรรม ป้องกันตัวได้ และผู้ใหญ่อนุมัติ</p></div>
+  <div class="princ reveal">
+    <div class="pr"><div class="pnum">หลักการที่ 1</div><h4>ยึดอำนาจหน้าที่เป็นฐาน (Mandate-driven)</h4><p>ทุกโครงการต้องสืบสาวกลับไปยังอำนาจหน้าที่ 13 ประการได้ คณะทำงานไม่เสนอสิ่งที่อยู่นอกขอบเขตที่ได้รับมอบหมาย เพื่อความชอบธรรมในการของบประมาณและการดำเนินงาน</p></div>
+    <div class="pr"><div class="pnum">หลักการที่ 2</div><h4>ล้อแผนชาติ (Policy Alignment)</h4><p>ผูกทุกโครงการเข้ากับยุทธศาสตร์ชาติ 20 ปี และหมุดหมายแผนฯ 13 อย่างเจาะจง เพื่อให้เจ้าของงบประมาณเห็นความสอดคล้องทันที และคงทนข้ามรัฐบาล</p></div>
+    <div class="pr"><div class="pnum">หลักการที่ 3</div><h4>ผลผลิตเชิงคุณภาพ ตั้งตัวชี้วัดระหว่างทาง</h4><p>ตามแนวทาง ดร.อภิรดี — เขียนผลผลิตเป็น “มีจำนวนและคุณภาพสอดคล้องกับความต้องการจริงจากภาคเอกชน” โดยยังไม่ล็อกตัวเลข แล้วกำหนดตัวชี้วัดจริงหลังการศึกษาความเหมาะสม (Feasibility)</p></div>
+    <div class="pr"><div class="pnum">หลักการที่ 4</div><h4>ตอบความต้องการจริงของภาคเอกชน (Demand-driven)</h4><p>ออกแบบบริการและโครงการจากการสำรวจอุปสงค์จริง มิใช่จากสมมุติฐานของรัฐ เพื่อให้เกิดการใช้งานและผลกระทบทางเศรษฐกิจที่วัดได้</p></div>
+    <div class="pr"><div class="pnum">หลักการที่ 5</div><h4>ผลลัพธ์ที่เปลี่ยนชีวิตคน (Outcome &gt; Output)</h4><p>ทุกโครงการต้องระบุชัดว่าเปลี่ยนชีวิตหรือเศรษฐกิจของกลุ่มใด (ผู้ประกอบการ SME ครีเอเตอร์ แรงงาน ภูมิภาค) มิใช่เพียงนับจำนวนกิจกรรม</p></div>
+    <div class="pr"><div class="pnum">หลักการที่ 6</div><h4>ความรับผิดที่ป้องกันได้ (Defendable Attribution)</h4><p>ในระดับผลกระทบมหภาค ใช้ถ้อยคำ “ร่วมขับเคลื่อน/เป็นกลไกเร่ง” มิใช่ “รับผิดชอบตัวเลขทั้งหมด” เพื่อป้องกันความเสี่ยงด้านความรับผิดเมื่อรายงานผล</p></div>
+    <div class="pr"><div class="pnum">หลักการที่ 7</div><h4>ความยั่งยืนเชิงสถาบัน (Institutional Legacy)</h4><p>ออกแบบให้เป็นมรดกเชิงสถาบันที่อยู่ต่อเนื่องข้ามรัฐบาล ผ่านกลไกหน่วยงานเฉพาะ กองทุนถาวร และมาตรฐานกลาง — มิใช่โครงการที่จบเมื่อสิ้นงบประมาณ</p></div>
+  </div>
+</div></section>
+
+<!-- LOGIC MODEL -->
+<section id="logic"><div class="wrap">
+  <div class="shead reveal"><div class="eyebrow">แบบจำลองเชิงตรรกะ (Logic Model)</div><h2>หลักการผลผลิต–ผลลัพธ์</h2><p>ห่วงโซ่คุณค่าที่ทุกโครงการยึดเป็นกรอบเดียวกัน — จากทรัพยากรนำเข้าสู่ผลกระทบระดับชาติ</p></div>
+  <div class="flow reveal">
+    <div class="step"><div class="k">Input · ปัจจัยนำเข้า</div><div class="v">งบประมาณ · บุคลากร · เครือข่ายหน่วยงาน · โครงสร้างพื้นฐาน</div></div>
+    <div class="step"><div class="k">Activity · กิจกรรม</div><div class="v">ดำเนินโครงการ 69 โครงการ ใน 6 เรือธงเมกะ</div></div>
+    <div class="step hl"><div class="k">Output · ผลผลิต</div><div class="v">เชิงคุณภาพ “สอดคล้องความต้องการจริงภาคเอกชน” · ตัวเลขตั้งระหว่างทาง</div></div>
+    <div class="step hl"><div class="k">Outcome · ผลลัพธ์</div><div class="v">ผู้ประกอบการ/ครีเอเตอร์/แรงงาน เปลี่ยนสถานะ รายได้สูงขึ้น</div></div>
+    <div class="step"><div class="k">Impact · ผลกระทบ</div><div class="v">“ร่วมขับเคลื่อน” เป้าหมายชาติ — ความสามารถแข่งขัน · ฮับอาเซียน · ลดเหลื่อมล้ำ</div></div>
+  </div>
+  <div class="cards2 reveal" style="margin-top:24px;">
+    <div class="panel">
+      <h3>ผลผลิต (Output)</h3>
+      <div class="h3sub">หลักการเขียน</div>
+      <p style="font-size:15px;color:var(--sub);line-height:1.65;">เขียนเป็น<b style="color:var(--ink)">เชิงคุณภาพ</b>ว่า “มีจำนวนและคุณภาพสอดคล้องกับความต้องการจริงจากภาคเอกชนในสาขาการผลิตเป้าหมาย” — <b style="color:var(--ink)">ยังไม่ล็อกตัวเลข</b> ณ ขั้นเสนอ แต่กำหนดตัวชี้วัดจริงหลังการศึกษาความเหมาะสมและรับฟังภาคเอกชน (Phase 1) ทำให้ข้อเสนอยืดหยุ่นและป้องกันการถูกตั้งคำถามก่อนเวลาอันควร</p>
+    </div>
+    <div class="panel">
+      <h3>ผลลัพธ์ (Outcome)</h3>
+      <div class="h3sub">หลักการวัด</div>
+      <p style="font-size:15px;color:var(--sub);line-height:1.65;">ทุกโครงการต้องระบุ<b style="color:var(--ink)">การเปลี่ยนแปลงในกลุ่มเป้าหมาย</b>ที่ชัดเจน เช่น “SME ลดต้นทุน–เพิ่มรายได้” “ครีเอเตอร์เป็นเจ้าของ IP” “แรงงานย้ายสู่บทบาทมูลค่าสูง” ส่วนระดับ<b style="color:var(--ink)">ผลกระทบ (Impact)</b> ผูกกับเป้าหมายชาติด้วยถ้อยคำ “ร่วมขับเคลื่อน” เพื่อความรับผิดที่ป้องกันได้</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- GOVERNANCE / ORCHESTRATION -->
+<section id="govern" class="gray"><div class="wrap wide">
+  <div class="shead reveal"><div class="eyebrow">สถาปัตยกรรมการกำกับและบูรณาการ</div><h2>คณะทำงานควบคุมงานทั้งหมดได้อย่างไร</h2><p>คณะทำงานในฐานะ “ผู้บูรณาการ (Integrator)” มิได้ลงมือทำเองทุกภารกิจ แต่กำหนดทิศทางและประสานให้ทุกหน่วยงานเจ้าภาพดำเนินไปในทิศทางเดียวกัน</p></div>
+
+  <div class="conductor reveal">
+    <div class="em">ปรัชญาการกำกับ</div>
+    <p>คณะทำงานเปรียบเสมือน <b>“วาทยกร”</b> ที่กำหนดจังหวะและประสานให้ทุกหน่วยงานบรรเลงไปในทิศทางเดียวกัน — <b>ภาวะผู้นำคือการประสานพลัง มิใช่การลงมือทำแทนทุกหน่วย</b></p>
+    <div class="cadence">
+      <span>ประชุมคณะทำงาน · ทุก 2 เดือน</span>
+      <span>รายงาน ดศช. · ทุก 6 เดือน</span>
+      <span>รายงานคณะกรรมการ AI ชาติ · รายปี</span>
+      <span>ทบทวนตัวชี้วัดกลางแผน · ปีที่ 3</span>
+    </div>
+  </div>
+
+  <div class="shead left reveal" style="margin:52px 0 24px;"><h2 style="font-size:28px;">คาน 4 ด้าน ที่คณะทำงานถือไว้</h2></div>
+  <div class="levers reveal">
+    <div class="lever"><div class="ln">1</div><h4>กำหนดทิศทาง<br>และจัดลำดับความสำคัญ</h4><p>ตั้งวิสัยทัศน์ เป้าหมาย และลำดับการดำเนินงานปีที่ 1/3/5 ให้ทุกหน่วยงานยึดเป็นกรอบเดียวกัน</p></div>
+    <div class="lever"><div class="ln">2</div><h4>บูรณาการ<br>และประสานเจ้าภาพ</h4><p>เป็นแกนกลางเชื่อมหน่วยงาน ลดงานซ้ำซ้อน หลอมโครงการที่ทับซ้อนเป็นเรือธงเดียว ผ่านพอร์ทัลกลาง</p></div>
+    <div class="lever"><div class="ln">3</div><h4>วางมาตรฐาน<br>และโครงสร้างพื้นฐานกลาง</h4><p>ถือครองทรัพยากรร่วม — พลังประมวลผล ชุดข้อมูล มาตรฐานรับรอง — ที่ทุกหน่วยต้องใช้ร่วมกัน</p></div>
+    <div class="lever"><div class="ln">4</div><h4>ติดตาม ประเมินผล<br>และรายงาน</h4><p>ถือระบบติดตามและประเมินผลระดับพอร์ตโฟลิโอ และเป็นผู้รายงานผลรวมต่อคณะกรรมการแม่</p></div>
+  </div>
+
+  <div class="shead left reveal" style="margin:52px 0 24px;"><h2 style="font-size:28px;">เมทริกซ์การกำกับ — เจ้าภาพรายเสา</h2><p style="max-width:64ch;">แต่ละเสามีหน่วยงานเจ้าภาพชัดเจน โดยคณะทำงานทำหน้าที่ประสานและบูรณาการ — แสดงว่างานทั้งหมดอยู่ภายใต้โครงสร้างการกำกับเดียว</p></div>
+  <div class="orch reveal">
+    <div class="orow head"><div>เสาหลัก</div><div>หน่วยงานเจ้าภาพ / สนับสนุน</div><div>บทบาทคณะทำงาน (ผู้บูรณาการ)</div></div>
+    <div class="orow"><div class="pn">เสา 1<small>ศูนย์ปฏิบัติการ</small></div><div class="ag"><b>depa, สศส./CEA</b> · สนับสนุน สวทช., ดศช.</div><div class="role">กำหนดรูปแบบศูนย์ · ผลักดันสู่หน่วยงานเฉพาะถาวร</div></div>
+    <div class="orow"><div class="pn">เสา 2<small>ระบบนิเวศ</small></div><div class="ag"><b>depa, CEA</b> · สนับสนุน อว., สภาอุตสาหกรรม</div><div class="role">เป็นแกนเครือข่ายกลาง · จัดเวทีจับคู่</div></div>
+    <div class="orow"><div class="pn">เสา 3<small>โครงสร้างพื้นฐาน + ข้อมูล</small></div><div class="ag"><b>สวทช./NECTEC (ThaiSC), BDI</b> · สนับสนุน สดช., depa</div><div class="role">กำหนดมาตรฐานข้อมูล · จัดสรรพลังประมวลผลกลาง</div></div>
+    <div class="orow"><div class="pn">เสา 4<small>โครงการต้นแบบ</small></div><div class="ag"><b>CEA, depa, NIA</b> · สนับสนุน BDI</div><div class="role">คัดเลือกกรณีใช้งาน · เร่งขยายผลเชิงพาณิชย์</div></div>
+    <div class="orow"><div class="pn">เสา 5<small>มาตรฐาน + IP</small></div><div class="ag"><b>กรมทรัพย์สินทางปัญญา, ETDA</b> · สนับสนุน สมอ., ก.วัฒนธรรม</div><div class="role">ผลักดันกรอบนโยบาย · ออกตรารับรองกลาง</div></div>
+    <div class="orow"><div class="pn">เสา 6<small>กำลังคน</small></div><div class="ag"><b>depa, CEA, สคช.</b> · สนับสนุน ก.แรงงาน, อว., บพค.</div><div class="role">เชื่อมหลักสูตรกับอุปสงค์ · กรอบสมรรถนะกลาง</div></div>
+    <div class="orow"><div class="pn">เสา 7<small>ตลาด + ส่งออก</small></div><div class="ag"><b>DITP, CEA</b> · สนับสนุน BOI, กต.</div><div class="role">รวมแบรนด์ประเทศ · เวทีจับคู่ลิขสิทธิ์กลาง</div></div>
+    <div class="orow"><div class="pn">เสา 8<small>ทรัพยากร + งบประมาณ</small></div><div class="ag"><b>ก.คลัง, สำนักงบประมาณ, ดศช.</b> · สนับสนุน NIA, บสย.</div><div class="role">ออกแบบกลไกการเงิน · กองทุนถาวร</div></div>
+  </div>
+</div></section>
+
+<!-- ALIGNMENT -->
+<section id="align"><div class="wrap">
+  <div class="shead reveal">
+    <div class="eyebrow">ตอบคำถาม</div>
+    <h2>ล้อแผนชาติไหม? ล้อข้อไหน?</h2>
+    <p>ล้อครบทั้งสองแผนที่กรรมการชุดใหญ่อ้างอิง — เน้นด้าน/หมุดหมายที่เกี่ยวกับ AI และเศรษฐกิจสร้างสรรค์</p>
+  </div>
+  <div class="cards2 reveal">
+    <div class="panel">
+      <h3>ยุทธศาสตร์ชาติ 20 ปี</h3>
+      <div class="h3sub">พ.ศ. 2561–2580 · ล้อ 4 จาก 6 ด้าน</div>
+      <div class="prow"><span class="dot hi"></span><div class="pt"><b>การสร้างความสามารถในการแข่งขัน</b><span>AI ยกผลิตภาพ+มูลค่าเพิ่ม เปลี่ยนจากรับจ้างผลิต → เจ้าของ IP</span></div><span class="tag hi">หลัก #1</span></div>
+      <div class="prow"><span class="dot hi"></span><div class="pt"><b>การพัฒนาทรัพยากรมนุษย์</b><span>กำลังคนทักษะสูง + AI-augmented creators</span></div><span class="tag hi">หลัก #2</span></div>
+      <div class="prow"><span class="dot mid"></span><div class="pt"><b>การสร้างโอกาสและความเสมอภาค</b><span>ลดเหลื่อมล้ำการเข้าถึง กระจายสู่ภูมิภาค</span></div><span class="tag mid">เสริม</span></div>
+      <div class="prow"><span class="dot mid"></span><div class="pt"><b>การปรับสมดุลภาครัฐ</b><span>COE = ต้นแบบภาครัฐดิจิทัล government-as-platform</span></div><span class="tag mid">เสริม</span></div>
+      <div class="prow"><span class="dot no"></span><div class="pt"><b>ความมั่นคง · สิ่งแวดล้อม</b><span>แตะทางอ้อม — ไม่ใช่จุดขายหลัก</span></div><span class="tag no">ทางอ้อม</span></div>
+    </div>
+    <div class="panel">
+      <h3>แผนพัฒนาฯ ฉบับที่ 13</h3>
+      <div class="h3sub">พ.ศ. 2566–2570 · ล้อ 5 จาก 13 หมุดหมาย</div>
+      <div class="prow"><span class="dot hi"></span><div class="pt"><b>#7 SME เข้มแข็ง ศักยภาพสูง</b><span>ตรงเป้า "ตอบความต้องการจริงภาคเอกชน" ผลกระทบเศรษฐกิจชัด</span></div><span class="tag hi">ทรงพลังสุด</span></div>
+      <div class="prow"><span class="dot hi"></span><div class="pt"><b>#6 ศูนย์กลางดิจิทัลของอาเซียน</b><span>วางไทยเป็นฮับ AI สร้างสรรค์ภูมิภาค สอดรับ ดศช.</span></div><span class="tag hi">หลัก</span></div>
+      <div class="prow"><span class="dot hi"></span><div class="pt"><b>#12 กำลังคนสมรรถนะสูง</b><span>สร้าง AI-literate creative workforce ตอบ "AI แย่งงานไหม"</span></div><span class="tag hi">หลัก</span></div>
+      <div class="prow"><span class="dot mid"></span><div class="pt"><b>#2 ท่องเที่ยวเชิงคุณภาพ</b><span>cultural storytelling ดึงนักท่องเที่ยวมูลค่าสูง</span></div><span class="tag mid">สำคัญ</span></div>
+      <div class="prow"><span class="dot mid"></span><div class="pt"><b>#9 ลดความเหลื่อมล้ำ · #13 ภาครัฐทันสมัย</b><span>เปิดโอกาสครีเอเตอร์ทุกภูมิภาค + กลไกรัฐยุคใหม่</span></div><span class="tag mid">เสริม</span></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- MATRIX -->
+<section id="matrix" class="gray"><div class="wrap">
+  <div class="shead reveal"><div class="eyebrow">Alignment Matrix</div><h2>โครงการ ↔ แผนชาติ</h2><p>โครงการ (ใหม่ + เดิม) ล้อกับด้านยุทธศาสตร์และหมุดหมายใด พร้อมระดับความเข้ม</p></div>
+  <div class="matrix reveal" id="matrix-rows"></div>
+</div></section>
+
+<!-- MEGA -->
+<section id="mega"><div class="wrap wide">
+  <div class="shead reveal"><div class="eyebrow">ข้อค้นพบ · AI Agent บรรจบกันเอง</div><h2>6 เมกะธีมเรือธง</h2><p>หลาย agent เสนอธีมเดียวกันข้ามเสา — สัญญาณว่าเป็น "ว้าว" ตัวจริง · เสนอกรรมการเป็น 6 เรือธงเพื่อกันภาพซ้ำ</p></div>
+  <div class="mega reveal" id="mega-cards"></div>
+</div></section>
+
+<!-- TOP WOW -->
+<section id="wow" class="gray"><div class="wrap wide">
+  <div class="shead reveal"><div class="eyebrow">คัดโดย AI สังเคราะห์</div><h2>8 โครงการที่ผู้ใหญ่จะว้าวที่สุด</h2></div>
+  <div class="wowlist reveal" id="wow-cards"></div>
+</div></section>
+
+<!-- PROJECTS -->
+<section id="projects"><div class="wrap wide">
+  <div class="shead left reveal"><div class="eyebrow">แคตตาล็อก · รายละเอียดเต็ม</div><h2>24 โครงการใหม่</h2><p style="max-width:60ch;">คลิกการ์ดเพื่อดู Output · Outcome · ล้อแผนข้อไหน · Wow factor · เจ้าภาพ · โครงการเทียบเคียง</p></div>
+</div>
+<div class="controls"><div class="wrap wide">
+  <div class="csearch">
+    <input id="q" type="text" placeholder="ค้นหา — สตูดิโอ, ลิขสิทธิ์, กองทุน, อาเซียน, compute…">
+    <span class="cnt" id="cnt"></span>
+  </div>
+  <div class="chips" id="pchips"></div>
+  <div class="chips" id="tchips">
+    <span class="chip on" data-t="all">ทุกประเภท</span>
+    <span class="chip" data-t="Flagship">Flagship</span>
+    <span class="chip" data-t="Foundation">Foundation</span>
+  </div>
+</div></div>
+<div class="wrap wide"><div class="pgrid" id="grid"></div></div></section>
+
+<!-- GAPS -->
+<section class="gray"><div class="wrap">
+  <div class="shead reveal"><div class="eyebrow">ข้อพิจารณา</div><h2>ช่องว่าง Alignment</h2></div>
+  <div class="note reveal">
+    <ul>
+      <li><b>หมุดหมาย #2 (ท่องเที่ยว) ยังเป็นแค่ "เสริม"</b> — ยังไม่มี Flagship ที่ยึดท่องเที่ยวเชิงวัฒนธรรมเป็นแกนตรง หากอยากดันเป็นแกน ควรเพิ่ม 1 โครงการ</li>
+      <li><b>ด้านความมั่นคง / สิ่งแวดล้อม (หมุดหมาย 10, 11)</b> — แตะทางอ้อมโดยเจตนา ไม่ควรเป็นแกน</li>
+      <li><b>หมุดหมาย 1, 3, 4, 5, 8</b> (เกษตร / EV / การแพทย์ / โลจิสติกส์ / เมือง) — อยู่นอกขอบเขต COE</li>
+    </ul>
+  </div>
+</div></section>
+
+<!-- NARRATIVE -->
+<section id="pitch"><div class="wrap">
+  <div class="shead reveal"><div class="eyebrow">พร้อมใช้</div><h2>ย่อหน้าเปิดสำหรับกรรมการชุดใหญ่</h2></div>
+  <div class="quote reveal">
+    <div class="em">Opening Statement</div>
+    <p>ในห้วงที่ปัญญาประดิษฐ์กำลังพลิกโฉมทุกอุตสาหกรรมของโลก COE AI Creative Economy ขอเสนอแผนปฏิบัติการ 5 ปี (งบ 2569–2574) ที่ออกแบบมาเพื่อเปลี่ยนประเทศไทยจาก <b>"ผู้รับจ้างผลิต" เป็น "เจ้าของทรัพย์สินทางปัญญามูลค่าสูง"</b> และวางไทยเป็น <b>"ศูนย์กลาง AI ด้านเศรษฐกิจสร้างสรรค์ของอาเซียน"</b> แผนนี้ไม่ได้ตั้งขึ้นลอยๆ แต่ <b>"ล้อ" กับเสาหลักของชาติอย่างชัดเจน</b> — ตอบยุทธศาสตร์ชาติ 20 ปี ด้านการแข่งขันและด้านทรัพยากรมนุษย์ พร้อมต่อยอดแผนพัฒนาฯ ฉบับที่ 13 ใน 3 หมุดหมายทรงพลังที่สุด คือ <b>#7 SME เข้มแข็ง · #6 ศูนย์กลางดิจิทัลอาเซียน · #12 กำลังคนสมรรถนะสูง</b> หัวใจคือการลงทุนใน <b>"อธิปไตยทางปัญญาประดิษฐ์ของชาติ"</b> ควบคู่กับการตอบโจทย์ร้อนแรงที่สุดอย่างตรงไปตรงมาว่า AI จะ <b>"เสริมพลังและคุ้มครองคนสร้างสรรค์ไทย"</b> ไม่ใช่แย่งงานหรือดูดผลงานไปฟรี — ทุกผลลัพธ์ยึดความต้องการจริงจากภาคเอกชน ไม่ล็อกตัวเลขล่วงหน้า และออกแบบให้เป็นมรดกเชิงสถาบันที่ยั่งยืนข้ามรัฐบาล</p>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><div class="ft">
+  <b>COE AI Creative Economy</b> · AICAT · มิ.ย. 2569<br>
+  ที่มา: สศช. (ยุทธศาสตร์ชาติ 20 ปี · แผนฯ 13) · ThaiLLM/Pathumma (สวทช.) · KOCCA · AI Singapore · IPOS · UK AVEC/VGEC · California Film Credit 4.0 / SB 942 · EU AI Act ม.50 · C2PA · ABCI 3.0 ญี่ปุ่น · Canada SCIP · AsiaIPEX ฮ่องกง · Temasek/GIC
+</div></div></footer>
+
+<script>
+const MEGA=[
+ {em:'🏭',h:'อธิปไตยคอมพิวต์ (AI Factory)',from:'รวม N1.1 + N3.1 + N2.3 — โครงสร้างประมวลผล/เรนเดอร์ของชาติ'},
+ {em:'🧬',h:'โมเดลฐาน + คลังข้อมูลวัฒนธรรมลิขสิทธิ์ถูกต้อง',from:'รวม N1.2 + N2.1 + N4.1 + N5.1 — อธิปไตยข้อมูล + แบ่งรายได้ครีเอเตอร์'},
+ {em:'🔏',h:'Provenance + สิทธิครีเอเตอร์ + Trust Mark',from:'รวม N2.2 + N3.2 + N4.2 — สอดรับ EU AI Act ม.50'},
+ {em:'🌏',h:'ผู้นำอาเซียน',from:'รวม N1.3 + N5.3 + N6.3 + N7.3 — Gateway / IP Exchange / มาตรฐาน / Talent Magnet'},
+ {em:'💰',h:'การเงิน-การคลังเพื่อ IP สร้างสรรค์',from:'รวม N7.1 + N8.1 + N8.2 + N8.3 — Co-Investment / Tax Credit / IP-Fin / Endowment'},
+ {em:'👥',h:'พีระมิดกำลังคน',from:'รวม N6.1 + N6.2 — Just-Transition + Fellows & Masters'},
+];
+const WOW=[
+ {h:'National Creative AI Factory',al:'ด้านการแข่งขัน + #6',why:'วาระอธิปไตย AI · ต่อยอด ThaiLLM/ซูเปอร์คอมพิวเตอร์ชาติ · มรดกลงทุนก้อนใหญ่'},
+ {h:'Thai Creative Data Commons & Foundation Models',al:'การแข่งขัน + มนุษย์ + #6/#7/#2',why:'อธิปไตยข้อมูล · ตอบ "AI ดูดงานคนไทยไหม" · ชาติแรกอาเซียน'},
+ {h:'National Creative IP Co-Investment Fund',al:'ด้านการแข่งขัน + #7',why:'เปลี่ยนไทยเป็นเจ้าของ IP · เทียบเกาหลีดึง Square Enix, ซาอุฯ PIF×MBC'},
+ {h:'Creative Economy AI Expenditure Credit (CE-AIC)',al:'ด้านการแข่งขัน + #7',why:'เงินรัฐ 1 บาทดึงเอกชนหลายเท่า · ไม่ตั้งกองทุนใหม่ → อนุมัติง่าย'},
+ {h:'National Creative Provenance & Rights Trust',al:'การแข่งขัน + ภาครัฐ + #7/#13',why:'สอดรับ EU AI Act ม.50 · ปกป้อง "คน" ไม่ใช่แค่เทคโนโลยี'},
+ {h:'Regional Creative AI Studio Network & ASEAN Hub',al:'เสมอภาค + การแข่งขัน + #9/#7/#2',why:'ได้ทั้ง "กระจายความเจริญ" + "ผู้นำอาเซียน" ในโครงการเดียว'},
+ {h:'National Creative Economy AI Endowment',al:'ภาครัฐ + #13',why:'แก้ "งบ 5 ปีหมดแล้วล้ม" · มรดก legacy ข้ามรัฐบาล'},
+ {h:'Creative-AI Fellows & Masters + Talent Magnet',al:'ทรัพยากรมนุษย์ + #12',why:'ยอดพีระมิดคนเก่งไทยบนเวทีโลก · national pride ที่ถ่ายรูปได้'},
+];
+const MATRIX=[
+ {i:'ยุทธศาสตร์ชาติ · ด้านการสร้างความสามารถในการแข่งขัน',s:'สูง',p:'AI Factory · Foundation Model+Data Commons · IP Co-Investment Fund · IP-Fin · Tax Credit · IP Exchange · Localization Engine · Fellows&Masters'},
+ {i:'ยุทธศาสตร์ชาติ · ด้านการพัฒนาทรัพยากรมนุษย์',s:'สูง',p:'Just-Transition · Fellows&Masters · Talent Magnet · Foundation Model · Evaluation Lab'},
+ {i:'หมุดหมาย #6 · ศูนย์กลางดิจิทัลของอาเซียน',s:'สูง',p:'AI Factory · Compute Hub · Foundation Model · ASEAN Gateway · Evaluation Lab · Localization · IP Exchange · Talent Magnet · Provenance'},
+ {i:'หมุดหมาย #7 · SME เข้มแข็ง (ทรงพลังที่สุด)',s:'สูง',p:'Tax Credit (CE-AIC) · IP-Fin · IP Co-Investment Fund · Provenance/Rights · AI Factory · Localization · IP Exchange'},
+ {i:'หมุดหมาย #12 · กำลังคนสมรรถนะสูง',s:'สูง',p:'Just-Transition · Fellows&Masters · Talent Magnet · ASEAN Gateway · Evaluation Lab'},
+ {i:'ยุทธศาสตร์ชาติ · ด้านโอกาสและความเสมอภาค',s:'กลาง',p:'Regional Studio Network · Compute Hub · Localization · IP-Fin · Data Trust · Just-Transition'},
+ {i:'ยุทธศาสตร์ชาติ · ด้านปรับสมดุลภาครัฐ',s:'กลาง',p:'CE-Endowment · Regulatory Sandbox · Provenance/Trust Mark · Testing Institute · IP Exchange'},
+ {i:'หมุดหมาย #2 · ท่องเที่ยวเชิงคุณภาพ',s:'กลาง',p:'Data Commons (cultural storytelling) · Foundation Model+Cultural Data Bank · Regional Studio Network'},
+ {i:'หมุดหมาย #9 · ลดความเหลื่อมล้ำ',s:'กลาง',p:'Regional Studio Network · Compute Hub · Localization · IP-Fin · Rights Trust · Just-Transition'},
+ {i:'หมุดหมาย #13 · ภาครัฐทันสมัย',s:'กลาง',p:'CE-Endowment · Regulatory Sandbox · Provenance · Testing Institute · IP Exchange'},
+];
+const PILLARS={1:'ศูนย์ปฏิบัติการ',2:'ระบบนิเวศ',3:'โครงสร้างพื้นฐาน+ข้อมูล',4:'โครงการต้นแบบ',5:'มาตรฐาน+IP',6:'กำลังคน',7:'ตลาด+ส่งออก',8:'ทรัพยากร+งบ'};
+
+const D=[
+{p:1,code:'N1.1',type:'Flagship',th:'โรงงานปัญญาประดิษฐ์เพื่อเศรษฐกิจสร้างสรรค์แห่งชาติ',en:'National Creative AI Factory',one:'โครงสร้างพื้นฐานประมวลผล AI สมรรถนะสูง (GPU/AI Factory) ใช้ร่วมกันของชาติ เฉพาะงานสร้างสรรค์ เปิดให้ครีเอเตอร์/สตูดิโอ/SME เข้าถึงผ่าน compute-credit',out:'ระบบ compute กลาง + access scheme แบบ compute-credit, คลังโมเดล/เครื่องมือ AI สร้างสรรค์, ระบบจัดสรรทรัพยากรยืดหยุ่นตามอุปสงค์จริง',oc:'เข้าถึงพลังประมวลผลระดับโลกโดยไม่ต้องลงทุนเอง ลดต้นทุน-เพิ่มผลิตภาพ เปลี่ยนจากรับจ้างเป็นเจ้าของ IP เก็บข้อมูลในประเทศ',s20:'ด้านการสร้างความสามารถในการแข่งขัน',n13:'#6 ฮับดิจิทัลอาเซียน (หลัก) · เสริม #7 SME',wow:'วาระอธิปไตย AI ต่อยอด ThaiLLM/ซูเปอร์คอมพิวเตอร์ชาติ เป็นมรดกลงทุนก้อนใหญ่ของรัฐบาลชุดนี้',lead:'ดศช./ETDA + สวทช.(NSTDA/NECTEC) + depa + เอกชนคลาวด์/ฮาร์ดแวร์',an:'Korea National AI Computing Center+NVIDIA; ThaiLLM บนซูเปอร์คอมพ์ชาติ; AI factory Scaleway/Telenor/Fastweb'},
+{p:1,code:'N1.2',type:'Foundation',th:'โมเดล AI สร้างสรรค์ฐานวัฒนธรรมไทย + คลังข้อมูล Data Trust ลิขสิทธิ์ถูกต้อง',en:'Thai Creative Foundation Model & Licensed Data Trust',one:'สร้างชุดข้อมูลสร้างสรรค์เชิงวัฒนธรรมไทยที่เคลียร์ลิขสิทธิ์และจ่ายผลตอบแทนเจ้าของ เพื่อฝึกโมเดล AI ฐานวัฒนธรรมไทย + ระบบ provenance ระดับชาติ',out:'data trust ที่มีกรอบสัญญาอนุญาต+กลไกแบ่งผลตอบแทน, โมเดล/เครื่องมือ AI เข้าใจบริบทไทย, มาตรฐานพิสูจน์แหล่งที่มา/ลายน้ำดิจิทัล',oc:'ครีเอเตอร์/เจ้าของวัฒนธรรมได้คุ้มครอง+ส่วนแบ่งรายได้ (ไม่ถูกดูดฟรี) อุตสาหกรรมมี AI ที่ "พูดภาษาวัฒนธรรมไทยได้จริง"',s20:'ด้านการแข่งขัน + ด้านโอกาสและความเสมอภาค',n13:'#6 (หลัก) · เชื่อม #2 ท่องเที่ยว · #9 ความเหลื่อมล้ำ',wow:'ตอบคำถามการเมืองร้อนสุด "AI จะดูดผลงาน-แย่งงานไหม" ด้วยจุดยืนเสริมพลัง-คุ้มครอง-แบ่งรายได้ ชาติแรกๆ ที่มี data trust สร้างสรรค์ลิขสิทธิ์ระดับชาติ',lead:'ดศช. + กรมทรัพย์สินทางปัญญา + ก.วัฒนธรรม + สวทช./NECTEC + สมาคมวิชาชีพ',an:'UK AI Opportunities Action Plan (cultural training dataset + National Data Library); Mozilla Data Collective; C2PA for G+LAM'},
+{p:1,code:'N1.3',type:'Flagship',th:'ศูนย์ประสานความเป็นเลิศ AI สร้างสรรค์อาเซียน + มาตรฐานกลางภูมิภาค',en:'ASEAN Creative AI Excellence Gateway',one:'ยกระดับศูนย์ฯ เป็นจุดประสานระดับภูมิภาค วางมาตรฐานกลาง เชื่อมเครือข่ายผู้ผลิต/ครีเอเตอร์ ดึง co-production เข้าไทย',out:'กลไกความร่วมมือ+มาตรฐานกลางกับอาเซียน, เวที/แพลตฟอร์มจับคู่ co-production, เครือข่ายผู้เชี่ยวชาญภูมิภาคที่ใช้ไทยเป็นศูนย์กลาง',oc:'ไทยเป็นฮับ AI สร้างสรรค์อาเซียน ดึงงานผลิต-เม็ดเงิน-ผู้เชี่ยวชาญเข้าประเทศ มีอำนาจต่อรองเชิงมาตรฐาน',s20:'ด้านการแข่งขัน + ทรัพยากรมนุษย์',n13:'#6 (หลัก) · เชื่อม #12 กำลังคน',wow:'ภาพ "ไทยเป็นผู้นำอาเซียน" ที่ รมว./ประธานสภาประกาศบนเวทีโลกได้ first-mover ตั้งมาตรฐานภูมิภาค',lead:'ดศช. + กต.(กรอบอาเซียน) + depa + CEA + BOI',an:'AI Singapore + Sectoral AI CoE (70+ บริษัท); CNAS Sovereign AI Index; เกาหลีบนเวที APEC'},
+
+{p:2,code:'N2.1',type:'Flagship',th:'คลังข้อมูลสร้างสรรค์แห่งชาติ + โมเดลฐานเศรษฐกิจสร้างสรรค์สัญชาติไทย',en:'Thai Creative Data Commons & Foundation Models',one:'สร้างคลังข้อมูลสร้างสรรค์แห่งชาติลิขสิทธิ์สะอาด (ภาพ เสียง ดนตรี ลายผ้า วรรณกรรม) เป็น digital public good แล้วฝึกโมเดล AI สร้างสรรค์สัญชาติไทย',out:'คลังข้อมูลกลางเคลียร์สิทธิ์+data governance ครอบคลุมสาขาหลัก, ชุดโมเดลฐาน (ภาพ/เสียง/ภาษา/ดีไซน์) เปิดให้เอกชนต่อยอด',oc:'ครีเอเตอร์/SME เป็นเจ้าของเครื่องมือ AI ที่เข้าใจบริบทไทย ลดพึ่งพาโมเดลต่างชาติ+ความเสี่ยงลิขสิทธิ์ เปลี่ยนเป็นเจ้าของ IP',s20:'ด้านการแข่งขัน + ทรัพยากรมนุษย์',n13:'#6 (หลัก) · เสริม #7 SME · #2 ท่องเที่ยว',wow:'ประกาศ "อธิปไตยข้อมูลและ AI สร้างสรรค์" แยกชัดจาก ThaiLLM ทั่วไปด้วยการเจาะเศรษฐกิจสร้างสรรค์ + แก้ปม "ข้อมูลฝึกถูกกฎหมายไหม" ที่ทั่วโลกฟ้องกัน',lead:'ดศช./สดช. + BDI + NECTEC/สวทช. + กรมทรัพย์สินทางปัญญา + ก.วัฒนธรรม + เอกชน',an:'ThaiLLM/Pathumma, OpenThaiGPT/Typhoon; Korea HAN Cultural Dataset (MSIT/NIA); Japan WAON; IndiaAI Datasets Platform'},
+{p:2,code:'N2.2',type:'Flagship',th:'ระบบยืนยันแหล่งที่มา+สิทธิ์ผลงานสร้างสรรค์แห่งชาติ + กลไกค่าตอบแทนครีเอเตอร์',en:'National Creative Provenance & Rights Trust',one:'วางโครงสร้าง "ความน่าเชื่อถือ" ของผลงานไทยด้วยมาตรฐาน Content Credentials/C2PA + กลไกให้ครีเอเตอร์ระบุเงื่อนไขฝึก AI และได้ค่าตอบแทน',out:'มาตรฐาน+แพลตฟอร์มกลางติดเครดิตเนื้อหา (ใครสร้าง/ใช้ AI/สิทธิ์ของใคร) เชื่อมเครื่องมือเอกชน, กลไก opt-in/opt-out + ระบบค่าตอบแทน',oc:'ครีเอเตอร์/เจ้าของ IP พิสูจน์ความเป็นเจ้าของ+ต่อรองค่าตอบแทนได้ ลดละเมิด/deepfake สร้างความเชื่อมั่นผู้ซื้อต่างชาติ',s20:'ด้านการแข่งขัน + ปรับสมดุลภาครัฐ',n13:'#7 SME (หลัก) · เสริม #13 ภาครัฐ · #9 เหลื่อมล้ำ',wow:'แก้ pain point ร้อนสุดของโลก ลิขสิทธิ์ vs AI สอดรับ EU AI Act ม.50 (ส.ค. 2569) + California SB 942 first-mover อาเซียน ปกป้อง "คน"',lead:'ดศช./สดช. + กรมทรัพย์สินทางปัญญา + ETDA + องค์กรจัดเก็บค่าลิขสิทธิ์',an:'C2PA (Adobe/BBC/Reuters/AFP/Microsoft/Sony/Nikon/Canon); Adobe Content Credentials; Google SynthID; California SB 942; EU AI Act Art.50'},
+{p:2,code:'N2.3',type:'Foundation',th:'โครงสร้างพื้นฐานคอมพิวต์ AI สร้างสรรค์อธิปไตย — ฮับเรนเดอร์ภูมิภาค',en:'Sovereign Creative AI Compute & Render Hub',one:'จัดตั้ง GPU/เรนเดอร์ฟาร์มสมรรถนะสูงที่ครีเอเตอร์/SME/สถาบันเข้าถึงในต้นทุนแข่งขันได้ สำหรับเรนเดอร์ภาพยนตร์/เกม/VFX และฝึกโมเดล',out:'ขีดความสามารถคอมพิวต์แบบ shared/subsidized ให้ภาคสร้างสรรค์ + ระบบจัดคิวเป็นธรรมต่อรายย่อย เชื่อมคลังข้อมูล/โมเดลฐาน',oc:'สตูดิโอ/ครีเอเตอร์รับงานเรนเดอร์มูลค่าสูงโดยไม่ต้องส่งงานออกนอก ดึงงาน-การลงทุนเข้าไทย รายย่อย/ต่างจังหวัดเข้าถึงเท่ารายใหญ่',s20:'ด้านการแข่งขัน + ความเสมอภาค',n13:'#6 (หลัก) · เสริม #7 · #9',wow:'ตอบวิสัยทัศน์ "ไทยเป็นฮับ AI สร้างสรรค์อาเซียน" ดึงเม็ดเงิน-งานจ้างผลิตเข้าประเทศชัดเจน',lead:'ดศช./สดช. + สวทช.(ThaiSC) + depa + PPP คลาวด์/โทรคมนาคม',an:'ThaiLLM บน LANTA/สวทช.; Canada SCIP (สูงสุด 705 ล้าน$CAD); IndiaAI compute (~1.25 พันล้าน$); France 109 พันล้านยูโร; Italy Fastweb NeXXt'},
+
+{p:3,code:'N3.1',type:'Flagship',th:'โรงงานคำนวณอัจฉริยะแห่งชาติเพื่ออุตสาหกรรมสร้างสรรค์',en:'National Creative AI Factory (Render Backbone)',one:'โครงสร้างประมวลผล AI/เรนเดอร์อธิปไตยกลางเฉพาะงานสร้างสรรค์ ให้ผู้ผลิตไทยเข้าถึงพลังคำนวณระดับสตูดิโอโลกในประเทศ',out:'โครงสร้างประมวลผล/เรนเดอร์กลาง + ระบบจองคิว/จัดสรรตามภาระงานสร้างสรรค์ (render burst, generative pipeline, real-time engine) ออกแบบจาก pain point จริง',oc:'ผู้ผลิต/SME ผลิตงานมูลค่าสูงในประเทศด้วยต้นทุน-ความเร็วระดับแข่งขันโลก ลดส่งงาน+ข้อมูลออกนอก วางไทยเป็นฐานผลิตคอนเทนต์ AI ภูมิภาค',s20:'ด้านการแข่งขัน · เสริม ปรับสมดุลภาครัฐ',n13:'#6 (มิติ 1) · เชื่อม #7',wow:'AI Factory อธิปไตยแห่งแรกเจาะอุตสาหกรรมสร้างสรรค์โดยตรง (เทียบ ABCI 3.0, Canada SCIP) "ไทยเป็นเจ้าของพลังคำนวณ AI ของตัวเอง"',lead:'ดศช./สดช. + NSTDA-ThaiSC + depa + อว. + เอกชนคลาวด์/ฮาร์ดแวร์',an:'Japan ABCI 3.0 (6 AI exaflops); Canada SCIP + AI Compute Access Fund; France AI infra 109bn€; ต่อยอด ThaiSC/NSTDA'},
+{p:3,code:'N3.2',type:'Foundation',th:'ระบบรับรองแหล่งที่มา + ทะเบียน IP ผลงานสร้างสรรค์ดิจิทัลแห่งชาติ',en:'Provenance & Creative IP Registry (Verified Thai Creative)',one:'โครงสร้างกลางใช้มาตรฐานสากล (C2PA/ลายน้ำดิจิทัล) ผูกกับทะเบียน IP รับรอง "แหล่งที่มา-เจ้าของ-การมีส่วนของ AI" ของผลงานดิจิทัลไทย',out:'ระบบออก/ตรวจ "ตรารับรอง Verified Thai Creative" ฝังเครื่องหมายเครื่องอ่านได้ตาม C2PA + เชื่อมทะเบียน IP + แนวปฏิบัติเปิดเผยการใช้ AI',oc:'ครีเอเตอร์/ผู้ประกอบการพิสูจน์ความเป็นเจ้าของ+ความน่าเชื่อถือในตลาดโลก ลดละเมิด/ปลอมแปลง เพิ่มมูลค่า IP ภาครัฐมีกลไกธรรมาภิบาล',s20:'ด้านการแข่งขัน + ภาครัฐ (เสริม ความมั่นคงข้อมูล)',n13:'#7 (หลัก) · เชื่อม #6 · #13',wow:'ชาติแรกในอาเซียนที่มีโครงสร้างรับรองความแท้ระดับชาติ สอดรับมาตรฐานบังคับของโลก (EU AI Act ม.50 ส.ค. 2569, EU Code of Practice แนะ C2PA)',lead:'ดศช. + กรมทรัพย์สินทางปัญญา + สดช./DGA + NECTEC/NSTDA + เอกชน',an:'C2PA Content Credentials; EU AI Act Art.50 + Code of Practice; US CISA + Digital Authenticity Act 2025; Google SynthID; Library of Congress C2PA'},
+{p:3,code:'N3.3',type:'Foundation',th:'ห้องปฏิบัติการทดสอบ + ชุดข้อมูลอ้างอิงมาตรฐาน AI เศรษฐกิจสร้างสรรค์',en:'National Creative AI Evaluation Lab & Golden Datasets',one:'ตั้งห้องปฏิบัติการกลาง + ชุดข้อมูลอ้างอิง (golden/benchmark) วัดว่า AI tool/โมเดลใด "ใช้ได้จริง" กับงานสร้างสรรค์ไทย',out:'ชุดข้อมูลอ้างอิง+ชุดทดสอบมาตรฐานสะท้อนงานจริง (ภาษาไทย/บริบทวัฒนธรรม/ดีไซน์/เล่าเรื่อง), sandbox กลางทดสอบเปรียบเทียบ AI อย่างเป็นกลาง',oc:'SME เลือก/ลงทุน AI tool ได้มั่นใจ ลดเสี่ยงลองผิดลองถูก ภาครัฐมีเกณฑ์กลางจัดซื้อ ผู้พัฒนาไทยมีเป้าคุณภาพจับต้องได้',s20:'ด้านการแข่งขัน + ทรัพยากรมนุษย์',n13:'#6 · เชื่อม #7 · #12',wow:'แก้ปมที่ยังไม่มีใครแก้ — AI ถูกวัดด้วยข้อสอบการเงิน/โค้ด ไม่ได้วัดงานสร้างสรรค์ "ไทยตั้งมาตรฐาน ไม่ใช่ตามคนอื่น"',lead:'ดศช. + NECTEC/NSTDA + มหาวิทยาลัย AI/ดีไซน์ + สำนักงานมาตรฐาน + เอกชนผู้ใช้จริง',an:'Creativity Benchmark (100 แบรนด์); Graphic-Design-Bench (GDB); REAL Bench; AI Safety Institute หลายประเทศ'},
+
+{p:4,code:'N4.1',type:'Flagship',th:'โมเดลฐาน AI เศรษฐกิจสร้างสรรค์ไทย + คลังข้อมูลวัฒนธรรมแห่งชาติ',en:'Thai Creative Foundation Model & Cultural Data Bank',one:'สร้างโมเดลฐาน AI สัญชาติไทยเฉพาะสร้างสรรค์ (ภาพ-เสียง-วิดีโอ-ภาษา) บนคลังข้อมูลวัฒนธรรมที่ขออนุญาตถูกต้อง เปิดใช้ผ่าน API/Playground กลาง',out:'โมเดลฐานเข้าใจบริบทไทย (ลาย/เสียงดนตรี/ภาษา/เล่าเรื่อง) + คลังข้อมูลกำกับลิขสิทธิ์ + ช่องทางเข้าถึงกลาง (API + no-code Playground)',oc:'ครีเอเตอร์/SME เข้าถึงเครื่องมือ AI ระดับโลกต้นทุนต่ำ ผลิตคอนเทนต์อัตลักษณ์ไทยถูกลิขสิทธิ์ ยกจากรับจ้างผลิตเป็นเจ้าของ IP',s20:'ด้านการแข่งขัน + ทรัพยากรมนุษย์',n13:'#6 (หลัก) · เสริม #7',wow:'โครงสร้างพื้นฐาน AI สร้างสรรค์ชิ้นแรก ต่อยอด ThaiLLM/Pathumma สู่โดเมนสร้างสรรค์ first-mover + อธิปไตย AI',lead:'ดศช./สดช. + สวทช./NECTEC + CEA + อว. + กรมส่งเสริมวัฒนธรรม + เอกชน',an:'ThaiLLM/Pathumma LLM (100B+ tokens, National Data Bank); South Korea Sovereign AI (200B-param); Seoul AI Hub (SNU+ETRI)'},
+{p:4,code:'N4.2',type:'Foundation',th:'ระบบรับรองแหล่งที่มา+ความน่าเชื่อถือผลงาน AI แห่งชาติ',en:'National AI Creative Content Provenance & Trust Mark',one:'มาตรฐาน+ระบบรับรองแหล่งที่มาคอนเทนต์ AI (ลายน้ำ + ข้อมูลกำกับตรวจสอบได้) + เครื่องหมาย "ผลงานสร้างสรรค์ไทยที่ไว้วางใจได้"',out:'กรอบมาตรฐานแห่งชาติสอดรับ C2PA/Content Credentials + ระบบออก Trust Mark + เครื่องมือตรวจสอบ/ฝังข้อมูลใช้ได้จริง',oc:'ครีเอเตอร์พิสูจน์ความเป็นเจ้าของ+ความถูกต้อง ลดละเมิด/deepfake ส่งออกเข้า EU/สหรัฐ/แพลตฟอร์มสากลที่บังคับ provenance ได้',s20:'ด้านการแข่งขัน + ภาครัฐ',n13:'#6 · เสริม #13',wow:'ตอบ pain point AI แย่งงาน/ละเมิด/deepfake ด้วยจุดยืน "AI เชื่อถือได้+ปกป้องคนไทย" สอดรับ EU AI Act + California SB 942',lead:'ดศช./สดช. + ETDA + กรมทรัพย์สินทางปัญญา + สมอ. + CEA + แพลตฟอร์มเอกชน',an:'C2PA/Content Credentials; Google SynthID; WIPO AIII (2026); EU AI Act Art.50; California SB 942; US CISA 2025'},
+{p:4,code:'N4.3',type:'Flagship',th:'เครือข่ายศูนย์ปฏิบัติการ AI สร้างสรรค์ระดับภูมิภาค + ฮับเศรษฐกิจสร้างสรรค์อาเซียน',en:'Regional Creative AI Studio Network & ASEAN Hub',one:'เครือข่ายศูนย์ AI สร้างสรรค์ในภูมิภาค เชื่อม COE ส่วนกลาง ให้ครีเอเตอร์/SME/วิสาหกิจชุมชนทุกภาคเข้าถึงเครื่องมือ+พื้นที่ผลิต+บ่มเพาะ ยกเป็นฮับอาเซียน',out:'เครือข่ายศูนย์กระจายตามภูมิภาคให้บริการเครื่องมือ AI+ฝึกอบรม+พื้นที่ผลิตร่วม เชื่อมโมเดลฐาน/แพลตฟอร์มกลาง',oc:'ครีเอเตอร์ต่างจังหวัด/วิสาหกิจชุมชนเข้าถึงเทคโนโลยีเท่ารายใหญ่ สร้างรายได้ในพื้นที่ ลดเหลื่อมล้ำ เชื่อมท่องเที่ยวเชิงวัฒนธรรม',s20:'ด้านความเสมอภาค + การแข่งขัน',n13:'#9 + #7 · เสริม #2 ท่องเที่ยว',wow:'ได้ทั้ง "กระจายความเจริญ/ลดเหลื่อมล้ำ" ที่ฝ่ายการเมืองให้คุณค่าสูง + "ผู้นำ AI อาเซียน" พร้อมกัน ขยายผลได้จริง',lead:'ดศช./สดช. + CEA + depa + อว./มหาวิทยาลัยภูมิภาค + จังหวัด + เอกชน',an:'Seoul AI Hub + เครือข่ายฮับรายเมืองเกาหลี (Busan/Daegu/Gwangju/Daejeon/Jeju); depa Digital Valley/CEA TCDC ภูมิภาค'},
+
+{p:5,code:'N5.1',type:'Flagship',th:'คลังข้อมูลวัฒนธรรมสร้างสรรค์แห่งชาติ + ตลาดอนุญาตใช้สิทธิเพื่อฝึก AI',en:'National Creative Data Trust & Fair-Licensing Marketplace',one:'ตั้ง data trust กลางรวบรวม-บริหารสิทธิคอนเทนต์ไทยคุณภาพสูง แล้วเปิดเป็นตลาดอนุญาตให้ผู้พัฒนา AI จ่ายค่าตอบแทนกลับสู่เจ้าของผลงานไทย',out:'องค์กร/กลไก data trust + แพลตฟอร์มตลาดอนุญาตสิทธิ (opt-in/opt-out machine-readable) เชื่อมทะเบียนสิทธิ + สัญญามาตรฐาน+สูตรแบ่งรายได้',oc:'เจ้าของผลงานไทย (ค่ายเพลง สตูดิโอ นักออกแบบ สำนักพิมพ์ รายย่อย) มีรายได้สายใหม่ เปลี่ยน "AI ขโมยงาน" เป็น "AI จ่ายเงินให้คนไทย"',s20:'ด้านการแข่งขัน + ความเสมอภาค',n13:'#7 (หลัก) · เชื่อม #6 · #9',wow:'ชาติแรกในอาเซียนที่มี sovereign clearinghouse ข้อมูลวัฒนธรรม ทำให้ AI ต้องจ่ายเงินคนไทย — เม็ดเงินกลับเข้าประเทศ + ภาพผู้นำ',lead:'ดศช. + กรมทรัพย์สินทางปัญญา + depa + CEA + องค์กรจัดเก็บค่าลิขสิทธิ์',an:'เกาหลี pilot trust ภายใต้ Art Promotion Act 2024; Cultural Data Trust / sovereign clearinghouse (GovInsider Asia 2025); EU GPAI Code of Practice'},
+{p:5,code:'N5.2',type:'Flagship',th:'สถาบันทดสอบ+รับรองมาตรฐาน AI สร้างสรรค์แห่งชาติ + ชุดทดสอบไทย + ตรวจความแท้สื่อ',en:'National AI-Creative Testing & Assurance Institute',one:'สถาบัน/ห้องปฏิบัติการกลางทดสอบ-รับรองว่าโมเดล/เครื่องมือ AI "ปลอดภัย เข้าใจบริบทไทย เชื่อถือได้" ด้วยชุดทดสอบไทย + ระบบยืนยันความแท้สื่อรับมือ deepfake',out:'สถาบันทดสอบ+ห้องแล็บ, Thai Creative AI Benchmark (ความถูกต้องวัฒนธรรม/ความปลอดภัย/อคติ/คุณภาพ), ระบบยืนยันความแท้สื่อ, assurance mark',oc:'ผู้บริโภค/หน่วยงาน/แพลตฟอร์มแยกสื่อจริง-ปลอม+เลือกเครื่องมือที่รับรอง ผู้พัฒนามีตรารับรองช่วยขาย/ส่งออก ลดความเสียหาย deepfake',s20:'ด้านการแข่งขัน + ภาครัฐ (เสริม ความมั่นคง)',n13:'#6 (หลัก) · เชื่อม #13 · #7',wow:'ไทยเป็นเจ้าของมาตรฐาน+ตรารับรอง AI สร้างสรรค์เองแทนพึ่งต่างชาติ ตอบทั้งเศรษฐกิจ+ความมั่นคง (สู้ deepfake) เทียบ AI Safety Institute',lead:'ดศช. + ETDA + สมอ. + NECTEC/สวทช. + มหาวิทยาลัย/ศูนย์วิจัย AI ภาษาไทย',an:'Taiwan TS-Bench + Breeze Guard; SEA-SafeguardBench (8 ภาษาอาเซียน); NIST deepfake eval; AI Safety Institute UK/US'},
+{p:5,code:'N5.3',type:'Foundation',th:'แซนด์บ็อกซ์กำกับดูแล + มาตรฐานกลาง AI สร้างสรรค์สู่ผู้นำอาเซียน',en:'Creative-AI Regulatory Sandbox & ASEAN Standards Leadership',one:'ตั้งพื้นที่ทดลองกฎเกณฑ์ให้เอกชนทดสอบโมเดลธุรกิจ AI สร้างสรรค์ใหม่ภายใต้กำกับยืดหยุ่น แล้วถอดบทเรียนเป็นมาตรฐานกลางที่ไทยเสนอเป็นต้นแบบอาเซียน',out:'กลไกแซนด์บ็อกซ์+เกณฑ์กำกับยืดหยุ่นสำหรับ use case AI สร้างสรรค์, ชุดมาตรฐานกลาง/แนวปฏิบัติ + ข้อเสนอเชิงนโยบายเสนอเวทีอาเซียน',oc:'ผู้ประกอบการ/สตาร์ทอัพกล้าทดลองนวัตกรรมโดยไม่ติดกำแพงกฎหมายล้าสมัย ไทยเปลี่ยนจากผู้ตามเป็นผู้ร่วมกำหนดกติกาภูมิภาค',s20:'ด้านปรับสมดุลภาครัฐ + การแข่งขัน',n13:'#13 + #6 (หลัก) · เชื่อม #7',wow:'first-mover "ไทยเขียนกติกาให้อาเซียน ไม่ใช่ตามต่างชาติ" ตอบช่องว่างที่ EU/UK/ญี่ปุ่นยังลังเลเรื่องกฎ AI-ลิขสิทธิ์',lead:'ดศช. + สำนักงานกฤษฎีกา + กรมทรัพย์สินทางปัญญา + depa + ETDA + กต.(เวทีอาเซียน)',an:'EU AI Act (regulatory sandbox ภาคบังคับ); TDM exception EU/UK/ญี่ปุ่น — ยังไม่มีชาติใดตั้งมาตรฐาน AI สร้างสรรค์ลงตัว'},
+
+{p:6,code:'N6.1',type:'Flagship',th:'กองทุน+กลไกปรับเปลี่ยนอาชีพอย่างเป็นธรรมสำหรับแรงงานสร้างสรรค์ยุค AI',en:'Creative Workforce Just-Transition Initiative',one:'กลไกชาติเชิงรุกช่วยอาชีพในอุตสาหกรรมสร้างสรรค์ที่ได้รับผลกระทบจาก AI ให้ "ปรับสู่บทบาทมูลค่าสูงกว่าเดิม" เปลี่ยนวาทกรรม "AI แย่งงาน" เป็น "AI ยกระดับอาชีพ"',out:'กรอบประเมินความเสี่ยง/โอกาสรายอาชีพ (occupation transition map), ชุดเส้นทางปรับอาชีพเชื่อมหลักสูตร upskill, มาตรการช่วงเปลี่ยนผ่าน (ทุน/เบี้ยเรียน/จับคู่งาน), ระบบเตือนล่วงหน้า',oc:'แรงงาน/ฟรีแลนซ์สร้างสรรค์ที่เสี่ยงถูกแทนที่ ย้ายสู่บทบาท AI-augmented ที่รายได้สูงขึ้น ลดแรงต้านสังคม/การเมือง รักษาฐานกำลังคน',s20:'ด้านทรัพยากรมนุษย์ + ความเสมอภาค',n13:'#12 (หลัก) · เสริม #9',wow:'ตอบประเด็นการเมืองร้อนสุด "AI แย่งงาน" เชิงรุก รัฐดูเป็นผู้นำที่ห่วงใย+กล้านำ AI พร้อมกัน first-mover อาเซียน เติมช่องว่าง just-transition',lead:'ดศช./สดช. + ก.แรงงาน(กรมพัฒนาฝีมือแรงงาน) + CEA + สภาอุตสาหกรรม/สมาคมวิชาชีพ + แพลตฟอร์มงาน',an:'California EO (พ.ค. 2026) เตรียมแรงงานรับ AI disruption; US AI Workforce Centers (DOL/NSF); Singapore National AI Impact Programme'},
+{p:6,code:'N6.2',type:'Flagship',th:'ศูนย์บ่มเพาะผู้เชี่ยวชาญ+ทุนปราชญ์ AI สร้างสรรค์ระดับโลก',en:'Thailand Creative-AI Fellows & Masters Programme',one:'คัด+บ่มเพาะคนเก่งหัวกะทิเป็นผู้เชี่ยวชาญ/ปรมาจารย์ AI สร้างสรรค์ระดับโลก ผ่านทุนวิจัย-สร้างผลงาน ความร่วมมือสตูดิโอ/บริษัทชั้นนำ และเวทีนานาชาติ',out:'โครงสร้างทุน fellowship/residency ทำงานกับ studio/แพลตฟอร์มระดับโลกจริง, ผลงาน/IP ต้นแบบที่ได้รับการยอมรับสากล, เครือข่ายปรมาจารย์ที่กลับมาเป็นกำลังหลัก',oc:'ไทยมีบุคลากร world-class เป็นแม่เหล็กดึงงานมูลค่าสูง+การลงทุน และเป็นครูคนรุ่นถัดไป ยกภาพจาก "รับจ้างผลิต" เป็น "แหล่งกำเนิดผู้เชี่ยวชาญ+IP"',s20:'ด้านทรัพยากรมนุษย์ + การแข่งขัน',n13:'#12 (หลัก) · เสริม #6',wow:'ผู้ใหญ่ "ว้าว" เพราะได้เห็นหน้าตาคนเก่งไทยบนเวทีโลกที่ถ่ายรูปได้ prestige project สร้าง national pride ผ่านบุคคลจริง',lead:'ดศช./สดช. + สอวช./บพค.(ทุนวิจัยขั้นแนวหน้า) + มหาวิทยาลัยชั้นนำ + CEA + สตูดิโอ/บริษัทระดับโลก',an:'Korea Top-Tier Visa (2026); AI Singapore Fellowship; UK Global Talent (digital) visa'},
+{p:6,code:'N6.3',type:'Foundation',th:'ดึงดูด+หมุนเวียนผู้เชี่ยวชาญ AI สร้างสรรค์ สู่ศูนย์รวมกำลังคนอาเซียน',en:'ASEAN Creative-AI Talent Magnet & Mobility',one:'กลไกประสานนโยบายดึงผู้เชี่ยวชาญ AI สร้างสรรค์จากทั่วโลก+คนไทยในต่างแดน (reverse brain-drain) เข้ามาทำงาน-สอน-ตั้งทีมในไทย เชื่อมวีซ่าทักษะสูง',out:'ข้อเสนอนโยบาย+กลไก one-stop เชื่อมวีซ่าทักษะสูง/LTR กับความต้องการอุตสาหกรรม, ระบบเทียบโอน/รับรองทักษะข้ามพรมแดน, โครงการจับคู่ผู้เชี่ยวชาญกับบริษัทไทย',oc:'ไทยเป็นจุดหมาย+ศูนย์รวมกำลังคน AI สร้างสรรค์อาเซียน เกิดการถ่ายทอดความรู้ ดึงสำนักงาน/ทีมผลิตภูมิภาคมาตั้งในไทย ลดสมองไหล',s20:'ด้านทรัพยากรมนุษย์ + ภาครัฐ',n13:'#6 (หลัก) · เสริม #12 · #13',wow:'ตอบวิสัยทัศน์ฮับอาเซียน แก้ปมภูมิภาคแย่งกำลังคน ไทยจริงจังเรื่องดึงคนเก่ง ต่อยอด LTR/DTV ที่มีอยู่ให้เจาะ creative-AI',lead:'ดศช./สดช. + BOI + ตม./กต.(วีซ่าทักษะสูง) + ก.แรงงาน + CEA + สภาดิจิทัลฯ',an:'Korea Top-Tier Visa (2026); Singapore tech/AI talent visa; Malaysia DE Rantau; Thailand LTR (2022)/DTV (2024)'},
+
+{p:7,code:'N7.1',type:'Flagship',th:'กองทุนร่วมลงทุนทรัพย์สินทางปัญญาสร้างสรรค์แห่งชาติ',en:'National Creative IP Co-Investment Fund',one:'กลไกร่วมลงทุนกึ่งรัฐ-เอกชนใช้ AI ประเมินศักยภาพตลาดโลกของผลงานไทย แล้วร่วมลงทุนถือสิทธิ์ IP เปลี่ยนไทยจาก "รับจ้างผลิต" เป็น "เจ้าของ IP"',out:'กองทุนร่วมลงทุน IP ภายใต้ธรรมาภิบาลการลงทุน + deal pipeline ผลงานไทย (ภาพยนตร์/ซีรีส์/เกม/แอนิเมชัน/คาแรกเตอร์/ดนตรี) ประเมินด้วย AI + พอร์ต IP ที่ไทยถือสิทธิ์ + LP ต่างชาติเชิงกลยุทธ์',oc:'ผู้ประกอบการ/สตูดิโอมีแหล่งทุนพัฒนา IP ของตนแทนรับจ้างผลิต รายได้+มูลค่าเพิ่มตกกับคนไทยระยะยาว เกิด super IP สัญชาติไทยขายทั่วโลก',s20:'ด้านการแข่งขัน (เจ้าของ IP มูลค่าสูง)',n13:'#7 (หลัก) · เสริม #6',wow:'รมว.คลัง/BOI เห็นภาพชัด เลียนโมเดลพิสูจน์แล้ว (เกาหลีดึง Square Enix เป็น LP, ซาอุฯ PIF×MBC ~2 พันล้าน$) วัดผลเศรษฐกิจได้',lead:'COE(ดศช.) + CEA + NIA + ธนาคารรัฐ(SME D Bank/บสย.) + ก.ล.ต. + LP เอกชน',an:'IBK-Crit Global Content Fund (KRW 37.5bn, Square Enix LP); KOCCA Content IP unit; PIF×MBC (~2bn$) + Osoul Fund (SAR 850m)'},
+{p:7,code:'N7.2',type:'Foundation',th:'แพลตฟอร์มแปล+พากย์ผลงานสร้างสรรค์ไทยด้วย AI เพื่อการส่งออก',en:'Thai Creative Content AI Localization & Dubbing Engine',one:'โครงสร้าง AI กลางที่แปล-พากย์-ทำคำบรรยายผลงานไทย (ภาพยนตร์/ซีรีส์/เกม/ดนตรี) เป็นหลายภาษาคุณภาพมืออาชีพ ลบกำแพงภาษาที่เป็นอุปสรรคใหญ่สุดของการส่งออก',out:'แพลตฟอร์ม AI localization ต้นทุนแข่งขันได้ รองรับหลายภาษาเป้าหมาย (อาเซียน จีน อินเดีย ตะวันออกกลาง ตะวันตก) รักษาน้ำเสียง/อารมณ์/เอกลักษณ์ + โมเดลภาษาไทย/คลังเสียง + QA ร่วมผู้ซื้อ',oc:'รายย่อย/ครีเอเตอร์ต่างจังหวัด/SME ที่ไม่มีงบจ้างพากย์ระดับมืออาชีพ ออกตลาดโลกได้เท่ารายใหญ่ ลดต้นทุน-เวลา localization คอนเทนต์ไทยเข้าถึงตลาดใหม่',s20:'ด้านการแข่งขัน + ความเสมอภาค',n13:'#6 (หลัก) · เสริม #9 · #7',wow:'แก้ pain point ที่ทุกคนยอมรับ — คอนเทนต์ไทยดีแต่ออกตลาดโลกไม่ได้เพราะภาษา ทุกโครงการส่งออกต่อยอดได้ มีกรณีโลกพิสูจน์แล้ว',lead:'COE(ดศช.) + NECTEC/สวทช. + depa + CEA + มหาวิทยาลัย/ผู้พัฒนาโมเดลภาษาไทย + แพลตฟอร์ม/สตูดิโอเอกชน',an:'CAMB.AI × IMAX (AI dubbing เรียลไทม์) + Comcast NBCUniversal; ElevenLabs Dubbing (90+ ภาษา); Deepdub; HeyGen'},
+{p:7,code:'N7.3',type:'Flagship',th:'ศูนย์แลกเปลี่ยน+จับคู่ลิขสิทธิ์เศรษฐกิจสร้างสรรค์อาเซียนด้วย AI',en:'ASEAN Creative IP Exchange',one:'แพลตฟอร์มกลางภูมิภาคใช้ AI จับคู่ผู้ถือสิทธิ์ไทย/อาเซียนกับผู้ซื้อ-ผู้จัดจำหน่าย-พันธมิตร co-production ทั่วโลก + โครงสร้างกฎหมาย/สัญญาลิขสิทธิ์',out:'แพลตฟอร์มแลกเปลี่ยน/จัดแสดง/จับคู่ลิขสิทธิ์ + แคตตาล็อก IP ไทย/อาเซียน (ฟิล์ม/ฟอร์แมต/คาแรกเตอร์/ดีไซน์/ดนตรี) + AI แนะนำคู่ค้า+ประเมินมูลค่า + สัญญามาตรฐาน + ดีลจริง',oc:'ผู้ถือสิทธิ์ไทย/อาเซียนเข้าถึงผู้ซื้อระดับโลกโดยตรง ลดอุปสรรค/ต้นทุนเจรจาข้ามพรมแดน ดึง co-production+ทุนเข้าไทย ไทยเป็น "ตลาดกลาง" ของภูมิภาค',s20:'ด้านการแข่งขัน + ภาครัฐ (government-as-platform)',n13:'#6 (หลัก) · เสริม #7 · #13',wow:'ภาพ "ผู้นำภูมิภาค" ตรง: ไทยเป็นเจ้าของ "ตลาดกลาง IP ของอาเซียน" first-mover (ยังไม่มีชาติใดยึด) เทียบ AsiaIPEX ฮ่องกง',lead:'COE(ดศช.) + DITP + กรมทรัพย์สินทางปัญญา + CEA + BOI + สมาคมอุตสาหกรรมสร้างสรรค์',an:'AsiaIPEX Creative Hub (HKTDC/CCIDA); KOCCA "Content IP Xcelerate in Singapore" + ศูนย์ธุรกิจต่างประเทศ 25 แห่ง'},
+
+{p:8,code:'N8.1',type:'Flagship',th:'เครดิตภาษีอุตสาหกรรมสร้างสรรค์ที่ขับเคลื่อนด้วย AI',en:'Creative Economy AI Expenditure Credit (CE-AIC)',one:'เครดิตภาษีแบบคืนเงิน (refundable) สำหรับค่าใช้จ่ายผลิตคอนเทนต์/ผลงานสร้างสรรค์ที่ใช้ AI และผลิตในไทย เปลี่ยนงบจาก "อุดหนุนรายโครงการ" เป็น "สิทธิประโยชน์ทางการคลังเชิงระบบ"',out:'กลไกเครดิตภาษีร่วมกับ ก.คลัง/สรรพากร/BOI ครอบคลุมภาพยนตร์/แอนิเมชัน/เกม/ดนตรี/ดีไซน์/คอนเทนต์ดิจิทัลที่มีองค์ประกอบ AI + ระบบ certification + audit ป้องกันสวมสิทธิ์',oc:'ผู้ประกอบการ/สตูดิโอลดต้นทุนจริง ดึง inward production+เงินลงทุนเอกชนเข้าประเทศ เปลี่ยนเป็นเจ้าของ IP สร้างเม็ดเงินหมุนเวียน+การจ้างงาน รัฐได้ภาษีกลับจากกิจกรรมจริง',s20:'ด้านการสร้างความสามารถในการแข่งขัน',n13:'#7 (หลัก) · เชื่อม #6',wow:'รมว.คลัง/BOI เข้าใจทันที — เงินรัฐ 1 บาทดึงเอกชนหลายเท่า (leverage) ไม่ตั้งกองทุนใหม่ → อนุมัติง่าย first-mover อาเซียนที่ผูกเครดิตภาษีกับการใช้ AI',lead:'ดศช. + ก.คลัง + กรมสรรพากร + BOI + สภาอุตสาหกรรม/สมาคมวิชาชีพ',an:'UK Audio-Visual Expenditure Credit (34-53%) + Video Games (34%, ม.ค. 2024); California Film & TV Tax Credit 4.0 (35-40% refundable, 750 ล้าน$)'},
+{p:8,code:'N8.2',type:'Foundation',th:'กลไกการเงินค้ำประกันด้วยทรัพย์สินทางปัญญาสร้างสรรค์',en:'Creative IP-Backed Financing Facility (IP-Fin)',one:'กลไกค้ำประกันสินเชื่อ+รับรองมูลค่า IP ร่วมสถาบันการเงิน ให้ผู้ประกอบการใช้ทรัพย์สินทางปัญญา (ลิขสิทธิ์/คาแรกเตอร์/คอนเทนต์ที่สร้างด้วย AI) เป็นหลักประกันเข้าถึงทุน',out:'ระบบประเมินมูลค่า IP (valuation framework) ร่วมกรมทรัพย์สินทางปัญญา+สถาบันการเงิน, กลไกค้ำประกันสินเชื่อผ่าน บสย./ธนาคารรัฐ, ทะเบียน IP เชื่อมการเงิน',oc:'ครีเอเตอร์/SME ที่เคยกู้ไม่ได้เพราะไม่มีหลักทรัพย์ เข้าถึงทุนหมุนเวียน/ขยายงานโดยใช้ผลงานเป็นหลักประกัน ต่อยอด IP เป็นทรัพย์สินมูลค่าสูง ลดเหลื่อมล้ำการเข้าถึงทุน',s20:'ด้านการแข่งขัน + ความเสมอภาค',n13:'#7 (หลัก) · เชื่อม #9',wow:'แก้ pain point "ครีเอเตอร์มีทรัพย์สินแต่กู้ไม่ได้" สายการเงิน (ธปท./ธนาคารรัฐ/บสย.) เห็นเป็น asset class ใหม่ รัฐไม่จ่ายตรง leverage สูง',lead:'ดศช. + กรมทรัพย์สินทางปัญญา + บสย. + ธปท. + ธนาคารรัฐ(SME D Bank/EXIM) + สมาคมวิชาชีพ',an:'Korea Fund of Funds + K-Content/Media Strategy Fund (KRW 600bn→1.02tn); IP-backed lending เกาหลี/สิงคโปร์ (IPOS IP Financing Scheme)'},
+{p:8,code:'N8.3',type:'Flagship',th:'กองทุนถาวรเศรษฐกิจสร้างสรรค์ AI แห่งชาติ',en:'National Creative Economy AI Endowment',one:'กองทุนทุนตั้งต้นกึ่งถาวร (endowment/sovereign model) นำดอกผล+ผลตอบแทนกลับมาหมุนเวียนสนับสนุนระบบนิเวศต่อเนื่อง ลดพึ่งงบรายปีที่ผันผวนตามการเมือง',out:'โครงสร้างกองทุนถาวร+ธรรมาภิบาลการลงทุนมืออาชีพ, แหล่งทุนตั้งต้นผสม (งบ+CSR เอกชน+ส่วนแบ่งผลตอบแทน IP), นโยบายใช้เฉพาะดอกผลหนุน R&D/การเข้าถึง AI/ทุนครีเอเตอร์ทุกภูมิภาค',oc:'ระบบนิเวศมีแหล่งทุนมั่นคงข้ามปีงบ/ข้ามรัฐบาล ครีเอเตอร์ได้รับการสนับสนุนที่คาดการณ์ได้ ไม่สะดุดตามการเมือง รัฐสร้างสินทรัพย์ที่งอกเงยแทนใช้แล้วหมด',s20:'ด้านปรับสมดุลภาครัฐ + การแข่งขัน',n13:'#13 (หลัก) · เชื่อม #6 · #7',wow:'วิสัยทัศน์ "สร้างสถาบันที่อยู่ยั่งยืน" มรดก legacy ข้ามรัฐบาล แก้ความกังวล "งบ 5 ปีหมดแล้วล้ม" ตรงจุด คาบเกี่ยวปลายแผน 13 → เชื่อมแผน 14',lead:'ดศช. + ก.คลัง + สำนักงบประมาณ + สศช. + คณะกรรมการ AI แห่งชาติ',an:'Korea Fund of Funds (Mother Fund ตั้งแต่ 2005); endowment/sovereign fund แบบ Temasek/GIC สิงคโปร์'},
+];
+
+// render mega
+document.getElementById('mega-cards').innerHTML=MEGA.map(m=>`<div class="mcard"><div class="em">${m.em}</div><h4>${m.h}</h4><div class="from">${m.from}</div></div>`).join('');
+// render wow
+document.getElementById('wow-cards').innerHTML=WOW.map(w=>`<div class="wow"><h4>${w.h}</h4><div class="al">ล้อ: ${w.al}</div><div class="why">${w.why}</div></div>`).join('');
+// render matrix
+document.getElementById('matrix-rows').innerHTML=MATRIX.map(m=>`<div class="mrow"><div class="mi"><b>${m.i}</b><p>${m.p}</p></div><span class="strength s-${m.s}">${m.s}</span></div>`).join('');
+
+// projects
+const grid=document.getElementById('grid');
+let fp='all', ft='all', fq='';
+// pillar chips
+const pchips=document.getElementById('pchips');
+pchips.innerHTML='<span class="chip on" data-p="all">ทุกเสา</span>'+Object.keys(PILLARS).map(k=>`<span class="chip" data-p="${k}">เสา ${k} · ${PILLARS[k]}</span>`).join('');
+function bt(t){return t==='Quick Win'?'QuickWin':t;}
+function render(){
+  let n=0;
+  grid.innerHTML=D.map((d,i)=>{
+    const m=(fp==='all'||d.p==fp)&&(ft==='all'||d.type===ft)&&(fq===''||(d.th+d.en+d.one+d.out+d.oc+d.wow+d.code).toLowerCase().includes(fq));
+    if(m)n++;
+    return `<div class="pc ${m?'':'hide'}" data-i="${i}">
+      <div class="pc-h" onclick="tg(${i})">
+        <span class="chev">⌄</span>
+        <div class="pc-top"><span class="pc-code">${d.code} · เสา ${d.p}</span><span class="btype ${bt(d.type)}">${d.type}</span></div>
+        <h4>${d.th}</h4><div class="en">${d.en}</div>
+        <div class="one">${d.one}</div>
+        <div class="altags"><span class="altag b">ยศ.ชาติ: ${d.s20}</span><span class="altag b">แผน13: ${d.n13}</span></div>
+      </div>
+      <div class="pc-body"><div class="pc-inner">
+        <div class="field"><div class="lab">Output</div><p>${d.out}</p></div>
+        <div class="field"><div class="lab">Outcome</div><p>${d.oc}</p></div>
+        <div class="field wow"><div class="lab">★ Wow factor — ทำไมผู้ใหญ่จะชอบ</div><p>${d.wow}</p></div>
+        <div class="hr"></div>
+        <div class="field"><div class="lab">เจ้าภาพ</div><p>${d.lead}</p></div>
+        <div class="field"><div class="lab">โครงการเทียบเคียง</div><p>${d.an}</p></div>
+      </div></div>
+    </div>`;
+  }).join('');
+  document.getElementById('cnt').textContent=`${n} จาก ${D.length} โครงการ`;
+}
+function tg(i){grid.querySelector(`.pc[data-i="${i}"]`).classList.toggle('open');}
+pchips.addEventListener('click',e=>{if(!e.target.dataset.p)return;[...pchips.children].forEach(c=>c.classList.remove('on'));e.target.classList.add('on');fp=e.target.dataset.p;render();});
+document.getElementById('tchips').addEventListener('click',e=>{if(!e.target.dataset.t)return;[...document.getElementById('tchips').children].forEach(c=>c.classList.remove('on'));e.target.classList.add('on');ft=e.target.dataset.t;render();});
+document.getElementById('q').addEventListener('input',e=>{fq=e.target.value.toLowerCase().trim();render();});
+render();
+
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
