@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>ตารางอัตรากำลัง (Org Chart + FTE) — COE Creative Economy</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap');
+@page { size: A4; margin: 1cm 1.1cm; }
+* { box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body { font-family:'Sarabun','Leelawadee UI','Tahoma',sans-serif; color:#1F2937; font-size:10.5px; line-height:1.4; margin:0; }
+h1 { text-align:center; color:#1F4E78; font-size:1.45em; margin:0 0 2px; }
+h1 .sub { display:block; font-size:0.6em; color:#2E75B6; font-weight:600; margin-top:3px; }
+h2 { color:#1F4E78; font-size:1.05em; margin:12px 0 5px; border-bottom:2px solid #2E75B6; padding-bottom:2px; }
+.layer { border-radius:8px; padding:8px 12px; margin:5px 0; color:#fff; text-align:center; }
+.layer .tag { font-size:0.78em; opacity:0.9; float:left; } .layer .tag2 { font-size:0.78em; opacity:0.9; float:right; }
+.layer .t { font-weight:700; font-size:1.02em; } .layer .d { font-size:0.85em; opacity:0.95; }
+.l1 { background:#1F4E78; } .l3 { background:#0E7490; } .l4 { background:#047857; }
+.arrow { text-align:center; color:#9CA3AF; font-size:1.1em; line-height:1; margin:1px 0; }
+.anu-row { display:grid; grid-template-columns:repeat(4,1fr); gap:7px; margin:5px 0; }
+.anu { background:#7C3AED; color:#fff; border-radius:8px; padding:7px 9px; }
+.anu .n { font-weight:700; font-size:0.95em; } .anu .h { font-size:0.8em; opacity:0.92; }
+.anu .f { font-size:0.82em; background:rgba(255,255,255,0.2); border-radius:4px; padding:1px 5px; display:inline-block; margin-top:3px; }
+.proj-row { display:grid; grid-template-columns:repeat(5,1fr); gap:6px; margin:5px 0; }
+.proj { background:#ECFDF5; border:1px solid #A7F3D0; border-radius:6px; padding:5px 6px; text-align:center; font-size:0.85em; }
+.proj b { color:#065F46; } .proj .fte { color:#047857; font-weight:700; }
+table { width:100%; border-collapse:collapse; font-size:0.95em; }
+th,td { border:1px solid #CBD5E1; padding:4px 8px; text-align:left; vertical-align:middle; }
+th { background:#1F4E78; color:#fff; font-weight:600; }
+tr:nth-child(even) td { background:#F6F9FC; }
+.num { text-align:right; } .sub2 td { background:#EFF6FF; font-size:0.95em; }
+.tot td { background:#1F4E78 !important; color:#fff; font-weight:700; }
+.cols { display:grid; grid-template-columns:1.15fr 0.85fr; gap:12px; }
+.footer { margin-top:9px; padding-top:6px; border-top:2px solid #1F4E78; font-size:0.88em; text-align:center; color:#1F4E78; font-weight:600; }
+.note { font-size:0.85em; color:#6B7280; }
+</style>
+</head>
+<body>
+
+<h1>ตารางอัตรากำลัง — โครงสร้างองค์กร (Org Chart) + FTE
+<span class="sub">คณะทำงานขับเคลื่อน COE Creative Economy + อนุทำงาน 4 ชุด · 5 มิ.ย. 2569</span>
+</h1>
+
+<div class="layer l1"><span class="tag">ชั้น 1 · Decision</span><span class="tag2">ประชุมทุก 2 เดือน · ไม่นับ FTE</span>
+<div class="t">คณะทำงานหลัก COE — 17 ที่นั่ง + ที่ปรึกษา 4</div>
+<div class="d">ประธาน: AICAT · รองประธาน: depa · เลขานุการ: สดช. + AICAT &nbsp;|&nbsp; รายงาน คกก.แม่ (สดช.) ทุก 6 เดือน</div></div>
+<div class="arrow">▼ กำกับ / อนุมัติ</div>
+
+<div class="anu-row">
+  <div class="anu"><div class="n">อนุ 1 — Hub & Capacity</div><div class="h">CEA + AICAT</div><span class="f">→ F4 Toolkit + Hub</span></div>
+  <div class="anu"><div class="n">อนุ 2 — Sandbox & Data</div><div class="h">BDI + NIA + AICAT</div><span class="f">→ F1 + F3</span></div>
+  <div class="anu"><div class="n">อนุ 3 — Policy/IP</div><div class="h">กรม IP + อ.สมชาย</div><span class="f">→ ด้าน 5</span></div>
+  <div class="anu"><div class="n">อนุ 4 — Industry & Export</div><div class="h">DITP + DAAT</div><span class="f">→ F2 + F5</span></div>
+</div>
+<div class="note" style="text-align:center;">ชั้น 2 · Execution oversight · ประชุมทุกเดือน · กรรมการ + ผู้เชี่ยวชาญ ~7–10/ชุด</div>
+<div class="arrow">▼</div>
+
+<div class="layer l3"><span class="tag">ชั้น 3 · Operations</span><span class="tag2">ทำงานรายวัน · FTE</span>
+<div class="t">สำนักงานเลขานุการ / PMO กลาง (สดช. + AICAT)</div>
+<div class="d">ประสาน · งบประมาณ · ติดตาม · รายงาน · กฎหมาย/IP</div></div>
+<div class="arrow">▼ สนับสนุน</div>
+
+<div class="proj-row">
+  <div class="proj"><b>F1 Foundation</b><br><span class="fte">16 FTE</span><br>+annotate 25</div>
+  <div class="proj"><b>F2 Summit</b><br><span class="fte">6 FTE</span><br>+PCO</div>
+  <div class="proj"><b>F3 Sandbox</b><br><span class="fte">9 FTE</span><br>+mentor</div>
+  <div class="proj"><b>F4 Toolkit</b><br><span class="fte">18 FTE</span><br>+content/mentor</div>
+  <div class="proj"><b>F5 Export</b><br><span class="fte">9 FTE</span><br>+สคต.</div>
+</div>
+<div class="note" style="text-align:center;">ชั้น 4 · Execution · ทีมโครงการเรือธง ~58 FTE core (+ pool/จ้างเหมา)</div>
+
+<div class="cols" style="margin-top:10px;">
+<div>
+<h2>อัตรากำลังปฏิบัติการ (FTE)</h2>
+<table>
+  <thead><tr><th>หน่วย</th><th class="num">ปีที่ 1</th><th class="num">เต็มรูปแบบ</th></tr></thead>
+  <tbody>
+    <tr><td><b>สำนักงานเลขานุการ / PMO กลาง</b></td><td class="num">5</td><td class="num">11</td></tr>
+    <tr class="sub2"><td>— หัวหน้าสำนักงาน/PMO</td><td class="num">1</td><td class="num">1</td></tr>
+    <tr class="sub2"><td>— ผู้ประสานโครงการ (1/อนุ)</td><td class="num">1</td><td class="num">4</td></tr>
+    <tr class="sub2"><td>— การเงิน/พัสดุ/ธุรการ</td><td class="num">1</td><td class="num">3</td></tr>
+    <tr class="sub2"><td>— M&E + สื่อสาร/กฎหมาย</td><td class="num">2</td><td class="num">3</td></tr>
+    <tr><td><b>ทีมเลขานุการอนุทำงาน 4 ชุด</b></td><td class="num">4</td><td class="num">8</td></tr>
+    <tr><td><b>ทีมโครงการเรือธง</b></td><td class="num">~24</td><td class="num">~58</td></tr>
+    <tr class="sub2"><td>— F1 Foundation/Dataset</td><td class="num">10</td><td class="num">16</td></tr>
+    <tr class="sub2"><td>— F2 Summit</td><td class="num">3</td><td class="num">6</td></tr>
+    <tr class="sub2"><td>— F3 Sandbox</td><td class="num">6</td><td class="num">9</td></tr>
+    <tr class="sub2"><td>— F4 Toolkit</td><td class="num">5</td><td class="num">18</td></tr>
+    <tr class="sub2"><td>— F5 Export</td><td class="num">0</td><td class="num">9</td></tr>
+    <tr class="tot"><td>รวม FTE core</td><td class="num">~33</td><td class="num">~77</td></tr>
+  </tbody>
+</table>
+<p class="note">+ Pool/จ้างเหมา (variable): annotate 25 · mentor · content · PCO · speaker/buyer</p>
+</div>
+<div>
+<h2>ที่มาของกำลังคน</h2>
+<table>
+  <thead><tr><th>ประเภท</th><th class="num">สัดส่วน</th></tr></thead>
+  <tbody>
+    <tr><td>จ้างใหม่ (โครงการ/สัญญาจ้าง)</td><td class="num">~40%</td></tr>
+    <tr><td>In-kind หน่วยงาน (จนท.รัฐ/สมาคม)</td><td class="num">~25%</td></tr>
+    <tr><td>จ้างเหมา (PCO, ผู้พัฒนาระบบ)</td><td class="num">~15%</td></tr>
+    <tr><td>Pool ผู้เชี่ยวชาญ/ครูพี่เลี้ยง</td><td class="num">~15%</td></tr>
+    <tr><td>Advisor นานาชาติ/คนไทย ตปท.</td><td class="num">~5%</td></tr>
+  </tbody>
+</table>
+<h2>ทักษะขาดแคลน (วางแผนล่วงหน้า)</h2>
+<table>
+  <tbody>
+    <tr><td>นักวิจัย AI อาวุโส</td><td>F1</td></tr>
+    <tr><td>MLOps / FinOps</td><td>F1, F3</td></tr>
+    <tr><td>Instructional designer</td><td>F4</td></tr>
+    <tr><td>Business matchmaker ตปท.</td><td>F2, F5</td></tr>
+  </tbody>
+</table>
+<p class="note">กลยุทธ์: ทีมแกนเล็ก + จ้างใหม่เฉพาะทักษะวิกฤต + in-kind + จ้างเหมา + pool — ไม่ตั้งทีมประจำใหญ่</p>
+</div>
+</div>
+
+<div class="footer">จัดทำโดย สมาคมสร้างสรรค์ปัญญาประดิษฐ์ไทย (AICAT) · มิถุนายน 2569 · ประมาณการเชิงวางแผน (ปรับหลัง Feasibility Study)</div>
+
+</body>
+</html>
