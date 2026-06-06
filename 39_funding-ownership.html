@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>การจำแนกความเป็นเจ้าของงบ — COE Creative Economy</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap');
+@page { size: A4; margin: 1.1cm 1.3cm; }
+* { box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body { font-family:'Sarabun','Leelawadee UI','Tahoma',sans-serif; color:#1F2937; font-size:11px; line-height:1.45; margin:0; }
+h1 { text-align:center; color:#1F4E78; font-size:1.5em; margin:0 0 2px; }
+h1 .sub { display:block; font-size:0.6em; color:#2E75B6; font-weight:600; margin-top:3px; }
+.cards { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:12px 0; }
+.card { border-radius:10px; padding:12px 14px; color:#fff; }
+.card .pct { font-size:2.1em; font-weight:800; line-height:1; }
+.card .amt { font-size:0.95em; font-weight:600; opacity:0.95; }
+.card .ttl { font-size:1.0em; font-weight:700; margin:4px 0 5px; }
+.card .desc { font-size:0.82em; opacity:0.95; }
+.c-gov{ background:#1F4E78; } .c-priv{ background:#047857; } .c-new{ background:#B45309; }
+.callout { background:#FEF3C7; border:1px solid #F59E0B; border-radius:8px; padding:10px 14px; margin:10px 0; font-size:1.0em; color:#78350F; }
+.callout b { color:#92400E; }
+h2 { color:#1F4E78; font-size:1.05em; margin:12px 0 4px; border-bottom:2px solid #2E75B6; padding-bottom:2px; }
+table { width:100%; border-collapse:collapse; font-size:0.95em; }
+th,td { border:1px solid #CBD5E1; padding:5px 8px; text-align:left; vertical-align:middle; }
+th { background:#1F4E78; color:#fff; font-weight:600; }
+tr:nth-child(even) td { background:#F6F9FC; }
+.num { text-align:right; }
+.gov { color:#1F4E78; font-weight:700; } .priv { color:#047857; font-weight:700; } .new { color:#B45309; font-weight:700; }
+.tot td { background:#1F4E78 !important; color:#fff; font-weight:700; }
+.yr { font-size:0.95em; margin-top:8px; }
+.footer { margin-top:10px; padding-top:6px; border-top:2px solid #1F4E78; font-size:0.9em; text-align:center; color:#1F4E78; font-weight:600; }
+.legend { font-size:0.86em; color:#374151; margin-top:4px; }
+</style>
+</head>
+<body>
+
+<h1>COE Creative Economy — การจำแนกความเป็นเจ้าของงบประมาณ
+<span class="sub">รัฐดำเนินการ+เงินรัฐ · เอกชนดำเนินการ+เงินเอกชน · ต้องของบเพิ่ม | ฐาน: แผน Base case 500 ลบ./5 ปี · 5 มิ.ย. 2569</span>
+</h1>
+
+<div class="cards">
+  <div class="card c-gov"><div class="pct">73%</div><div class="amt">≈ 365 ลบ.</div><div class="ttl">รัฐดำเนินการ + เงินรัฐ</div><div class="desc">งบ/กองทุนหน่วยรัฐที่มีอยู่ + ทรัพยากร in-kind (LANTA, voucher engine, Thai MOOC) — ไม่ต้องของบใหม่</div></div>
+  <div class="card c-priv"><div class="pct">11%</div><div class="amt">≈ 55 ลบ.</div><div class="ttl">เอกชนดำเนินการ + เงินเอกชน</div><div class="desc">AICAT secretariat · sponsor · พันธมิตรเครื่องมือ AI · บริษัทร่วมจ่าย — ไม่เป็นภาระงบรัฐ</div></div>
+  <div class="card c-new"><div class="pct">16%</div><div class="amt">≈ 80 ลบ.</div><div class="ttl">ต้องของบเพิ่ม</div><div class="desc">เสนอ คกก./โครงการพิเศษ สดช. — Dataset, Feasibility, ส่วนกลาง · ปีแรกเพียง ~12 ลบ.</div></div>
+</div>
+
+<div class="callout">
+<b>ข้อความหลักสำหรับ คกก.ขับเคลื่อน:</b> การขับเคลื่อนกว่า <b>84% ใช้งบและกลไกที่มีอยู่แล้ว</b> (รัฐ 73% + เอกชน 11%) — <b>ขออนุมัติงบใหม่เพียง ~16% (80 ลบ. ตลอด 5 ปี) และปีแรกเพียง ~12 ลบ.</b>
+</div>
+
+<h2>จำแนกรายโครงการ (ลบ.)</h2>
+<table>
+  <thead><tr><th>โครงการ</th><th>ผู้ดำเนินการหลัก</th><th class="num">งบ 5 ปี</th><th class="num">รัฐ (มีอยู่)</th><th class="num">เอกชน</th><th class="num">ของบเพิ่ม</th></tr></thead>
+  <tbody>
+    <tr><td>1. Foundation Model (Dataset)</td><td>รัฐ (BDI, สวทช.) + AICAT</td><td class="num">120</td><td class="num gov">75</td><td class="num priv">–</td><td class="num new">45</td></tr>
+    <tr><td>2. Bangkok AI Summit</td><td>รัฐ (DITP, CEA, สสปน.) + เอกชน</td><td class="num">80</td><td class="num gov">65</td><td class="num priv">15</td><td class="num new">–</td></tr>
+    <tr><td>3. Sandbox Platform</td><td>รัฐ (NIA, BDI, depa) + AICAT</td><td class="num">150</td><td class="num gov">125</td><td class="num priv">15</td><td class="num new">10</td></tr>
+    <tr><td>4. Creator AI Toolkit</td><td>ร่วมรัฐ–เอกชน (depa, CEA, สคช.)</td><td class="num">100</td><td class="num gov">75</td><td class="num priv">20</td><td class="num new">5</td></tr>
+    <tr><td>5. Export Accelerator</td><td>ร่วม (DITP, สสว., EXIM, DAAT)</td><td class="num">30</td><td class="num gov">20</td><td class="num priv">5</td><td class="num new">5</td></tr>
+    <tr><td>งบสนับสนุน (Feasibility/เลขาฯ/IP)</td><td>รัฐ (สดช.) + AICAT</td><td class="num">20</td><td class="num gov">5</td><td class="num priv">–</td><td class="num new">15</td></tr>
+    <tr class="tot"><td colspan="2">รวม</td><td class="num">500</td><td class="num">365</td><td class="num">55</td><td class="num">80</td></tr>
+  </tbody>
+</table>
+
+<h2>เงินที่ต้อง "ของบเพิ่ม" รายปี</h2>
+<table class="yr">
+  <thead><tr><th>ปีงบประมาณ</th><th class="num">ปี 1</th><th class="num">ปี 2</th><th class="num">ปี 3</th><th class="num">ปี 4</th><th class="num">ปี 5</th><th class="num">รวม</th></tr></thead>
+  <tbody>
+    <tr><td>โครงการพิเศษ (เสนอ คกก./สดช.)</td><td class="num new">12</td><td class="num">18</td><td class="num">20</td><td class="num">16</td><td class="num">14</td><td class="num"><b>80</b></td></tr>
+  </tbody>
+</table>
+<p class="legend">ของบใหม่ทยอยตามผลงาน — ปีแรกเล็ก แล้วเพิ่มเมื่อ Feasibility/ผลนำร่องพิสูจน์คุณค่า · หากยกระดับเป็นเรือธงชาติเต็มรูปแบบ (~2,000 ลบ.) ต้องเสนอ ครม. แยกอีกชั้น</p>
+
+<div class="footer">จัดทำโดย สมาคมสร้างสรรค์ปัญญาประดิษฐ์ไทย (AICAT) · มิถุนายน 2569 · ประมาณการเชิงวางแผน (ปรับหลัง Feasibility Study)</div>
+
+</body>
+</html>
