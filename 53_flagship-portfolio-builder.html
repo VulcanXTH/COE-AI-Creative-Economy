@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>COE Creative Economy — Flagship Portfolio Builder</title>
+<style>
+  :root{--navy:#1F4E78;--blue:#2E75B6;--ignite:#1F4E78;--grow:#047857;--govern:#B45309;--equip:#7C3AED;--bg:#F1F5F9;--line:#CBD5E1;}
+  *{box-sizing:border-box;}
+  body{font-family:'Sarabun','TH Sarabun New','Leelawadee UI','Tahoma',sans-serif;margin:0;background:var(--bg);color:#1F2937;font-size:14px;line-height:1.4;}
+  header{background:linear-gradient(90deg,var(--navy),var(--blue));color:#fff;padding:14px 18px;}
+  header h1{margin:0;font-size:1.25em;}
+  header p{margin:4px 0 0;font-size:.82em;opacity:.92;}
+  .wrap{display:grid;grid-template-columns:1fr 340px;gap:14px;padding:14px;align-items:start;}
+  @media(max-width:880px){.wrap{grid-template-columns:1fr;}.side{position:static!important;}}
+  .toolbar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+  .btn{border:1px solid var(--line);background:#fff;border-radius:7px;padding:5px 10px;font-family:inherit;font-size:.82em;cursor:pointer;font-weight:600;color:var(--navy);}
+  .btn:hover{background:#EFF6FF;}
+  .btn.preset{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .btn.preset:hover{background:#163a5c;}
+  .filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+  .chip{border:1px solid var(--line);background:#fff;border-radius:14px;padding:3px 11px;font-size:.78em;cursor:pointer;font-weight:600;}
+  .chip.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:10px;}
+  .card{background:#fff;border:1px solid var(--line);border-left:5px solid #999;border-radius:9px;padding:10px 11px;display:flex;flex-direction:column;gap:5px;transition:.12s;}
+  .card.sel{box-shadow:0 0 0 2px var(--navy) inset;border-left-color:var(--navy);}
+  .card h3{margin:0;font-size:.96em;color:var(--navy);line-height:1.25;}
+  .scts{display:flex;flex-wrap:wrap;gap:4px;}
+  .s{font-size:.68em;font-weight:700;color:#fff;border-radius:9px;padding:1px 7px;}
+  .s.IGNITE{background:var(--ignite);}.s.GROW{background:var(--grow);}.s.GOVERN{background:var(--govern);}.s.EQUIP{background:var(--equip);}
+  .meta{font-size:.76em;color:#475569;display:flex;justify-content:space-between;gap:6px;flex-wrap:wrap;}
+  .bud{font-weight:800;color:var(--navy);font-size:1.05em;}
+  .desc{font-size:.78em;color:#374151;}
+  .det{font-size:.74em;color:#64748B;display:none;border-top:1px dashed var(--line);padding-top:5px;margin-top:2px;}
+  .det.show{display:block;}
+  .det b{color:#334155;}
+  .row{display:flex;gap:6px;align-items:center;margin-top:auto;}
+  .add{flex:1;border:1px solid var(--navy);background:#fff;color:var(--navy);border-radius:7px;padding:5px;font-family:inherit;font-weight:700;cursor:pointer;font-size:.82em;}
+  .card.sel .add{background:var(--navy);color:#fff;}
+  .more{border:1px solid var(--line);background:#fff;border-radius:7px;padding:5px 8px;cursor:pointer;font-size:.78em;color:#64748B;}
+  .pilot{font-size:.72em;color:#475569;display:flex;align-items:center;gap:4px;cursor:pointer;user-select:none;}
+  .legacy-tag{font-size:.65em;background:#E2E8F0;color:#475569;border-radius:7px;padding:1px 6px;font-weight:700;}
+  .side{position:sticky;top:14px;background:#fff;border:1px solid var(--line);border-radius:11px;padding:14px;}
+  .side h2{margin:0 0 8px;font-size:1.05em;color:var(--navy);}
+  .total{font-size:2em;font-weight:800;color:var(--navy);line-height:1;}
+  .total small{font-size:.42em;color:#64748B;font-weight:600;}
+  .cov{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:10px 0;}
+  .cov div{border-radius:7px;padding:6px 8px;font-size:.78em;font-weight:700;text-align:center;border:2px solid var(--line);color:#94A3B8;background:#F8FAFC;}
+  .cov div.on{color:#fff;border-color:transparent;}
+  .cov div.on.IGNITE{background:var(--ignite);}.cov div.on.GROW{background:var(--grow);}.cov div.on.GOVERN{background:var(--govern);}.cov div.on.EQUIP{background:var(--equip);}
+  .warn{font-size:.76em;color:#B91C1C;font-weight:700;margin:6px 0;min-height:1em;}
+  .ok{color:var(--grow);}
+  .sellist{list-style:none;padding:0;margin:8px 0;max-height:210px;overflow:auto;}
+  .sellist li{display:flex;justify-content:space-between;gap:6px;font-size:.8em;padding:4px 0;border-bottom:1px solid #EEF2F7;}
+  .sellist .x{color:#B91C1C;cursor:pointer;font-weight:800;}
+  textarea{width:100%;height:120px;font-family:ui-monospace,Menlo,monospace;font-size:.72em;border:1px solid var(--line);border-radius:7px;padding:7px;resize:vertical;}
+  .copy{width:100%;margin-top:6px;background:var(--grow);color:#fff;border:none;border-radius:7px;padding:8px;font-family:inherit;font-weight:700;cursor:pointer;}
+  .copy:hover{background:#065f46;}
+  .hint{font-size:.74em;color:#64748B;margin-top:6px;}
+</style>
+</head>
+<body>
+<header>
+  <h1>🎛️ COE Creative Economy — เครื่องมือจัด Flagship Portfolio</h1>
+  <p>เลือก/สลับโครงการเอง · งบรวม + ไฟครบ 4 ยุทธศาสตร์อัปเดตสด · เลือกเสร็จกด “คัดลอกสรุป” แล้ววางในแชทบอก Claude</p>
+</header>
+<div class="wrap">
+  <main>
+    <div class="toolbar">
+      <span style="font-weight:700;color:#475569;font-size:.82em;align-self:center;">Preset:</span>
+      <button class="btn preset" onclick="loadPreset('rec')">มิกซ์แนะนำ</button>
+      <button class="btn preset" onclick="loadPreset('A')">A · GOVERN+EQUIP</button>
+      <button class="btn preset" onclick="loadPreset('B')">B · Export</button>
+      <button class="btn preset" onclick="loadPreset('C')">C · Lean</button>
+      <button class="btn" onclick="loadPreset('legacy')">ของเดิม 4 ตัว</button>
+      <button class="btn" onclick="loadPreset('clear')">ล้าง</button>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+  </main>
+  <aside class="side">
+    <h2>📦 พอร์ตของผม</h2>
+    <div class="total"><span id="total">0</span> <small>ลบ. · <span id="count">0</span> โครงการ</small></div>
+    <div class="cov" id="cov"></div>
+    <div class="warn" id="warn"></div>
+    <ul class="sellist" id="sellist"></ul>
+    <textarea id="summary" readonly></textarea>
+    <button class="copy" onclick="copySum()">📋 คัดลอกสรุป (ส่งให้ Claude)</button>
+    <p class="hint">หมายเหตุ: ตัวที่มี “นำร่อง” กดสลับงบนำร่อง/เต็มได้ · งบเป็นประมาณการเชิงวางแผน</p>
+  </aside>
+</div>
+<script>
+const STR=["IGNITE","GROW","GOVERN","EQUIP"];
+const F=[
+ {id:"trust",n:"Trusted Thai AI — ตราส่งออก provenance + EU AI Act ม.50",s:["GOVERN","GROW"],full:150,pilot:90,sc:93,fe:"H",
+  what:"สคีมารับรองแม่: C2PA/ลายน้ำ + checklist EU AI Act ม.50 + Trust Seal = พาสปอร์ตส่งออกเดียวใช้ได้ทุกสื่อ",
+  lev:"ETDA + สมอ.(ISO/IEC 42001) + DIP + DITP/สคต. + depa/กทปส.",out:"ติดตรา ≥3,000 ชิ้น/ซีซัน · รักษามูลค่าส่งออก ≥1,500 ลบ. · ใช้ตรา ≥400 ราย",
+  wow:"⭐ deadline จริง EU AI Act ม.50 (ส.ค.2569) · GOVERN ตัวหลัก · ศูนย์อื่นเคลมไม่ได้"},
+ {id:"vault",n:"Creative Rights Vault & Consent Ledger",s:["EQUIP","GOVERN"],full:140,pilot:90,sc:91,fe:"M",
+  what:"ทะเบียนสิทธิ์/consent ของครีเอเตอร์ไทย → ป้อน ThaiLLM + ตลาดสิทธิ์สะอาด + royalty จ่ายต่อการใช้จริง",
+  lev:"BDI ThaiLLM + NECTEC LANTA + GDCC + DIP + ก.ล.ต. + กองทุน ววน.",out:"ลงทะเบียน ≥30,000 ชิ้น · ดีล licensing ≥150 (≥250 ลบ.) · จ่ายคืนครีเอเตอร์ ≥60 ลบ.",
+  wow:"EQUIP+GOVERN ตัวหลัก · data commons ลิขสิทธิ์สะอาด ชาติแรกอาเซียน"},
+ {id:"vfx",n:"VFX-Bid Thailand — first-loss ดึงงาน VFX/Post ต่างชาติ",s:["GROW","IGNITE"],full:300,pilot:150,sc:89,fe:"H",
+  what:"ปิดดีลรับจ้างผลิต VFX/Post ต่างชาติ ใช้ AI เร่งงาน + first-loss ลดความเสี่ยงรับงานใหญ่",
+  lev:"BOI + DITP pavilion/สคต. + EXIM/บสย. + สสว.BDS",out:"สัญญา ≥80 (≥3,000 ลบ.) · สตูดิโอ ≥60 · จ้างทักษะสูง ≥1,200 ตำแหน่ง",
+  wow:"service export งานภาพที่ AI ตัดต้นทุน labor ตรง ๆ วัดเป็นเงินตราต่างประเทศ"},
+ {id:"esport",n:"Esports & Game Export Bounty + พากย์สดเรียลไทม์",s:["GROW","IGNITE"],full:480,sc:86,fe:"M",
+  what:"จ่ายเมื่อเกิดผล: bounty เมื่อสตูดิโอ/ทีมมีรายได้ตปท./เซ็น publisher + AI live localization",
+  lev:"depa ESPORTS (≥1,000 ลบ.) + Game Accel + กกท. + BOI + EXIM/บสย.",out:"รับ bounty ≥120 ราย · ดีล ≥80 · รายได้ส่งออก verify ≥1,500 ลบ.",
+  wow:"จ่ายเมื่อพิสูจน์ผล ไม่เสี่ยงงบจม + เชื่อมอีสปอร์ต"},
+ {id:"char",n:"Character-to-Cashflow — IP ตัวละคร/Virtual Talent",s:["GROW","IGNITE"],full:80,sc:85,fe:"M",
+  what:"matching-grant + revenue-share clawback ปั้น IP ตัวละคร/ไอดอลเสมือนทำเงินข้ามสื่อ",
+  lev:"BOI Matching (1:1 VC) + depa OTOD AI + DITP/DIP Character Licensing",out:"ปั้น IP ≥100 · ดีล ≥150 · รายได้ ≥800 ลบ. · เอกชนร่วม ≥160 ลบ.",
+  wow:"ขี่ character economy +196%→7.2 พันล้าน · สินทรัพย์ทำเงินซ้ำไม่จำกัด"},
+ {id:"lqm",n:"Thai-LQM — ตรารับรองคุณภาพแปล/พากย์ AI (ราชบัณฑิตยสภา)",s:["GOVERN","IGNITE"],full:55,sc:84,fe:"H",
+  what:"ตรา + golden benchmark 8-12 ภาษาคู่ โดยราชบัณฑิตยสภา · จ่ายเมื่อสอบผ่าน (pay-for-pass)",
+  lev:"depa d-voucher + สสว.BDS + ETDA + สมอ. + DITP + ราชบัณฑิตยสภา",out:"ติดตรา ~2,000-3,000 เรื่อง · มาตรฐานกลางอาเซียน 1 ฉบับ",
+  wow:"มีเพียงศูนย์สร้างสรรค์+ราชบัณฑิตฯ ที่ออกมาตรฐานภาษา-วัฒนธรรมได้"},
+ {id:"martech",n:"MarTech Performance Pool — AI โฆษณา จ่ายเมื่อยอดขายขึ้น",s:["IGNITE","GROW"],full:75,sc:83,fe:"H",
+  what:"co-pay เครื่องมือ AI มาร์เทค (ad creative/livestream/optimization) + rebate เมื่อยอดขายเพิ่ม",
+  lev:"depa d-voucher + ลดหย่อนภาษี 200% + สสว.BDS + DITP",out:"ใช้สแตก ≥6,000 ราย · ต้นทุนลด ≥70% · ยอดขาย attribute ≥2,000 ลบ.",
+  wow:"ผูกผลตลาด (ยอดขาย/ROAS) กับเครื่องมือ AI โดยตรง · งบต่ำ leverage สูง"},
+ {id:"otop",n:"OTOP-AI Pay-on-Sales — AI ฐานราก + จ้างเยาวชน",s:["IGNITE","GROW"],full:85,sc:82,fe:"H",
+  what:"OTOP/ชุมชนได้ชุด AI ครบจบ จ่ายโบนัสเมื่อยอดขายเพิ่มจริง + จ้างเยาวชน กสศ.",
+  lev:"พช. OTOP NEXT + สสว.BDS + กสศ. Learn-to-Earn",out:"ใช้ AI ขายจริง ~3,000 ราย · ยอดขาย +≥30% · เยาวชนมีรายได้ ~600 คน",
+  wow:"ผูกลดเหลื่อมล้ำ + ยอดขายฐานราก · ตอบกรอบเศรษฐกิจฐานราก"},
+ {id:"fashion",n:"AI Fashion-Tech Export Sprint — จ่ายเมื่อปิดดีล",s:["GROW","IGNITE"],full:65,sc:81,fe:"H",
+  what:"ดีไซเนอร์ใช้ AI ทั้งสาย (เจนคอลเลกชัน/3D sampling/นางแบบเสมือน) ตัดต้นทุน sample 70-90%",
+  lev:"DITP + EXIM/บสย. + BOI + DIP",out:"เข้าสปรินต์ ~400 ราย · ดีลส่งออก ≥800 ลบ. · ออกตลาดโลกทันฤดูกาล",
+  wow:"แฟชั่น sample แพง/ช้าสุด · AI ตัดต้นทุนตรงจุด"},
+ {id:"artist",n:"Thai Virtual Artist Export — ไอดอล/ศิลปินเสมือนไทย",s:["GROW","IGNITE"],full:90,sc:79,fe:"M",
+  what:"matching/rebate จ่ายเมื่อมีรายได้ตปท. ปั้นนักร้อง/ไอดอลเสมือนไทยส่งออก (สตรีม/คอนเสิร์ตเสมือน/licensing)",
+  lev:"DITP + depa + กองทุนพัฒนาสื่อฯ + BOI + ก.ล.ต.",out:"มีรายได้ตปท. ≥30 ราย · ดีล/สตรีม ≥250 ลบ. · MV/เพลง AI ≥200 ชิ้น",
+  wow:"ไอดอล AI ไทยขายโลก · จำง่าย เฉพาะมุมเสียง/ดนตรี"},
+ {id:"voice",n:"Thai Voice & Music Rights — ทะเบียนลายเสียง + ค่าตอบแทน",s:["GOVERN","EQUIP"],full:65,sc:78,fe:"M",
+  what:"นักร้อง/นักพากย์ลงทะเบียน voiceprint + consent ให้ AI ใช้เสียง + collective licensing จ่าย pay-per-use",
+  lev:"DIP + ETDA + สมอ. + ก.ล.ต. + กองทุนพัฒนาสื่อฯ + BDI",out:"ลงทะเบียน ≥3,000 ราย · ดีล ≥40 · คืนศิลปิน ≥30 ลบ.",
+  wow:"voiceprint consent ชาติแรกอาเซียน · เฉพาะมุมเสียง"},
+ {id:"compute",n:"Creative Compute Credits — เครดิต LANTA/GDCC จ่ายเมื่อส่งงาน",s:["EQUIP","GROW"],full:70,sc:78,fe:"H",
+  what:"ปลดเครดิต compute เป็นงวด (milestone) เมื่อทีมส่งผลงานจริง สำหรับฝึก/รัน gen-AI สร้างสรรค์",
+  lev:"NECTEC/ThaiSC LANTA + GDCC/NT คลาวด์รัฐ",out:"ทีมส่งมอบผล ≥250 · ชิ้นงาน ≥150 · รายได้/ทุน follow-on ≥250 ลบ.",
+  wow:"เครดิตเฉพาะ workload สร้างสรรค์ + คืนข้อมูลเข้าคลังเป็นวงจร"},
+ {id:"book",n:"Thai Rights & Book Export — AI แปลทั้งเล่ม ขายสิทธิ์",s:["GROW","IGNITE"],full:70,sc:76,fe:"M",
+  what:"AI แปลทั้งเล่ม (นิยาย/การ์ตูน/เว็บตูน) + บก.มนุษย์ ทำ rights kit ขายสิทธิ์ตปท. margin สูง",
+  lev:"DITP book fair (Frankfurt/Bologna/สคต.) + DIP + EXIM/บสย. + กองทุนพัฒนาสื่อฯ",out:"พร้อมขายสิทธิ์ ~400-600 ชื่อ · ดีล ≥120 · advance+royalty ≥250 ลบ.",
+  wow:"เติมช่องที่ Dub-Thai (วิดีโอ) ไม่ครอบ · recurring royalty"},
+ {id:"festival",n:"Festival Twin — ดิจิทัลทวินเทศกาล + AI วางแผนฝูงชน",s:["IGNITE","GROW","GOVERN"],full:180,sc:74,fe:"M",
+  what:"จ่ายเมื่อเกิดผล: ทีม AI ไทยทำดิจิทัลทวินเทศกาลใหญ่ (สงกรานต์/MICE) พยากรณ์ฝูงชน/ความปลอดภัย/เม็ดเงิน",
+  lev:"TCEB/สสปน. + ททท. Co-Creator + CEA + depa",out:"ติดตั้ง 20 เทศกาล · จ้างทีม AI ไทย ≥30 · กระตุ้นเศรษฐกิจ ≥3,000 ลบ.",
+  wow:"ผูกศิลปวัฒนธรรม+เครือข่ายเทศกาล (CEA/TCEB)"},
+ {id:"livel10n",n:"Live Localization Pact — AI แปลสด/accessibility เทศกาล-ท่องเที่ยว",s:["IGNITE","GROW","GOVERN"],full:140,sc:73,fe:"H",
+  what:"co-pay ผู้จัดเทศกาล/แหล่งท่องเที่ยวติด AI แปลสดหลายภาษา + เสียงบรรยาย + รองรับผู้พิการ + Quality Mark",
+  lev:"สสว.BDS + ททท. Co-Creator + TCEB + ETDA + สมอ. + BDI",out:"ติดตั้ง 150 แห่ง · ≥10 ภาษา · ใช้จ่ายนักท่องเที่ยว/หัว +≥10%",
+  wow:"ประสบการณ์สด real-time on-site + accessibility"},
+ {id:"squad",n:"Creative Tourism Studio Squad — หน่วยกำลังคน AI เคลื่อนที่",s:["EQUIP","IGNITE","GROW"],full:220,sc:72,fe:"M",
+  what:"จ่ายเมื่อเกิดผล สร้างหน่วยกำลังคน AI สร้างสรรค์เคลื่อนที่ลงเมืองรอง/ชุมชน ผลิตประสบการณ์+คอนเทนต์",
+  lev:"ททท. Co-Creator + CEA + พช. OTOP + กสศ. + depa + กองทุนพัฒนาสื่อฯ",out:"อบรม+จ้าง ≥500 คน · ลงพื้นที่ ≥60 · รายได้ท่องเที่ยวชุมชน ≥1,500 ลบ.",
+  wow:"AI + เล่าเรื่องวัฒนธรรม + ออกแบบประสบการณ์ลงพื้นที่"},
+ // ---- ของเดิม (portfolio ที่ล็อกไว้ก่อน pivot menu) ----
+ {id:"voucher",n:"AI-Creative Voucher (ของเดิม)",s:["IGNITE"],full:60,sc:0,fe:"H",legacy:1,
+  what:"คูปองให้ครีเอเตอร์/SME ใช้เครื่องมือ AI ลดต้นทุน",lev:"สสว.BDS + depa d-voucher",out:"~5,000 ราย · ต้นทุน ↓30%",wow:"adoption เร็ว วงกว้าง · proven"},
+ {id:"rebate",n:"AI-Production Cash Rebate (ของเดิม)",s:["GROW"],full:85,sc:0,fe:"M",legacy:1,
+  what:"คืนเงิน % ค่าผลิต AI ที่เกิดในไทย ดึงงานเข้าประเทศ",lev:"BOI + Thailand Film Office",out:"production spend ×4 + จ้างคนไทย",wow:"เม็ดเงิน leverage สูง"},
+ {id:"dub",n:"Dub-Thai Export (ของเดิม)",s:["GROW"],full:75,sc:0,fe:"M",legacy:1,
+  what:"สายพากย์/แปลคอนเทนต์ไทยด้วย AI 10-20 ภาษา ส่งออก",lev:"DITP + CEA",out:"~300-500 เรื่อง · มูลค่าดีลตลาดใหม่",wow:"ส่งออกคอนเทนต์"},
+ {id:"game",n:"AI Game Studio Accelerator (ของเดิม)",s:["GROW"],full:15,sc:0,fe:"H",legacy:1,
+  what:"เติมโมดูล AI ใน accelerator เกม/อีสปอร์ตของ depa",lev:"depa Game/ESPORTS",out:"สตูดิโอใช้ AI + รายได้ส่งออก",wow:"งบเล็ก leverage ecosystem ใหญ่"},
+];
+const PRESETS={
+ rec:[["voucher",0],["rebate",0],["char",0],["trust",1],["vault",1]],
+ A:[["trust",0],["vault",0],["martech",0],["otop",0]],
+ B:[["vfx",1],["trust",1],["compute",0],["lqm",0]],
+ C:[["char",0],["voice",0],["vault",1],["lqm",0]],
+ legacy:[["voucher",0],["rebate",0],["dub",0],["game",0]],
+ clear:[],
+};
+let sel={}; // id -> {pilot:bool}
+let filter="ALL";
+const $=id=>document.getElementById(id);
+function bud(f){const st=sel[f.id];return (st&&st.pilot&&f.pilot)?f.pilot:f.full;}
+function renderFilters(){
+  const opts=["ALL",...STR,"ของเดิม"];
+  $("filters").innerHTML=opts.map(o=>`<span class="chip${filter===o?' active':''}" onclick="setFilter('${o}')">${o==='ALL'?'ทั้งหมด':o}</span>`).join("");
+}
+function setFilter(o){filter=o;renderGrid();}
+function renderGrid(){
+  const g=$("grid");g.innerHTML="";
+  F.filter(f=>filter==="ALL"||(filter==="ของเดิม"?f.legacy:f.s.includes(filter)))
+   .forEach(f=>{
+    const on=!!sel[f.id];const pil=on&&sel[f.id].pilot&&f.pilot;
+    const c=document.createElement("div");c.className="card"+(on?" sel":"");
+    c.style.borderLeftColor=({IGNITE:"#1F4E78",GROW:"#047857",GOVERN:"#B45309",EQUIP:"#7C3AED"})[f.s[0]];
+    c.innerHTML=`
+      <div class="scts">${f.s.map(x=>`<span class="s ${x}">${x}</span>`).join("")}${f.legacy?'<span class="legacy-tag">ของเดิม</span>':''}</div>
+      <h3>${f.n}</h3>
+      <div class="meta"><span class="bud">${bud(f)} <span style="font-weight:600;font-size:.7em;color:#64748B">ลบ.</span></span><span>${f.sc?'score '+f.sc+' · ':''}feas ${f.fe}</span></div>
+      <div class="desc">${f.what}</div>
+      <div class="det" id="det_${f.id}"><b>leverage:</b> ${f.lev}<br><b>output:</b> ${f.out}<br><b>จุดเด่น:</b> ${f.wow}</div>
+      <div class="row">
+        <button class="add" onclick="toggle('${f.id}')">${on?'✓ เลือกแล้ว':'+ เพิ่ม'}</button>
+        ${f.pilot?`<label class="pilot"><input type="checkbox" ${pil?'checked':''} onchange="togglePilot('${f.id}')">นำร่อง</label>`:''}
+        <button class="more" onclick="document.getElementById('det_${f.id}').classList.toggle('show')">i</button>
+      </div>`;
+    g.appendChild(c);
+  });
+}
+function toggle(id){ if(sel[id])delete sel[id]; else sel[id]={pilot:false}; renderGrid();renderSide(); }
+function togglePilot(id){ if(!sel[id])sel[id]={pilot:false}; sel[id].pilot=!sel[id].pilot; renderGrid();renderSide(); }
+function loadPreset(k){ sel={}; (PRESETS[k]||[]).forEach(([id,p])=>sel[id]={pilot:!!p}); renderGrid();renderSide(); }
+function renderSide(){
+  const ids=Object.keys(sel);
+  const items=ids.map(id=>F.find(f=>f.id===id)).filter(Boolean);
+  const total=items.reduce((s,f)=>s+bud(f),0);
+  $("total").textContent=total; $("count").textContent=items.length;
+  const cov=new Set(); items.forEach(f=>f.s.forEach(x=>cov.add(x)));
+  $("cov").innerHTML=STR.map(x=>`<div class="${cov.has(x)?'on '+x:''}">${cov.has(x)?'✓ ':''}${x}</div>`).join("");
+  const missing=STR.filter(x=>!cov.has(x));
+  let w=""; if(items.length===0)w=""; else if(missing.length)w="⚠ ยังขาดยุทธศาสตร์: "+missing.join(", ");
+  else w='<span class="ok">✓ ครบทั้ง 4 ยุทธศาสตร์</span>';
+  if(total>450&&items.length)w+=(w?' · ':'')+'<span style="color:#B45309">งบสูง (>450) ลองใช้เฟสนำร่อง</span>';
+  $("warn").innerHTML=w;
+  $("sellist").innerHTML=items.map(f=>`<li><span>${f.n.split(' — ')[0].replace(' (ของเดิม)','')} <span style="color:#94A3B8">[${f.s.join('/')}]</span></span><span><b>${bud(f)}</b> <span class="x" onclick="toggle('${f.id}')">✕</span></span></li>`).join("")||'<li style="color:#94A3B8">ยังไม่ได้เลือก — กด “เพิ่ม” หรือ Preset</li>';
+  // summary text
+  let t=`พอร์ต COE Creative Economy (เลือกเอง)\nรวม ${total} ลบ. · ${items.length} โครงการ\nครอบยุทธศาสตร์: ${[...cov].join(", ")||"-"}${missing.length?` (ขาด: ${missing.join(", ")})`:" (ครบ 4)"}\n\n`;
+  items.forEach((f,i)=>{t+=`${i+1}. ${f.n.replace(' (ของเดิม)','')} — ${bud(f)} ลบ. [${f.s.join("/")}]${sel[f.id].pilot&&f.pilot?" (นำร่อง)":""}\n`;});
+  t+=`\n→ ให้ Claude อัปเดต 48/49 + กรอกชีต 51 + อำนาจหน้าที่ ตามพอร์ตนี้`;
+  $("summary").value=t;
+}
+function copySum(){ const s=$("summary"); s.select(); navigator.clipboard&&navigator.clipboard.writeText(s.value); const b=event.target; const o=b.textContent; b.textContent="✓ คัดลอกแล้ว!"; setTimeout(()=>b.textContent=o,1500); }
+renderFilters();loadPreset('rec');
+</script>
+</body>
+</html>
